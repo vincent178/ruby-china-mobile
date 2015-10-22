@@ -6,6 +6,10 @@ GET   /                                            controllers.Reports.index
 GET   /jsroutes.js                                 controllers.Reports.jsRoutes()
 GET   /topics                                      controllers.TopicsController.index
 
+
+GET   /user/sign_up                                controllers.RegistrationsController.index
+POST  /user                                        controllers.RegistrationsController.create
+
 # Report routes
 GET   /reports                                     controllers.Reports.reports(offset:Int ?= 0, limit:Int ?= 25, fromDate: Option[String], toDate: Option[String], world: Option[String], field: Option[String], sort: Option[String])
 GET   /reports/worldsList                          controllers.Reports.worldsList

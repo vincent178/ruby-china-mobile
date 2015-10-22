@@ -14,7 +14,9 @@
     <script type="text/javascript" src="@routes.Assets.versioned("lib/requirejs/require.js")"></script>
 </head>
 <body>
-    @partials.header()
-    <section class="content">@content</section>
-    @partials.footer()
+    <section class="application container-fluid">
+        @partials.header()
+        <section class="main">@content</section>
+        @partials.footer()
+    </section>
 </body>
