@@ -1,0 +1,67 @@
+<div class="page-header">
+	<h1>Report</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-4 form-group">
+        <label class="control-label">From:</label>
+        <div class="input-group">
+            <input type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="fromDate" is-open="openedFrom"
+                   max-date="toDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                   ng-required="true" show-button-bar="false" readonly ng-change="reloadTable()"/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 'openedFrom')">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-4 form-group">
+        <label class="control-label">To:</label>
+        <div class="input-group">
+            <input type="text" class="form-control" datepicker-popup="dd.MM.yyyy" ng-model="toDate" is-open="openedTo"
+                   min-date="fromDate" datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                   ng-required="true" show-button-bar="false" readonly ng-change="reloadTable()"/>
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event, 'openedTo')">
+                    <i class="glyphicon glyphicon-calendar"></i>
+                </button>
+            </span>
+        </div>
+    </div>
+    <div class="col-md-4 form-group">
+        <label class="control-label">World:</label>
+        <select class="form-control" id="bdr-world-selector" ng-model="world" ng-options="w for w in worlds track by w"
+                ng-change="reloadTable()">
+            <option value="">all</option>
+        </select>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">
+    <dl class="dl-horizontal">
+        <dt>TOTAL:</dt>
+        <dd>
+            <ul class="list-inline">
+                <li><strong>Detected:</strong></li>
+                <li>{{totalDetected}}</li>
+                <li><strong>Banned:</strong></li>
+                <li>{{totalBanned}}</li>
+                <li><strong>Deleted:</strong></li>
+                <li>{{totalDeleted}}</li>
+            </ul>
+        </dd>
+    </dl>
+</div>
+
+<div loading-container="tableParams.settings().$loading" class="row">
+    <table ng-table="tableParams" class="table table-striped table-hover table-bordered">
+        <tr ng-repeat="result in $data">
+            <td data-title="'World'" sortable="'world'" class="text-center">{{result.world}}</td>
+            <td data-title="'Date'" sortable="'date'" class="text-center">{{result.date | date : "dd.MM.yyyy"}}</td>
+            <td data-title="'Detected'" sortable="'detected'" class="text-right">{{result.detected}}</td>
+            <td data-title="'Banned'" sortable="'banned'" class="text-right">{{result.banned}}</td>
+            <td data-title="'Deleted'" sortable="'deleted'" class="text-right">{{result.deleted}}</td>
+        </tr>
+    </table>
+</div>

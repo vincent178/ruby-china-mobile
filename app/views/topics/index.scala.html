@@ -1,0 +1,15 @@
+@(topicList: Seq[Topic])
+@layouts.application {
+    <ul>
+        @for(topic <- topicList) {
+            <li>
+                <div class="topics title">@topic.title</div>
+                <div class="topics info">
+                    <span class="node-name">@topic.nodeName</span>
+                    <span class="username">@topic.userName</span>
+                    <span class="datetime">@helpers.PrettyTime(topic.createdAt)</span>
+                </div>
+            </li>
+        }
+    </ul>
+}
