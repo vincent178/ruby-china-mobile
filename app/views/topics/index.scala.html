@@ -1,5 +1,5 @@
 @(topicList: Seq[Topic])
-@layouts.application {
+@layouts.application() {
     <ul>
         @for(topic <- topicList) {
             <li>
