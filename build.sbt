@@ -1,4 +1,3 @@
-//name := """PlaySlickAngularBootstrapH2TestsExample"""
 name := "scala-china"
 
 version := "0.1.3"

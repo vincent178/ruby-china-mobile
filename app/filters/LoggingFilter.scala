@@ -1,10 +1,9 @@
-package controllers
+package filters
 
-import play.api.Logger
-import play.api.mvc._
-import play.api.mvc.Action
-import scala.concurrent.Future
 import play.api.libs.concurrent.Execution.Implicits.defaultContext
+import play.api.mvc._
+
+import scala.concurrent.Future
 
 
 object LoggingFilter extends Filter {
