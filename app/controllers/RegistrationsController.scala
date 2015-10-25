@@ -1,10 +1,12 @@
 package controllers
 
+import helpers.forms.UserForm.userForm
 import models.database.UserEntity
 import models.database.UsersDatabase._
 import helpers.forms.UserForm
 
 import org.joda.time.DateTime
+import play.Logger
 
 import play.api.mvc._
 import play.api.db.slick.Config.driver.simple._
@@ -25,14 +27,30 @@ object RegistrationsController extends Controller {
 //    users += user
 
 //    Ok(views.html.registrations.index())
-    Ok(views.html.registrations.index(UserForm.userForm))
+    Ok(views.html.registrations.index(userForm))
   }
 
   // POST /user
   def create = Action {implicit request =>
 
+    userForm.bindFromRequest.fold(
+      errors => {
 
-    Ok("Hello world")
+        Logger.debug("我错了")
+        Logger.debug(errors.toString)
+
+        BadRequest(views.html.index())
+      },
+      user => {
+        Logger.debug("我对了")
+        Logger.info(user.email)
+        Logger.info(user.password)
+        Redirect("/")
+      }
+    )
+
+
+//    Ok("Hello world")
   }
 
   // GET /user/edit

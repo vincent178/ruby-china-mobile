@@ -9,15 +9,17 @@
     <div class="col-md-4 well">
         <form action="/user" method="post">
             @inputText(userForm("email"),
-                'inputType -> "email",
+                'labelText -> "Email Address",
+                'class -> "form-control",
                 'placeholder -> "Email",
-                'id -> "user-register-email",
-                'labelText -> "Email Address")
+                'type -> "email",
+                'id -> "user-register-email")
 
             @inputText(userForm("password"),
-                'inputType -> "password",
+                'class -> "form-control",
                 'placeholder -> "Password",
                 'id -> "user-register-password",
+                'type -> "password",
                 'labelText -> "Password")
 
             <button type="submit" class="btn btn-default">Submit</button>
