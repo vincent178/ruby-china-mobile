@@ -1,9 +1,6 @@
 package models.database
 
 import java.sql.Timestamp
-
-import org.joda.time.DateTime
-
 import play.api.db.slick.Config.driver.simple._
 import play.api.Play.current
 import scala.concurrent.ExecutionContext.Implicits.global
