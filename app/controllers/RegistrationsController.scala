@@ -5,13 +5,13 @@ import models.database.UserEntity
 import models.database.UsersDatabase._
 import helpers.forms.UserForm
 
-import org.joda.time.DateTime
 import play.Logger
-
 import play.api.mvc._
 import play.api.db.slick.Config.driver.simple._
 import play.api.db.slick._
 import play.api.Play.current
+import org.joda.time.DateTime
+import org.mindrot.jbcrypt.BCrypt
 
 // current_sign_in_at current_sign_in_ip
 // last_sign_in_at   last_sign_in_ip
@@ -31,21 +31,19 @@ object RegistrationsController extends Controller {
   }
 
   // POST /user
-  def create = Action {implicit request =>
+  def create = DBAction {implicit request =>
 
     userForm.bindFromRequest.fold(
       errors => {
-
-        Logger.debug("我错了")
-        Logger.debug(errors.toString)
-
         BadRequest(views.html.index())
       },
       user => {
-        Logger.debug("我对了")
-        Logger.info(user.email)
-        Logger.info(user.password)
-        Redirect("/")
+
+        val encryptedPassword = BCrypt.hashpw(user.email, BCrypt.gensalt(12))
+        val newUser = UserEntity(email = user.email, encryptedPassword = encryptedPassword)
+        val userId = (users returning users.map(_.id)) += newUser
+
+        Redirect("/").flashing("success" -> "User has successfully created")
       }
     )
 

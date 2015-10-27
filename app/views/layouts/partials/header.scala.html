@@ -1,3 +1,54 @@
-<header class="col-md-12 well">
-    This is header
-</header>
+<div class="header">
+    <nav class="navbar navbar-static-top navbar-default">
+        <div class="container">
+            <div class="navbar-header" id="navbar-header">
+                <a href="/" class="navbar-brand">Scala China</a>
+            </div>
+
+            <span id="main-nav-menu">
+                <ul class="nav navbar-nav">
+                    <li class=""><a href="/topics">社区</a></li>
+                    <li class=""><a href="/wiki">Wiki</a></li>
+                    <li class=""><a href="/jobs">招聘</a></li>
+                    <li class=""><a href="/twitter">推文</a></li>
+                    <li class=""><a href="/sites">酷站</a></li>
+                </ul>
+            </span>
+
+            <ul class="nav user-bar navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">vincent178 <span class="caret"></span></a>
+                    <button class="navbar-toggle" type="button" data-toggle="dropdown" role="button" aria-expanded="false">
+                        <span class="sr-only">Toggle</span>
+                        <i class="fa fa-reorder"></i>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li class=""><a href="/vincent178">我的主页</a></li>
+                        <li class=""><div class="divider"></div></li>
+                        <li class=""><a href="/account/edit">个人资料设置</a></li>
+                        <li class=""><a href="/notes">记事本</a></li>
+                        <li class=""><a href="/vincent178/favorites">我的收藏</a></li>
+                        <li class=""><div class="divider"></div></li>
+                        <li class=""><a rel="nofollow" data-method="delete" href="/account/sign_out">退出</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="nav-search hidden-xs">
+                    <form class="navbar-form form-search" action="/search" method="GET">
+                        <div class="form-group">
+                            <input class="form-control" name="q" type="text" value="" placeholder="搜索本站内容">
+                        </div>
+                        <i class="fa btn-search fa-search"></i>
+                        <i class="fa btn-close fa-times-circle"></i>
+                    </form>
+                </li>
+                <li class="notification-count">
+                    <a href="/notifications" class="" title="通知"><i class="fa fa-bell"></i><span class="count">0</span></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

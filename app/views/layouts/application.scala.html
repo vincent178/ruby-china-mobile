@@ -11,12 +11,16 @@
         <title>@title | Scala China</title>
     }
     <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.css")" />
-    <script type="text/javascript" src="@routes.Assets.versioned("lib/requirejs/require.js")"></script>
+    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")" />
+    <script type="text/javascript" src="@routes.Assets.versioned("lib/jquery/jquery.js")"></script>
+    <script type="text/javascript" src="@routes.Assets.versioned("lib/bootstrap/js/bootstrap.js")"></script>
 </head>
 <body>
-    <section class="application container-fluid">
+    <section class="application">
         @partials.header()
-        <section class="main">@content</section>
+        <div id="main" class="main-container container">
+            @content
+        </div>
         @partials.footer()
     </section>
 </body>

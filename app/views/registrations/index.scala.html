@@ -1,7 +1,7 @@
 @import helpers.forms.UserData
 @import helper._
 @(userForm: Form[UserData])
-@implicitField = @{ FieldConstructor(bootstrapFormInput.f) }
+@implicitField = @{ FieldConstructor(helper.bootstrapFormInput.f) }
 
 
 @layouts.application() {

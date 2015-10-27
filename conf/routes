@@ -2,19 +2,22 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET   /                                            controllers.Reports.index
-GET   /jsroutes.js                                 controllers.Reports.jsRoutes()
-GET   /topics                                      controllers.TopicsController.index
+GET     /                                            controllers.HomeController.index
+
+GET     /topics                                      controllers.TopicsController.index
 
 
-GET   /user/sign_up                                controllers.RegistrationsController.index
-POST  /user                                        controllers.RegistrationsController.create
+GET     /user/sign_up                                controllers.RegistrationsController.index
+POST    /user                                        controllers.RegistrationsController.create
 
-# Report routes
-GET   /reports                                     controllers.Reports.reports(offset:Int ?= 0, limit:Int ?= 25, fromDate: Option[String], toDate: Option[String], world: Option[String], field: Option[String], sort: Option[String])
-GET   /reports/worldsList                          controllers.Reports.worldsList
+GET     /user/sign_in                                controllers.SessionController.index
+POST    /user/sign_in                                controllers.SessionController.create
+DELETE  /user/sign_out                               controllers.SessionController.destroy
+
+GET     /reports                                     controllers.Reports.reports(offset:Int ?= 0, limit:Int ?= 25, fromDate: Option[String], toDate: Option[String], world: Option[String], field: Option[String], sort: Option[String])
+GET     /jsroutes.js                                 controllers.Reports.jsRoutes()
+GET     /reports/worldsList                          controllers.Reports.worldsList
 
 # Map static resources from the /public folder to the /assets URL path 
-GET   /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
-
+GET     /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
 
