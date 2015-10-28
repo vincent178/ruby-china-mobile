@@ -23,6 +23,7 @@ libraryDependencies ++= Seq(
   "org.webjars" % "ng-table" % "0.3.3" exclude("org.webjars", "angularjs"),
   "org.scala-lang.modules" %% "scala-async" % "0.9.1",
   "joda-time" % "joda-time" % "2.3",
+  "org.mindrot"  % "jbcrypt"   % "0.3m",
   // Database
   "com.typesafe.play" %% "play-slick" % "0.8.0-RC1",
   "mysql" % "mysql-connector-java" % "5.1.31",
