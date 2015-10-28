@@ -4,15 +4,18 @@
 
 GET     /                                            controllers.HomeController.index
 
-GET     /topics                                      controllers.TopicsController.index
 
 
 GET     /user/sign_up                                controllers.RegistrationsController.index
 POST    /user                                        controllers.RegistrationsController.create
 
-GET     /user/sign_in                                controllers.SessionController.index
+GET     /user/sign_in                                controllers.SessionController.init
 POST    /user/sign_in                                controllers.SessionController.create
 DELETE  /user/sign_out                               controllers.SessionController.destroy
+
+GET     /topics                                      controllers.TopicsController.index
+GET     /topics/new                                  controllers.TopicsController.init
+
 
 GET     /reports                                     controllers.Reports.reports(offset:Int ?= 0, limit:Int ?= 25, fromDate: Option[String], toDate: Option[String], world: Option[String], field: Option[String], sort: Option[String])
 GET     /jsroutes.js                                 controllers.Reports.jsRoutes()

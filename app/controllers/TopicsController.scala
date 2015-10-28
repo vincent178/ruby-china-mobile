@@ -8,6 +8,10 @@ case class Topic(val title: String, val userName: String, val nodeName: String, 
 
 object TopicsController extends Controller {
 
+  def init = Action {
+    Ok(views.html.topics.init())
+  }
+
   def index = Action {
 
     val topics = Seq(
