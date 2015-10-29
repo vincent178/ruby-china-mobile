@@ -13,6 +13,8 @@ GET     /user/sign_in                                controllers.SessionControll
 POST    /user/sign_in                                controllers.SessionController.create
 DELETE  /user/sign_out                               controllers.SessionController.destroy
 
+GET     /github/callback                             controllers.OAuthConsumers.callback
+
 GET     /topics                                      controllers.TopicsController.index
 GET     /topics/new                                  controllers.TopicsController.init
 
