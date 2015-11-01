@@ -1,6 +1,5 @@
 package controllers
 
-import helpers.PostBody
 import play.api.libs.ws._
 import scala.concurrent.Future
 import play.api.mvc._
@@ -22,19 +21,14 @@ object OAuthConsumers extends Controller {
     val code = request.getQueryString("code").getOrElse("")
     val clientId = Play.application.configuration.getString("github.clientId")
     val clientSecret = Play.application.configuration.getString("github.clientSecret")
-    val postBody = Map(
-      "code" -> code,
-      "client_id" -> clientId,
-      "client_secret" -> clientSecret
-    )
+    val postBody = Map("code" -> Seq(code), "client_id" -> Seq(clientId), "client_secret" -> Seq(clientSecret))
 
     WS.url("https://github.com/login/oauth/access_token")
-      .withHeaders("Content-Type" -> "application/json")
-      .post(PostBody(postBody)).map { response =>
+      .post(postBody).map { response =>
 
+      Logger.info("Response status: " + response.status)
       Logger.info("Response body: " + response.body)
 
-      // response.body = "access_token=76d10c2c197a13c31655485e39d4cc11235201cd&scope=&token_type=bearer"
       Ok(response.body.toString)
     }
   }
