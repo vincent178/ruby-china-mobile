@@ -29,6 +29,13 @@ object OAuthConsumers extends Controller {
       Logger.info("Response status: " + response.status)
       Logger.info("Response body: " + response.body)
 
+      val accessToken = response.body.toString.split("&")(0).split("=")(1)
+      Logger.info("Access token: " + accessToken)
+
+      WS.url("https://api.github.com/user").get.map { implicit response =>
+        Ok(response.body.toString)
+      }
+
       Ok(response.body.toString)
     }
   }
