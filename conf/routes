@@ -12,6 +12,7 @@ POST    /user                                        controllers.RegistrationsCo
 GET     /user/sign_in                                controllers.SessionController.init
 POST    /user/sign_in                                controllers.SessionController.create
 DELETE  /user/sign_out                               controllers.SessionController.destroy
+GET     /user/login                                  controllers.SessionController.login
 
 GET     /github/callback                             controllers.OAuthConsumers.callback
 

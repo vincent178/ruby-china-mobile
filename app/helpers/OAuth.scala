@@ -1,7 +1,10 @@
 package helpers
 
-import play.api.{Logger, Play}
+import play.api.Logger
+import play.Play
 import play.api.libs.ws.WS
+import play.api.Play.current
+import scala.concurrent.ExecutionContext.Implicits.global
 
 class OAuth {
 
