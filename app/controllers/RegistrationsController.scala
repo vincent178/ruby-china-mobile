@@ -35,7 +35,7 @@ object RegistrationsController extends Controller {
 
     userForm.bindFromRequest.fold(
       errors => {
-        BadRequest(views.html.index())
+        BadRequest(views.html.home.index())
       },
       user => {
 

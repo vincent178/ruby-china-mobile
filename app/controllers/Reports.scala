@@ -13,7 +13,7 @@ import scala.concurrent.Future
 
 object Reports extends Controller {
 
-  def index = LoggingAction(Ok(views.html.index()))
+  def index = LoggingAction(Ok(views.html.home.index()))
 
 
   /**
