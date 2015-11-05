@@ -19,6 +19,8 @@ GET     /github/callback                             controllers.OAuthConsumers.
 GET     /topics                                      controllers.TopicsController.index
 GET     /topics/new                                  controllers.TopicsController.init
 
+GET     /products                                    controllers.ProductsController.list
+
 
 GET     /reports                                     controllers.Reports.reports(offset:Int ?= 0, limit:Int ?= 25, fromDate: Option[String], toDate: Option[String], world: Option[String], field: Option[String], sort: Option[String])
 GET     /jsroutes.js                                 controllers.Reports.jsRoutes()

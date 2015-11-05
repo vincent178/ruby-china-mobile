@@ -1,4 +1,4 @@
-@(title: String = "")(content: Html)
+@(title: String = "")(content: Html)(implicit lang: Lang)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,10 +10,10 @@
     } else {
         <title>@title | Scala China</title>
     }
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("lib/bootstrap/css/bootstrap.css")" />
-    <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")" />
-    <script type="text/javascript" src="@routes.Assets.versioned("lib/jquery/jquery.js")"></script>
-    <script type="text/javascript" src="@routes.Assets.versioned("lib/bootstrap/js/bootstrap.js")"></script>
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("lib/bootstrap/css/bootstrap.css")' />
+    <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/main.css")' />
+    <script type="text/javascript" src='@routes.Assets.versioned("lib/jquery/jquery.js")'></script>
+    <script type="text/javascript" src='@routes.Assets.versioned("lib/bootstrap/js/bootstrap.js")'></script>
 </head>
 <body>
     <section class="application">
