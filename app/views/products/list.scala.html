@@ -1,4 +1,5 @@
 @(products: List[Product])(implicit lang: Lang)
+
 @layouts.application(Messages("application.name")) {
     <dl class="products">
         @for(product <- products) {

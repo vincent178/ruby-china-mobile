@@ -1,0 +1,21 @@
+@(product: Product)(implicit lang: Lang)
+
+@layouts.application(Messages("products.details", product.name)) {
+    <h2>
+        <!-- We have a convention to put small or frequently used templates in a tags package -->
+        @tags.barcode(product.ean)
+        @Messages("products.details", product.name)
+    </h2>
+
+    <dl class="dl-horizontal">
+        <dt>@Messages("ean"):</dt>
+        <dd>@product.ean</dd>
+
+        <dt>@Messages("name"):</dt>
+        <dd>@product.name</dd>
+
+        <dt>@Messages("description"):</dt>
+        <dd>@product.description</dd>
+    </dl>
+
+}

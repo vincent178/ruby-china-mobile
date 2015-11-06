@@ -4,6 +4,7 @@
 
 GET     /                                            controllers.HomeController.index
 
+GET     /barcode/:ean                                controllers.BarcodesController.barcode(ean: Long)
 
 
 GET     /user/sign_up                                controllers.RegistrationsController.index
@@ -20,6 +21,7 @@ GET     /topics                                      controllers.TopicsControlle
 GET     /topics/new                                  controllers.TopicsController.init
 
 GET     /products                                    controllers.ProductsController.list
+GET     /products/:ean                               controllers.ProductsController.show(ean: Long)
 
 
 GET     /reports                                     controllers.Reports.reports(offset:Int ?= 0, limit:Int ?= 25, fromDate: Option[String], toDate: Option[String], world: Option[String], field: Option[String], sort: Option[String])

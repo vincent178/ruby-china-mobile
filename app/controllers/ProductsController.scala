@@ -1,5 +1,6 @@
 package controllers
 
+import models.Product
 import play.api.mvc._
 
 object ProductsController extends Controller {
@@ -10,4 +11,10 @@ object ProductsController extends Controller {
     Ok(views.html.products.list(products))
   }
 
+  def show(ean: Long) = Action { implicit resquest =>
+
+    Product.findByEan(ean).map { product =>
+      Ok(views.html.products.details(product))
+    }.getOrElse(NotFound)
+  }
 }
