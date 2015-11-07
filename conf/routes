@@ -21,7 +21,9 @@ GET     /topics                                      controllers.TopicsControlle
 GET     /topics/new                                  controllers.TopicsController.init
 
 GET     /products                                    controllers.ProductsController.list
+GET     /products/new                                controllers.ProductsController.newProduct
 GET     /products/:ean                               controllers.ProductsController.show(ean: Long)
+POST    /products/save                               controllers.ProductsController.save
 
 
 GET     /reports                                     controllers.Reports.reports(offset:Int ?= 0, limit:Int ?= 25, fromDate: Option[String], toDate: Option[String], world: Option[String], field: Option[String], sort: Option[String])
