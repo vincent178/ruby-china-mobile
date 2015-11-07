@@ -1,6 +1,6 @@
 @import helpers.forms.UserData
 @import helper._
-@(userForm: Form[UserData])
+@(userForm: Form[UserData])(implicit flash: Flash, lang: Lang)
 @implicitField = @{ FieldConstructor(helper.bootstrapFormInput.f) }
 
 

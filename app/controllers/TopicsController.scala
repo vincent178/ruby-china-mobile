@@ -8,11 +8,11 @@ case class Topic(val title: String, val userName: String, val nodeName: String, 
 
 object TopicsController extends Controller {
 
-  def init = Action {
+  def init = Action { implicit request =>
     Ok(views.html.topics.init())
   }
 
-  def index = Action {
+  def index = Action { implicit request =>
 
     val topics = Seq(
       Topic("[广州][2015年10月28日 19:00] GZRUBY 第 27 次聚会 [Post RubyConf 专场]", "allenfantasy", "线下活动", new DateTime("2015-09-13T21:39:45.618-08:00")),

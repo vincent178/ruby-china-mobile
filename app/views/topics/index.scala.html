@@ -1,4 +1,4 @@
-@(topicList: Seq[Topic])
+@(topicList: Seq[Topic])(implicit flash: Flash, lang: Lang)
 @layouts.application() {
     <ul>
         @for(topic <- topicList) {
