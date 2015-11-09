@@ -20,9 +20,11 @@ GET     /github/callback                             controllers.OAuthConsumers.
 GET     /topics                                      controllers.TopicsController.index
 GET     /topics/new                                  controllers.TopicsController.init
 
-GET     /products                                    controllers.ProductsController.list
+GET     /products                                    controllers.ProductsController.list(page: Int ?= 1)
+GET     /products/:ean                               controllers.ProductsController.details(ean: Long)
+GET     /products/:ean/edit                          controllers.ProductsController.edit(ean: Long)
+PUT     /products/:ean                               controllers.ProductsController.update(ean: Long)
 GET     /products/new                                controllers.ProductsController.newProduct
-GET     /products/:ean                               controllers.ProductsController.show(ean: Long)
 POST    /products/save                               controllers.ProductsController.save
 
 
