@@ -1,5 +1,4 @@
 import akka.actor.{Actor, Props}
-import filters.LoggingFilter
 import play.Logger
 import play.api.GlobalSettings
 import play.api.libs.concurrent.Akka
@@ -19,11 +18,11 @@ object Global extends WithFilters(filters.LoggingFilter, new GzipFilter(shouldGz
     import play.api.libs.concurrent.Execution.Implicits.defaultContext
 
     val actor = Akka.system.actorOf(
-      Props(new LoggerActor("1sec Hello world"))
+      Props(new LoggerActor("10 min interval"))
     )
 
     Akka.system.scheduler.schedule(
-      0.seconds, 1.seconds, actor, "send"
+      0.seconds, 10.minutes, actor, "send"
     )
 
   }
@@ -32,9 +31,7 @@ object Global extends WithFilters(filters.LoggingFilter, new GzipFilter(shouldGz
 class LoggerActor(msg: String) extends Actor {
 
   def receive = {
-    case "send" => {
-      Logger.info(msg)
-    }
+    case "send" => Logger.info(msg)
     case _ => Logger.info("_ got mapped")
   }
 }
