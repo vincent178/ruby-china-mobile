@@ -8,17 +8,25 @@ import play.api.mvc._
 
 object ProductsController extends Controller {
 
-  def list = Action { implicit request =>
+  def list(page: Int) = Action { implicit request =>
     val products = models.Product.findAll
 
     Ok(views.html.products.list(products))
   }
 
-  def show(ean: Long) = Action { implicit request =>
+  def details(ean: Long) = Action { implicit request =>
 
     Product.findByEan(ean).map { product =>
       Ok(views.html.products.details(product))
     }.getOrElse(NotFound)
+  }
+
+  def edit(ean: Long) = Action { implicit request =>
+    NotImplemented
+  }
+
+  def update(ean: Long) = Action { implicit request =>
+    NotImplemented
   }
 
   def newProduct = Action { implicit request =>
@@ -43,7 +51,7 @@ object ProductsController extends Controller {
       success = { newProduct =>
         Product.add(newProduct)
         val message = Messages("products.new.success", newProduct.name)
-        Redirect(routes.ProductsController.show(newProduct.ean))
+        Redirect(routes.ProductsController.details(newProduct.ean))
           .flashing("success" -> message)
       }
     )
