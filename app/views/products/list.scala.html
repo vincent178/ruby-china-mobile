@@ -3,7 +3,7 @@
 @layouts.application(Messages("application.name")) {
     <dl class="products">
         @for(product <- products) {
-            <dt>@product.name</dt>
+            <dt><a href="@routes.ProductsController.details(product.ean)">@product.name</a></dt>
             <dd>@product.description</dd>
         }
     </dl>

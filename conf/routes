@@ -21,7 +21,7 @@ GET     /topics                                      controllers.TopicsControlle
 GET     /topics/new                                  controllers.TopicsController.init
 
 GET     /products                                    controllers.ProductsController.list(page: Int ?= 1)
-GET     /products/$ean<\d{13}>                       controllers.ProductsController.details(ean: Long)
+GET     /products/$ean<\d{12,13}>                    controllers.ProductsController.details(ean: Long)
 GET     /products/:ean/edit                          controllers.ProductsController.edit(ean: Long)
 PUT     /products/:ean                               controllers.ProductsController.update(ean: Long)
 GET     /products/new                                controllers.ProductsController.newProduct
