@@ -2,7 +2,7 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
-GET     /                                            controllers.HomeController.index
+GET     /                                            controllers.HomeController.index(flag: String ?= "")
 
 GET     /barcode/:ean                                controllers.BarcodesController.barcode(ean: Long)
 
@@ -32,9 +32,6 @@ GET     /reports                                     controllers.Reports.reports
 GET     /jsroutes.js                                 controllers.Reports.jsRoutes()
 GET     /reports/worldsList                          controllers.Reports.worldsList
 
-# GET     /photo/:file                                 controllers.MediaController.photo(file: String) file can't include slashes
-# GET     /photo/*file                                 controllers.MediaController.photo(file: String) file may include slashes
-
-# Map static resources from the /public folder to the /assets URL path 
+# Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                                controllers.Assets.versioned(path="/public", file: Asset)
 
