@@ -1,9 +1,11 @@
 import akka.actor.{Actor, Props}
 import play.Logger
-import play.api.GlobalSettings
+import play.api.{Play, GlobalSettings}
 import play.api.libs.concurrent.Akka
-import play.api.mvc.WithFilters
+import play.api.mvc._
 import play.filters.gzip.GzipFilter
+
+import scala.concurrent.duration._
 
 object Global extends WithFilters(filters.LoggingFilter, new GzipFilter(shouldGzip =
   (request, response) => {
@@ -11,6 +13,8 @@ object Global extends WithFilters(filters.LoggingFilter, new GzipFilter(shouldGz
     contentType.exists(_.startsWith("text/html")) || request.path.endsWith("jsroutes.js")
   }
 )) with GlobalSettings {
+
+
   override def onStart(application: play.api.Application): Unit = {
 
     import scala.concurrent.duration._
@@ -24,7 +28,20 @@ object Global extends WithFilters(filters.LoggingFilter, new GzipFilter(shouldGz
     Akka.system.scheduler.schedule(
       0.seconds, 10.minutes, actor, "send"
     )
+  }
 
+  override def onRequestReceived(request: RequestHeader): (RequestHeader, Handler) = {
+
+    implicit class CustomSession(session: Session) {
+
+      def monkeyPatch = {
+        "This is monkey patch like Ruby"
+      }
+    }
+
+    Logger.info(request.session.monkeyPatch)
+
+    super.onRequestReceived(request)
   }
 }
 

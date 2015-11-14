@@ -4,17 +4,48 @@ import models.Product
 import play.api.data.Form
 import play.api.data.Forms._
 import play.api.i18n.Messages
+import play.api.libs.json._
 import play.api.mvc._
 
 object ProductsController extends Controller {
 
   def list(page: Int) = Action { implicit request =>
-    val products = models.Product.findAll
+//    val products = models.Product.findAll
+//    Ok(views.html.products.list(products))
 
-    Ok(views.html.products.list(products))
+    val product = Json.obj(
+      "name" -> JsString("Blue Paper clips"),
+      "ean" -> JsString("Big box of paper clips"),
+      "pieces" -> JsNumber(500),
+      "manufacturer" -> Json.obj(
+        "name" -> JsString("Paperclipfactory Inc."),
+        "contact_details" -> Json.obj(
+          "email" -> JsString("contact@paperclipfactory.example.com"),
+          "fax" -> JsNull,
+          "phone" -> JsString("+123456789")
+        )
+      ),
+      "tags" -> Json.arr(
+        JsString("paperclips"),
+        JsString("coated")
+      ),
+      "active" -> JsBoolean(true)
+    )
+
+    val productString = Json.stringify(product)
+
+    /*
+    val productCodes = Product.findAll.map(_.ean)
+    // if return JsValue, Play will add Content-Type: application/json HTTP response header
+    Ok(Json.toJson(productCodes))
+    */
+
+
+    Ok(productString)
   }
 
   def details(ean: Long) = Action { implicit request =>
+
 
     Product.findByEan(ean).map { product =>
       Ok(views.html.products.details(product))

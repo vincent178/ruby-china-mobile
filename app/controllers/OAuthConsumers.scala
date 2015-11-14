@@ -9,7 +9,7 @@ import scala.concurrent.ExecutionContext.Implicits.global
 
 object OAuthConsumers extends Controller {
 
-  def callback = Action.async { implicit request =>
+  def callback(provider: String) = Action.async { implicit request =>
 
     // POST https://github.com/login/oauth/access_token
 

@@ -15,7 +15,7 @@ POST    /user/sign_in                                controllers.SessionControll
 DELETE  /user/sign_out                               controllers.SessionController.destroy
 GET     /user/login                                  controllers.SessionController.login
 
-GET     /github/callback                             controllers.OAuthConsumers.callback
+GET     /:provider/callback                          controllers.OAuthConsumers.callback(provider: String)
 
 GET     /topics                                      controllers.TopicsController.index
 GET     /topics/new                                  controllers.TopicsController.init
