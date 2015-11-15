@@ -9,6 +9,8 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 val akkaVersion = "2.3.3"
 
+resolvers += "rediscala" at "http://dl.bintray.com/etaty/maven"
+
 // Dependencies
 libraryDependencies ++= Seq(
   filters,ws,
@@ -25,6 +27,7 @@ libraryDependencies ++= Seq(
   "joda-time" % "joda-time" % "2.3",
   "org.mindrot"  % "jbcrypt"   % "0.3m",
   "net.sf.barcode4j" % "barcode4j" % "2.0",
+  "com.etaty.rediscala" %% "rediscala" % "1.5.0",
   // Database
   "com.typesafe.play" %% "play-slick" % "0.8.0-RC1",
   "mysql" % "mysql-connector-java" % "5.1.31",
