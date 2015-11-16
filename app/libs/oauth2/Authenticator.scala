@@ -1,6 +1,6 @@
 package libs.oauth2
 
-import scala.concurrent.Future
+import scala.concurrent.{ExecutionContext, Future}
 
 trait Authenticator {
 
@@ -12,5 +12,5 @@ trait Authenticator {
 
   val clientSecret: String
 
-  def retrieveAccessToken(code: String): Future[String]
+  def retrieveAccessToken(code: String)(implicit ec: ExecutionContext): Future[String]
 }

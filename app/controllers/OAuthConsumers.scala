@@ -1,12 +1,8 @@
 package controllers
 
-import play.api.libs.ws._
 import play.api.mvc._
-import play.api.{Play, Logger}
-import play.api.Play.current
+import libs.oauth2.provider.GithubAuthenticator
 import scala.concurrent.ExecutionContext.Implicits.global
-
-import libs.oauth2.strategy.GithubAuthenticator
 
 object OAuthConsumers extends Controller {
 
@@ -14,6 +10,7 @@ object OAuthConsumers extends Controller {
 
     val code = request.getQueryString("code").getOrElse("")
     GithubAuthenticator.retrieveAccessToken(code).map { accessToken =>
+
       Ok(accessToken)
     }
   }
