@@ -12,18 +12,18 @@ object UsersDatabase {
 
 case class UserEntity(id: Option[Int] = None,
                       email: String,
-                      encryptedPassword: String,
+                      username: Option[String] = None,
+                      avatarUrl: Option[String] = None,
                       createdAt: Option[Timestamp] = None,
                       updatedAt: Option[Timestamp] = None)
 
 class Users(tag: Tag) extends Table[UserEntity](tag, "users") {
   def id = column[Int]("id", O.NotNull, O.PrimaryKey, O.AutoInc)
   def email = column[String]("email", O.NotNull)
-  def encryptedPassword = column[String]("encrypted_password", O.NotNull)
+  def username = column[String]("username", O.NotNull)
+  def avatarUrl = column[String]("avatar_url")
   def createdAt = column[Timestamp]("created_at", O.NotNull, O.DBType("timestamp default now()"))
   def updatedAt = column[Timestamp]("updated_at", O.NotNull, O.DBType("timestamp default now()"))
 
-  def * = (id.?, email, encryptedPassword, createdAt.?, updatedAt.?) <> (UserEntity.tupled, UserEntity.unapply)
+  def * = (id.?, email, username.?, avatarUrl.?, createdAt.?, updatedAt.?) <> (UserEntity.tupled, UserEntity.unapply)
 }
-
-
