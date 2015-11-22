@@ -29,7 +29,7 @@ libraryDependencies ++= Seq(
   "net.sf.barcode4j" % "barcode4j" % "2.0",
   "com.etaty.rediscala" %% "rediscala" % "1.5.0",
   // Database
-  "com.typesafe.play" %% "play-slick" % "0.8.0-RC1",
+  "com.typesafe.play" %% "play-slick" % "1.1.0",
   "mysql" % "mysql-connector-java" % "5.1.31",
   // test
   "org.scalatest" %% "scalatest" % "2.2.0" % "test",
