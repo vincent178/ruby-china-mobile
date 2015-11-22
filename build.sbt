@@ -3,7 +3,7 @@ name := "scala-china"
 version := "0.1.3"
 
 // Scala Version, Play supports both 2.10 and 2.11
-scalaVersion := "2.11.2"
+scalaVersion := "2.11.7"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
@@ -15,14 +15,12 @@ resolvers += "rediscala" at "http://dl.bintray.com/etaty/maven"
 libraryDependencies ++= Seq(
   filters,ws,
   cache,
+  evolutions,
   // WebJars (i.e. client-side) dependencies
   "org.webjars" % "requirejs" % "2.1.14",
   "org.webjars" % "underscorejs" % "1.6.0",
   "org.webjars" % "jquery" % "2.1.1",
   "org.webjars" % "bootstrap" % "3.2.0" exclude("org.webjars", "jquery"),
-  "org.webjars" % "angularjs" % "1.3.0-beta.13" exclude("org.webjars", "jquery"),
-  "org.webjars" % "angular-ui-bootstrap" % "0.11.0-2" exclude("org.webjars", "jquery"),
-  "org.webjars" % "ng-table" % "0.3.3" exclude("org.webjars", "angularjs"),
   "org.scala-lang.modules" %% "scala-async" % "0.9.1",
   "joda-time" % "joda-time" % "2.3",
   "org.mindrot"  % "jbcrypt"   % "0.3m",
