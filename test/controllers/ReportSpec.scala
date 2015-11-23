@@ -6,7 +6,6 @@ import play.api.test.Helpers._
 import org.specs2.mutable._
 import org.specs2.execute.{Result, AsResult}
 import play.api.db.slick._
-import play.api.db.slick.Config.driver.simple._
 
 abstract class WithDbData extends WithApplication(FakeApplication(additionalConfiguration = inMemoryDatabase())) {
   override def around[T: AsResult](callback: => T): Result = super.around {

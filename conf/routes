@@ -20,14 +20,6 @@ GET     /:provider/callback                          controllers.OAuthConsumers.
 GET     /topics                                      controllers.TopicsController.index
 GET     /topics/new                                  controllers.TopicsController.init
 
-GET     /products                                    controllers.ProductsController.list(page: Int ?= 1)
-GET     /products/$ean<\d{12,13}>                    controllers.ProductsController.details(ean: Long)
-GET     /products/:ean/edit                          controllers.ProductsController.edit(ean: Long)
-PUT     /products/:ean                               controllers.ProductsController.update(ean: Long)
-GET     /products/new                                controllers.ProductsController.newProduct
-POST    /products/save                               controllers.ProductsController.save
-
-
 GET     /reports                                     controllers.Reports.reports(offset:Int ?= 0, limit:Int ?= 25, fromDate: Option[String], toDate: Option[String], world: Option[String], field: Option[String], sort: Option[String])
 GET     /jsroutes.js                                 controllers.Reports.jsRoutes()
 GET     /reports/worldsList                          controllers.Reports.worldsList
