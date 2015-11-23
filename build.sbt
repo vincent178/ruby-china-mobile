@@ -28,6 +28,7 @@ libraryDependencies ++= Seq(
   "com.etaty.rediscala" %% "rediscala" % "1.5.0",
   // Database
   "com.typesafe.play" %% "play-slick" % "1.1.0",
+  "com.typesafe.slick" %% "slick-codegen" % "3.1.0",
   "mysql" % "mysql-connector-java" % "5.1.31",
   // test
   "org.scalatest" %% "scalatest" % "2.2.0" % "test",
