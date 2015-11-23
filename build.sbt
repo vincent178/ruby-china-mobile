@@ -15,7 +15,6 @@ resolvers += "rediscala" at "http://dl.bintray.com/etaty/maven"
 libraryDependencies ++= Seq(
   filters,ws,
   cache,
-  evolutions,
   // WebJars (i.e. client-side) dependencies
   "org.webjars" % "requirejs" % "2.1.14",
   "org.webjars" % "underscorejs" % "1.6.0",
@@ -29,6 +28,7 @@ libraryDependencies ++= Seq(
   // Database
   "com.typesafe.play" %% "play-slick" % "1.1.0",
   "com.typesafe.slick" %% "slick-codegen" % "3.1.0",
+  "com.typesafe.slick" %% "slick" % "3.1.0",
   "mysql" % "mysql-connector-java" % "5.1.31",
   // test
   "org.scalatest" %% "scalatest" % "2.2.0" % "test",
@@ -81,3 +81,7 @@ RjsKeys.paths += ("jsRoutes" -> ("/jsroutes" -> "empty:"))
 includeFilter in (Assets, LessKeys.less) := "*.less"
 
 excludeFilter in (Assets, LessKeys.less) := "_*.less"
+
+// using the injected generator route
+routesGenerator := InjectedRoutesGenerator
+
