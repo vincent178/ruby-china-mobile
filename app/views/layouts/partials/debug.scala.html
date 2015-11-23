@@ -1,0 +1,6 @@
+@import play.api.Play.current
+
+<footer>
+    user = @current.configuration.getString("environment.user"),
+    date = @(new java.util.Date().format("yyyy-MM-dd HH:mm"))
+</footer>
