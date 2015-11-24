@@ -7,16 +7,16 @@ import slick.driver.JdbcProfile
 
 import scala.concurrent.{Future, ExecutionContext}
 
-case class User(id: Option[Int] = None,
+case class User(id: Int,
                 email: String,
                 username: Option[String] = None,
                 avatarUrl: Option[String] = None,
-                createdAt: Option[Timestamp] = None,
-                updatedAt: Option[Timestamp] = None)
+                createdAt: Timestamp,
+                updatedAt: Timestamp)
 
 
 @Singleton
-class UsersModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
+class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
 
   private val dbConfig = dbConfigProvider.get[JdbcProfile]
 
@@ -31,7 +31,7 @@ class UsersModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec
     def createdAt = column[Timestamp]("created_at")
     def updatedAt = column[Timestamp]("updated_at")
 
-    def * = (id.?, email, username.?, avatarUrl.?, createdAt.?, updatedAt.?) <> (User.tupled, User.unapply)
+    def * = (id, email, username.?, avatarUrl.?, createdAt, updatedAt) <> (User.tupled, User.unapply)
   }
 
   private val users = TableQuery[UserTable]
