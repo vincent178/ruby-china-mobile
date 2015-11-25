@@ -7,7 +7,7 @@ import play.filters.gzip.GzipFilter
 
 import scala.concurrent.duration._
 
-object Global extends WithFilters(filters.LoggingFilter, new GzipFilter(shouldGzip =
+object Global extends WithFilters(new GzipFilter(shouldGzip =
   (request, response) => {
     val contentType = response.headers.get("Content-Type")
     contentType.exists(_.startsWith("text/html")) || request.path.endsWith("jsroutes.js")
