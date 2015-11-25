@@ -1,5 +1,5 @@
 #  SCHEMA
-# --- !Ups
+# --- !Ups done
 
 CREATE TABLE scopes (
     `id` INT(11) NOT NULL AUTO_INCREMENT,
