@@ -27,8 +27,9 @@ class ScopeRoleModel @Inject()(dbConfigProvider: DatabaseConfigProvider, roleMod
   val scopeRoleMapping = TableQuery[ScopeRoleTable]
 
   def roleForScope: Future[Seq[Role]] = db.run {
+
     val crossJoin = for {
-      (r, s) <- roleModel.roles joinLeft scopeRoleMapping on (_.id === _.scopeId)
+      ((r, sr), s) <- roleModel.roles joinLeft scopeRoleMapping on (_.id === _.roleId) joinLeft scopeModel.scopes on (_._2.map(_.scopeId) === _.id)
     } yield r
 
     crossJoin.result

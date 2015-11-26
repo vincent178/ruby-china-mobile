@@ -3,7 +3,6 @@ package controllers
 import javax.inject.Inject
 
 import models.{Role, ScopeRoleModel}
-import play.api._
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
 
@@ -16,8 +15,6 @@ class HomeController @Inject()(scopeRoleModel: ScopeRoleModel)(implicit ex: Exec
       Ok(Json.toJson(roles))
     }
   }
-
-  def convertRolesToJson(roles: Seq[Role]): JsValue = Json.toJson(roles)
 }
 
 
