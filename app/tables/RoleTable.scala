@@ -1,31 +1,15 @@
-package models
+package tables
 
 import java.sql.Timestamp
 import javax.inject.{Inject, Singleton}
+import models.Role
 import play.api.db.slick.DatabaseConfigProvider
-import play.api.libs.json._
 import slick.driver.JdbcProfile
-
 import scala.concurrent.{Future, ExecutionContext}
 
-case class Role(id: Int, name: String, createdAt: Timestamp, updatedAt: Timestamp)
-
-object Role {
-  implicit object RoleFormat extends Writes[Role] {
-    def writes(role: Role): JsValue = {
-      val roleSeq = Seq(
-        "id" -> JsNumber(role.id),
-        "name" -> JsString(role.name),
-        "createdAt" -> JsString(role.createdAt.toString),
-        "updatedAt" -> JsString(role.updatedAt.toString)
-      )
-      JsObject(roleSeq)
-    }
-  }
-}
 
 @Singleton
-class RoleModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ex: ExecutionContext) {
+class RoleTable @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ex: ExecutionContext) {
 
   val dbConfig = dbConfigProvider.get[JdbcProfile]
   import dbConfig._
@@ -40,10 +24,10 @@ class RoleModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ex:
     def * = (id, name, createdAt, updatedAt) <> ((Role.apply _).tupled, Role.unapply)
   }
 
-  val roles = TableQuery[RoleTable]
+  val RoleQuery = TableQuery[RoleTable]
 
 
   def list: Future[Seq[Role]] = db.run {
-    roles.result
+    RoleQuery.result
   }
 }

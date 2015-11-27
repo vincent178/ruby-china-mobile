@@ -1,14 +1,15 @@
-package models
+package tables
 
 import java.sql.Timestamp
 import javax.inject.Inject
 
+import models.Role
 import play.api.db.slick.DatabaseConfigProvider
 import slick.driver.JdbcProfile
 
 import scala.concurrent.{Future, ExecutionContext}
 
-class ScopeRoleModel @Inject()(dbConfigProvider: DatabaseConfigProvider, roleModel: RoleModel, scopeModel: ScopeModel)(implicit ex: ExecutionContext) {
+class ScopeRoleTable @Inject()(dbConfigProvider: DatabaseConfigProvider, roleTable: RoleTable, scopeTable: ScopeTable)(implicit ex: ExecutionContext) {
 
   val dbProfile = dbConfigProvider.get[JdbcProfile]
   import dbProfile._
@@ -24,12 +25,12 @@ class ScopeRoleModel @Inject()(dbConfigProvider: DatabaseConfigProvider, roleMod
     def * = (id, scopeId, roleId, createdAt, updatedAt)
   }
 
-  val scopeRoleMapping = TableQuery[ScopeRoleTable]
+  val ScopeRoleQuery = TableQuery[ScopeRoleTable]
 
   def roleForScope: Future[Seq[Role]] = db.run {
 
     val crossJoin = for {
-      ((r, sr), s) <- roleModel.roles joinLeft scopeRoleMapping on (_.id === _.roleId) joinLeft scopeModel.scopes on (_._2.map(_.scopeId) === _.id)
+      ((r, sr), s) <- roleTable.RoleQuery joinLeft ScopeRoleQuery on (_.id === _.roleId) joinLeft scopeTable.ScopeQuery on (_._2.map(_.scopeId) === _.id)
     } yield r
 
     crossJoin.result

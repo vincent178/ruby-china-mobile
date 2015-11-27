@@ -1,4 +1,4 @@
-package models
+package tables
 
 import java.sql.Timestamp
 import javax.inject.{ Inject, Singleton}
@@ -16,7 +16,7 @@ case class User(id: Int,
 
 
 @Singleton
-class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
+class UserTable @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
 
   private val dbConfig = dbConfigProvider.get[JdbcProfile]
 
