@@ -9,7 +9,7 @@ import scala.concurrent.{Future, ExecutionContext}
 
 
 @Singleton
-class RoleTable @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ex: ExecutionContext) {
+class RoleModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ex: ExecutionContext) {
 
   val dbConfig = dbConfigProvider.get[JdbcProfile]
   import dbConfig._

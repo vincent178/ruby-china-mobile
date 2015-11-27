@@ -9,7 +9,7 @@ import slick.driver.JdbcProfile
 
 import scala.concurrent.{Future, ExecutionContext}
 
-class ScopeRoleTable @Inject()(dbConfigProvider: DatabaseConfigProvider, roleTable: RoleTable, scopeTable: ScopeTable)(implicit ex: ExecutionContext) {
+class ScopeRoleModel @Inject()(dbConfigProvider: DatabaseConfigProvider, roleTable: RoleModel, scopeTable: ScopeModel)(implicit ex: ExecutionContext) {
 
   val dbProfile = dbConfigProvider.get[JdbcProfile]
   import dbProfile._

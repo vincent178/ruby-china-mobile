@@ -10,7 +10,7 @@ import scala.concurrent.{ExecutionContext, Future}
 
 
 @Singleton
-class ScopeTable @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ex: ExecutionContext) {
+class ScopeModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ex: ExecutionContext) {
 
   val dbConfig = dbConfigProvider.get[JdbcProfile]
   import dbConfig._
