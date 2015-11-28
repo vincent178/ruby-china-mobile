@@ -6,6 +6,6 @@ trait ScopeTrait {
 
   val scopeName: String = this.getClass.toString
 
-  val scopeRoles: Seq[Role]
+//  val scopeRoles: Seq[Role]
 
 }
