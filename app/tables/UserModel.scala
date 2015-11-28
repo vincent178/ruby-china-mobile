@@ -51,6 +51,13 @@ class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec:
 
   private val users = TableQuery[UserTable]
 
+  /**
+    *
+    * @param username
+    * @param email
+    * @param avatarUrl
+    * @return
+    */
   def create(username: String = "", email: String = "", avatarUrl: String = "") = {
     val userInsertAction = {
       users.filter(_.username === username).result.headOption.flatMap {
@@ -64,17 +71,6 @@ class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec:
     }.transactionally
 
     db.run(userInsertAction)
-  }
-
-
-  /**
-    *
-    * Create user method and verify all fields
-    * @param username
-    * @param email
-    * @param avatarUrl
-    */
-  def createUser(username: String = "", email: String = "", avatarUrl: String = ""): Unit = {
   }
 
 

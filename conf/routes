@@ -4,7 +4,11 @@
 
 GET     /                                            controllers.HomeController.index
 
+
+GET     /admin                                       controllers.AdminController.index
+
 GET     /:provider/callback                          controllers.OAuthConsumers.callback(provider: String)
+
 
 
 # Map static resources from the /public folder to the /assets URL path

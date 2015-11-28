@@ -10,12 +10,6 @@ import scala.concurrent.ExecutionContext
 
 class HomeController @Inject()(userModel: UserModel)(implicit ex: ExecutionContext) extends Controller {
 
-//  def index = Action.async {
-//    scopeRoleModel.roleForScope.map { roles =>
-//      Ok(Json.toJson(roles))
-//    }
-//  }
-
   def index = Action {
 
     val username = "vincent_178"
