@@ -23,3 +23,4 @@ bin
 .tmpBin
 projectFilesBackup
 logs/*
+app/assets/javascripts/node_modules
