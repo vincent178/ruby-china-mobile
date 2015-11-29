@@ -12,10 +12,9 @@
     }
     <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("lib/bootstrap/css/bootstrap.css")' />
     <link rel="stylesheet" media="screen" href='@routes.Assets.versioned("stylesheets/main.css")' />
-    <script src="https://fb.me/react-0.14.3.js"></script>
-    <script src="https://fb.me/react-dom-0.14.3.js"></script>
     <script type="text/javascript" src='@routes.Assets.versioned("lib/jquery/jquery.js")'></script>
-    <script type="text/javascript" src='@routes.Assets.versioned("lib/bootstrap/js/bootstrap.js")'></script>
+    <script type="text/javascript" src='@routes.Assets.versioned("lib/react/dist/react.min.js")'></script>
+    <script type="text/javascript" src='@routes.Assets.versioned("lib/react-dom/dist/react-dom.min.js")'></script>
 </head>
 <body>
 <section class="application">
@@ -24,5 +23,11 @@
         @content
     </div>
     @partials.footer()
+
+    <script>
+        if (aaa) {
+            console.log(aaa);
+        }
+    </script>
 </section>
 </body>

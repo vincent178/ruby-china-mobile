@@ -16,6 +16,8 @@ libraryDependencies ++= Seq(
   filters,ws,
   cache,
   // WebJars (i.e. client-side) dependencies
+  "org.webjars.npm" % "react" % "0.14.3",
+  "org.webjars.npm" % "react-dom" % "0.14.3",
   "org.webjars" % "requirejs" % "2.1.14",
   "org.webjars" % "underscorejs" % "1.6.0",
   "org.webjars" % "jquery" % "2.1.1",

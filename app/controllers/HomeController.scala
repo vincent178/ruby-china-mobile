@@ -1,6 +1,7 @@
 package controllers
 
 import javax.inject.Inject
+import javax.script.ScriptEngineManager
 
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
@@ -12,18 +13,15 @@ class HomeController @Inject()(userModel: UserModel)(implicit ex: ExecutionConte
 
   def index = Action {
 
-    val username = "vincent_178"
-    val email = "vincent.007.cn@gmail.com"
-    val avatarUrl = ""
+    val engine = new ScriptEngineManager().getEngineByName("nashorn")
 
-    userModel.create(username = username, email = email, avatarUrl = avatarUrl)
-    userModel.create(username = username, email = email, avatarUrl = avatarUrl)
-    userModel.create(username = username, email = email, avatarUrl = avatarUrl)
-    userModel.create(username = username, email = email, avatarUrl = avatarUrl)
-    userModel.create(username = username, email = email, avatarUrl = avatarUrl)
+    if (engine == null) {
+      BadRequest("Nashorn script engine not found. Are you using JDK 8?")
+    } else {
 
-    Ok(views.html.home.index())
+      engine.eval("var aaa = 'Hello world'")
+
+      Ok(views.html.home.index())
+    }
   }
 }
-
-
