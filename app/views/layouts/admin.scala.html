@@ -1,4 +1,4 @@
-@(title: String = "")(content: Html)
+@(title: String = "", user: Option[tables.User])(content: Html)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -17,7 +17,7 @@
 </head>
 <body>
 <section class="application">
-    @partials.header()
+    @partials.header(user)
     <div id="main" class="main-container container">
         @content
     </div>

@@ -25,3 +25,4 @@ projectFilesBackup
 logs/*
 app/assets/javascripts/node_modules
 spa/node_modules
+spa/.idea

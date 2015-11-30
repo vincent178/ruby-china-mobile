@@ -20,16 +20,6 @@ case class User(id: Int,
   validatesLengthOf("12321")
 }
 
-class UserBM(user: User) extends Validation {
-
-  validatesLengthOf("12321")
-  user
-
-
-
-}
-
-
 @Singleton
 class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: ExecutionContext) {
 
@@ -52,7 +42,8 @@ class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec:
   private val users = TableQuery[UserTable]
 
   /**
-    *
+    * Create user with information username, email, and avatarUrl.
+    * Check database if the email has already exist before save it.
     * @param username
     * @param email
     * @param avatarUrl
@@ -60,9 +51,9 @@ class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec:
     */
   def create(username: String = "", email: String = "", avatarUrl: String = "") = {
     val userInsertAction = {
-      users.filter(_.username === username).result.headOption.flatMap {
+      users.filter(_.email === email).result.headOption.flatMap {
         case Some(user) =>
-          Logger.info("Hello world")
+          Logger.info(s"User with $email has already exists!")
           DBIO.successful(user)
 
         case None =>
@@ -73,6 +64,13 @@ class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec:
     db.run(userInsertAction)
   }
 
+  def find(username: String) = {
+    val selectQuery = for {
+      u <- users if u.username === username
+    } yield u
+
+    db.run(selectQuery.result.headOption)
+  }
 
   def list(): Future[Seq[User]] = db.run {
     users.result

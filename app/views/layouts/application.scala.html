@@ -1,4 +1,5 @@
-@(title: String = "")(content: Html)
+@import tables.User
+@(title: String = "", user: Option[User])(content: Html)
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,16 +19,10 @@
 </head>
 <body>
 <section class="application">
-    @partials.header()
+    @partials.header(user)
     <div id="main" class="main-container container">
         @content
     </div>
     @partials.footer()
-
-    <script>
-        if (aaa) {
-            console.log(aaa);
-        }
-    </script>
 </section>
 </body>

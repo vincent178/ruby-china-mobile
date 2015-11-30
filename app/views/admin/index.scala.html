@@ -1,4 +1,4 @@
-@()
-@layouts.admin() {
+@(user: Option[tables.User])
+@layouts.admin("", user) {
 <h1>This is home page</h1>
 }
