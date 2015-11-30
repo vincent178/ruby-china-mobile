@@ -6,6 +6,11 @@ GET     /                                            controllers.HomeController.
 GET     /account/sign_out                            controllers.SessionsController.destroy
 
 
+
+GET     /topics                                      controllers.TopicsController.index
+GET     /topics/new                                  controllers.TopicsController.init
+
+
 GET     /admin                                       controllers.AdminController.index
 
 GET     /:provider/callback                          controllers.OAuthConsumers.callback(provider: String)
