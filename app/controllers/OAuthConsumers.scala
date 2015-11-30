@@ -20,15 +20,14 @@ class OAuthConsumers @Inject()(userModel: UserModel) extends Controller {
       response <- WS.url("https://api.github.com/user").withHeaders("Authorization" -> s"token ${accessToken}").get()
     } yield response
 
-    oauthUser.map { response =>
-
+    oauthUser.flatMap { response =>
       val username = (response.json \ "name").as[String]
       val email = (response.json \ "email").as[String]
       val avatarUrl = (response.json \ "avatar_url").as[String]
 
-      userModel.create(username = username, email = email, avatarUrl = avatarUrl)
-
-      Redirect(routes.HomeController.index()).withSession("username" -> username)
+      userModel.create(username = username, email = email, avatarUrl = avatarUrl).map { user =>
+        Redirect(routes.HomeController.index()).withSession("username" -> username)
+      }
     }
   }
 }

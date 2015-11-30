@@ -13,6 +13,5 @@ class HomeController @Inject()(userModel: UserModel)(implicit ex: ExecutionConte
     currentLoginUser(request.session, userModel).map { user =>
       Ok(views.html.home.index(user))
     }
-
   }
 }
