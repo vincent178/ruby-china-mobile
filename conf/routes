@@ -3,6 +3,7 @@
 # ~~~~
 
 GET     /                                            controllers.HomeController.index
+GET     /account/sign_out                            controllers.SessionsController.destroy
 
 
 GET     /admin                                       controllers.AdminController.index
