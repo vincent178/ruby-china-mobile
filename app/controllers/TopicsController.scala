@@ -1,19 +1,18 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
+import actionbuilders.AuthenticationBuilder
 import play.api.mvc._
 import tables.UserModel
 
 import scala.concurrent.ExecutionContext
 
 @Singleton
-class TopicsController @Inject()(userModel: UserModel)(implicit ex: ExecutionContext) extends ApplicationController {
+class TopicsController @Inject()(userModel: UserModel)(implicit ex: ExecutionContext) extends Controller with AuthenticationBuilder {
 
-  def index = Action.async { implicit request =>
-    currentLoginUser(request.session, userModel).map { user =>
-      Ok(views.html.topics.index(user))
-    }
+  def index = TODO
+
+  def init = AuthenticatedAction(userModel)(ex) { implicit request =>
+    Ok(views.html.topics.init(request.user))
   }
-
-  def init = TODO
 }
