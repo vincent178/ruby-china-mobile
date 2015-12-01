@@ -76,3 +76,4 @@ class UserModel @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec:
     users.result
   }
 }
+
