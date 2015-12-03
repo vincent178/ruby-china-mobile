@@ -57,7 +57,7 @@ class Users @Inject()(dbConfigProvider: DatabaseConfigProvider)(implicit ec: Exe
           DBIO.successful(user)
 
         case None =>
-          users.map( u => (u.username, u.email, u.avatarUrl)) += (username, email, avatarUrl)
+          users.map(u => (u.username, u.email, u.avatarUrl)) += ((username, email, avatarUrl))
       }
     }.transactionally
 

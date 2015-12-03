@@ -8,9 +8,10 @@ GET     /account/sign_out                            controllers.SessionsControl
 
 
 
-GET     /topics                                      controllers.TopicsController.index
+GET     /topics                                      controllers.TopicsController.list
 GET     /topics/new                                  controllers.TopicsController.init
 POST    /topics                                      controllers.TopicsController.create
+GET     /topics/$id<\d+>                           controllers.TopicsController.detail(id: Int)
 
 
 GET     /admin                                       controllers.AdminController.index
