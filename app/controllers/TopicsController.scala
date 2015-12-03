@@ -3,12 +3,12 @@ package controllers
 import javax.inject.{Inject, Singleton}
 import actionbuilders.AuthenticationBuilder
 import play.api.mvc._
-import tables.UserModel
+import models.Users
 
 import scala.concurrent.ExecutionContext
 
 @Singleton
-class TopicsController @Inject()(userModel: UserModel)(implicit ex: ExecutionContext) extends Controller with AuthenticationBuilder {
+class TopicsController @Inject()(userModel: Users)(implicit ex: ExecutionContext) extends Controller with AuthenticationBuilder {
 
   def index = TODO
 

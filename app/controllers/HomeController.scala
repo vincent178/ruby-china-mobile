@@ -5,12 +5,12 @@ import scala.concurrent.ExecutionContext
 import play.api.mvc._
 
 import actionbuilders.AuthenticationBuilder
-import tables.UserModel
+import models.Users
 
 
 
 @Singleton
-class HomeController @Inject()(userModel: UserModel)(implicit ex: ExecutionContext) extends Controller with AuthenticationBuilder {
+class HomeController @Inject()(userModel: Users)(implicit ex: ExecutionContext) extends Controller with AuthenticationBuilder {
 
 
   def index = AuthenticatedAction(userModel)(ex) { implicit request =>

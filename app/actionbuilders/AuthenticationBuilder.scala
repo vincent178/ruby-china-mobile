@@ -1,7 +1,7 @@
 package actionbuilders
 
 import play.api.mvc._
-import tables.{User, UserModel}
+import models.{User, Users}
 import scala.concurrent.{ExecutionContext, Future}
 
 class AuthenticatedRequest[A](val user: Option[User], request: Request[A]) extends WrappedRequest[A](request)
@@ -9,7 +9,7 @@ class AuthenticatedRequest[A](val user: Option[User], request: Request[A]) exten
 
 trait AuthenticationBuilder {
 
-  def AuthenticatedAction(userModel: UserModel)(implicit ec: ExecutionContext) = new ActionBuilder[AuthenticatedRequest] {
+  def AuthenticatedAction(userModel: Users)(implicit ec: ExecutionContext) = new ActionBuilder[AuthenticatedRequest] {
 
     def invokeBlock[A](request: Request[A], block: (AuthenticatedRequest[A]) => Future[Result]) = {
 

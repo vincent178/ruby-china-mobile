@@ -4,14 +4,14 @@ import com.google.inject.{Inject, Singleton}
 import play.api.libs.ws.{WS, WSResponse}
 import play.api.mvc._
 import libs.oauth2.provider.GithubAuthenticator
-import tables.UserModel
+import models.Users
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import play.api.Play.current
 
 
 @Singleton
-class OAuthConsumers @Inject()(userModel: UserModel) extends Controller {
+class OAuthConsumers @Inject()(userModel: Users) extends Controller {
 
   def callback(provider: String) = Action.async { implicit request =>
 
