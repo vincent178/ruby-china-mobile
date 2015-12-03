@@ -16,7 +16,8 @@ libraryDependencies ++= Seq(
   filters,ws,
   cache,
   // WebJars (i.e. client-side) dependencies
-//  "org.webjars" %% "webjars-play" % "2.4.0-1",
+  "org.webjars" %% "webjars-play" % "2.4.0-1",
+  "org.webjars.bower" % "font-awesome" % "4.5.0",
   "org.webjars.npm" % "react" % "0.14.3",
   "org.webjars.npm" % "react-dom" % "0.14.3",
   "org.webjars.bower" % "summernote" % "0.6.16",

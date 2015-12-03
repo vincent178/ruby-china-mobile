@@ -7,8 +7,10 @@ GET     /account/sign_out                            controllers.SessionsControl
 
 
 
+
 GET     /topics                                      controllers.TopicsController.index
 GET     /topics/new                                  controllers.TopicsController.init
+POST    /topics                                      controllers.TopicsController.create
 
 
 GET     /admin                                       controllers.AdminController.index
