@@ -67,7 +67,7 @@
 
 //package controllers
 //
-//import actionbuilders.LoggingAction
+//import helpers.actionbuilders.LoggingAction
 //import models.ReportsModel
 //import models.database.ReportEntity
 //import play.api.Routes

@@ -4,7 +4,7 @@ import com.google.inject.{Inject, Singleton}
 import scala.concurrent.ExecutionContext
 import play.api.mvc._
 
-import actionbuilders.AuthenticationBuilder
+import helpers.actionbuilders.AuthenticationBuilder
 import models.Users
 
 

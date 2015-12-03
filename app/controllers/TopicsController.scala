@@ -1,7 +1,7 @@
 package controllers
 
 import javax.inject.{Inject, Singleton}
-import actionbuilders.AuthenticationBuilder
+import helpers.actionbuilders.AuthenticationBuilder
 import play.api.mvc._
 import models.Users
 
