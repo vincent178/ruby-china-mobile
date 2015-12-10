@@ -19,6 +19,7 @@
     document.addEventListener('DOMContentLoaded', function() {
       var button = document.getElementById("button");
       var processing = document.getElementById("processing");
+
       button.addEventListener('click', function() {
         var width = 0;
 
@@ -30,10 +31,8 @@
           if (width === 100) {
             clearInterval(id);
           }
-
         }
-
-        var id = setInterval(process, 100);
+        var id = setInterval(process, 50);
       });
     }, false);
   </script>
