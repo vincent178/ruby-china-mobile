@@ -40,3 +40,8 @@ console.log(find(arr, 0) === -1);
 function filterNumeric(arr) {
 
 }
+
+// slice()
+var arr = ["Why", "learn", "Javascript"];
+var arr2 = arr.slice(0, 2);
+console.log(arr2);
