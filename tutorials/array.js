@@ -45,3 +45,7 @@ function filterNumeric(arr) {
 var arr = ["Why", "learn", "Javascript"];
 var arr2 = arr.slice(0, 2);
 console.log(arr2);
+
+var arr3 = arr.slice(1); // means slice 1 to end
+console.log(arr3);
+
