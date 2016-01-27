@@ -5,8 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "run": "./node_modules/nodemon/bin/nodemon.js build/index.js",
-    "watch": "./node_modules/babel-cli/bin/babel.js --watch=./logic --out-dir=./build",
+    "run": "./node_modules/nodemon/bin/nodemon.js logic.bundle.js",
     "webpack": "./node_modules/webpack/bin/webpack.js"
   },
   "author": "vincent.007.cn@gmail.com",
@@ -20,6 +19,7 @@
     "babel-cli": "^6.4.5",
     "babel-loader": "^6.2.1",
     "babel-preset-es2015": "^6.3.13",
+    "json-loader": "^0.5.4",
     "nodemon": "^1.8.1",
     "webpack": "^2.0.5-beta",
     "webpack-dev-server": "^1.14.1"
