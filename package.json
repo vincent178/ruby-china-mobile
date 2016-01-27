@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "run": "./node_modules/nodemon/bin/nodemon.js build/index.js",
-    "watch": "./node_modules/babel-cli/bin/babel.js --watch=./logic --out-dir=./build"
+    "watch": "./node_modules/babel-cli/bin/babel.js --watch=./logic --out-dir=./build",
+    "webpack": "./node_modules/webpack/bin/webpack.js"
   },
   "author": "vincent.007.cn@gmail.com",
   "license": "MIT",

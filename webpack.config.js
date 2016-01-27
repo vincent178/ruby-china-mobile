@@ -1,10 +1,8 @@
 module.exports = {
 
-  entry: './app.js',
-
   entry: {
     view: './view/app.js',
-    logic: './logic/index.js'
+    //logic: './logic/index.js'
   },
 
   output: {
