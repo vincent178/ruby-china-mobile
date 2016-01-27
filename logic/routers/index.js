@@ -5,7 +5,7 @@ import home from './home';
 const app = express();
 
 app.set('view engine', 'ejs');
-app.set('views', process.cwd() + '/view');
+app.set('views', process.cwd() + '/templates');
 
 app.use('/', home);
 
