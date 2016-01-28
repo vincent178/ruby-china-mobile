@@ -13,7 +13,10 @@
   "dependencies": {
     "body-parser": "^1.14.2",
     "ejs": "^2.4.1",
-    "express": "^4.13.4"
+    "express": "^4.13.4",
+    "react": "^0.14.6",
+    "react-redux": "^4.0.6",
+    "redux-thunk": "^1.0.3"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",
