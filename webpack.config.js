@@ -14,12 +14,11 @@ fs.readdirSync('node_modules')
 var web = {
   entry: {
     view: './view/app.js',
-    //logic: './logic/index.js'
   },
 
   output: {
     filename: "[name].bundle.js",
-    path: __dirname
+    path: __dirname + "/build"
   },
 
   module: {
