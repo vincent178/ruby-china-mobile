@@ -5,8 +5,8 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "run": "./node_modules/nodemon/bin/nodemon.js logic.bundle.js",
-    "webpack": "./node_modules/webpack/bin/webpack.js"
+    "start": "node_modules/.bin/webpack-dev-server --content-base build",
+    "build": "nodel_modules/.bin/webpack"
   },
   "author": "vincent.007.cn@gmail.com",
   "license": "MIT",
