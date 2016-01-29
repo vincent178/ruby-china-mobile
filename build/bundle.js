@@ -63,7 +63,7 @@
 
 	document.body.appendChild(app);
 
-	ap.appendChild(component());
+	app.appendChild(component());
 
 /***/ }
 /******/ ]);
