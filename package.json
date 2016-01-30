@@ -5,7 +5,7 @@
   "private": true,
   "main": "index.js",
   "scripts": {
-    "start": "node_modules/.bin/webpack-dev-server --content-base build",
+    "start": "node_modules/.bin/webpack-dev-server",
     "build": "nodel_modules/.bin/webpack"
   },
   "author": "vincent.007.cn@gmail.com",
