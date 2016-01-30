@@ -7,11 +7,27 @@ const PATH = {
 };
 
 module.exports = {
+
   entry: PATH.app,
+
   output: {
     path: PATH.build,
     filename: 'bundle.js'
   },
+
+  module: {
+
+    loaders: [
+      {
+        test: /\.css$/,
+        loaders: ['style', 'css'],
+        // loader evaluated from right to left
+        include: PATH.app },
+    ]
+
+  },
+
+  devtool: 'eval-source-map',
 
   devServer: {
     contentBase: PATH.build,
