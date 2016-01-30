@@ -22,7 +22,14 @@ module.exports = {
         test: /\.css$/,
         loaders: ['style', 'css'],
         // loader evaluated from right to left
-        include: PATH.app },
+        include: PATH.app
+      },
+
+      {
+        test: /\.jsx?$/,
+        loaders: ['babel?cacheDirectory'],
+        include: PATH.app
+      }
     ]
 
   },
