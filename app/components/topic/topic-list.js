@@ -10,6 +10,10 @@ export default class TopicList extends Component {
     super(props);
   }
 
+  componentDidMount() {
+
+  }
+
   render() {
     return (
       <div>
