@@ -1,5 +1,3 @@
-import './main.css';
-
 import React, { Component } from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -8,11 +6,15 @@ import { render } from 'react-dom';
 
 import reducers from './reducers';
 import App from './containers/app';
+import Channel from './channel';
 
 const middleware = [ thunk ];
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 
 const store = createStoreWithMiddleware(reducers);
+
+const channel = new Channel();
+channel.getTopics();
 
 render(
   <Provider store={store}>
