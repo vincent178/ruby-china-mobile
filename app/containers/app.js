@@ -5,90 +5,90 @@ import React, {
   PropTypes
 } from 'react';
 import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import classNames from 'classnames';
+
+import { initEnvironment } from '../actions/environment';
+import { initTab } from '../actions/application';
+import Tabs from '../constants/tabs';
 
 import TopicContainer from './topic-container';
-import { getTopics } from '../actions/topic';
+import NotificationContainer from './notification-container';
+import MeContainer from './me-container';
+
 
 import '../assets/stylesheets/index.css';
-
-const Width = window.innerWidth;
-const Height = window.innerHeight;
-
-/*
- * STATE SHAPE
- *
- * {
- *   "application": {
- *     "selectedTab": "topic"
- *   },
- *
- *   "topic": {
- *     "topics": {
- *       1: {},
- *       2: {}
- *     },
- *
- *     "topicsById": [1, 2]
- *   },
- *
- *   "notification": {
- *     "notifications": {
- *       1: {},
- *       2: {}
- *     },
- *
- *     "notificationsById": [1, 2]
- *   }
- * }
- *
- */
+import '../assets/stylesheets/app.css';
 
 class App extends Component {
 
-  constructor(props) {
-    super(props);
+  componentDidMount() {
+    const { dispatch } = this.props;
+    dispatch(initEnvironment());
+    dispatch(initTab());
+  }
 
-    console.log(Width);
-    console.log(Height);
+  renderTabBar() {
+
+    const { selectedTab } = this.props;
+
+    function tabItemClass(tab) {
+      if (tab === selectedTab) {
+        return "tab-item-container selected";
+      }
+      return "tab-item-container";
+    }
+
+    return (
+      <div className="tab-bar">
+        <div className={tabItemClass(Tabs.TOPIC_TAB)}>
+          <span className="tab-item">Topics</span>
+        </div>
+        <div className={tabItemClass(Tabs.NOTIFICATION_TAB)}>
+          <span className="tab-item">Notification</span>
+        </div>
+        <div className={tabItemClass(Tabs.ME_TAB)}>
+          <span className="tab-item">Me</span>
+        </div>
+      </div>
+    );
+  }
+
+  renderScene() {
+
+    const { selectedTab } = this.props;
+
+    switch (selectedTab) {
+      case Tabs.TOPIC_TAB:
+        return <TopicContainer />;
+      case Tabs.NOTIFICATION_TAB:
+        return <NotificationContainer />;
+      case Tabs.ME_TAB:
+        return <MeContainer />;
+    }
   }
 
   render() {
-    const { topicAction } = this.props;
     return (
       <div>
-        <TopicContainer actions={topicAction} />
-
-        <div className="toolbar">
-          <div>
-            <span className="tab-item selected">Topics</span>
-          </div>
-          <div>
-            <span className="tab-item">Notification</span>
-          </div>
-          <div>
-            <span className="tab-item">Me</span>
-          </div>
-        </div>
+        {this.renderTabBar()}
+        {this.renderScene()}
       </div>
     );
   }
 }
 
 App.propTypes = {
-  topicAction: PropTypes.object
+  dispatch: PropTypes.func.isRequired,
+  selectedTab: PropTypes.string.isRequired
 };
 
-export default connect( state => {
+function mapStateToProps(state) {
+  const { environment, application } = state;
   return {
-    application: state.application,
-    topic: {
-      topics: state.topics,
-      topicsById: state.topicsById
-    }
-  }}, dispatch => {
-  return {
-    topicAction: bindActionCreators(Object.assign({}, getTopics), dispatch)
+    width: environment.width,
+    height: environment.height,
+    selectedTab: application.selectedTab
   }
 }
-)(App);
+
+export default connect(mapStateToProps)(App);
