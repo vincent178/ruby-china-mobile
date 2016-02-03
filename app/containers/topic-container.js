@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import { Component, PropTypes } from 'react';
+import { connect } from 'react-redux';
 
-import TopicList from '../components/topic/topic-list';
-import { ShadowHeader } from '../components/shared/shadow';
+import TopicList from '../components/topic-list';
 import { getTopic } from '../actions/topic';
 
-export default class TopicContainer extends Component {
+class TopicContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -13,10 +13,30 @@ export default class TopicContainer extends Component {
   render() {
     return (
       <div>
-        <ShadowHeader />
         TopicContainer
         <TopicList actions={getTopic} />
       </div>
     );
   }
 }
+
+TopicContainer.propTypes = {
+
+};
+
+function mapStateToProps(state) {
+  //const { environment, application } = state;
+  //return {
+  //  width: environment.width,
+  //  height: environment.height,
+  //  selectedTab: application.selectedTab
+  //}
+
+  return { state };
+}
+
+export default connect(mapStateToProps)(TopicContainer);
+
+
+
+

@@ -14,3 +14,10 @@ export function getTopics() {
       .then((topics) => dispatch(receiveTopics(topics)));
   }
 }
+
+//有两种情况, 第一种是没有
+
+export function fetchTopicsIfNeeded(node) {
+
+}
+
