@@ -1,4 +1,5 @@
 import * as types from '../constants/action-types';
+import Channel from '../channel';
 
 function receiveTopics(topics) {
   return {
@@ -16,8 +17,6 @@ export function getTopics() {
 }
 
 //有两种情况, 第一种是没有
-
 export function fetchTopicsIfNeeded(node) {
-
 }
 

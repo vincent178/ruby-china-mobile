@@ -15,3 +15,4 @@ export function initTab(selectedTab = Tabs.TOPIC_TAB) {
     return dispatch(changeTab(selectedTab))
   }
 }
+

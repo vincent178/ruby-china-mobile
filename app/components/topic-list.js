@@ -11,7 +11,8 @@ export default class TopicList extends Component {
   }
 
   componentDidMount() {
-
+    var { dispatch } = this.props;
+    dispatch(this.props.actions.getTopic);
   }
 
   render() {
