@@ -12,9 +12,11 @@ export default class Channel {
   getTopics() {
     const url = address.topics();
 
-    return window.fetch(url)
-      .then(res => res.json())
-      .then(data => producer.getTopics(data.topics))
-      .catch(e => console.log(e))
+    //return window.fetch(url)
+    //  .then(res => res.json())
+    //  .then(data => producer.getTopics(data.topics))
+    //  .catch(e => console.log(e))
+
+    return {};
   }
 }

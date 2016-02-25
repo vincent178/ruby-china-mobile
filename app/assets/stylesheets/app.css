@@ -13,7 +13,6 @@
 .tab-item-container {
     height: 100%;
     min-width: 50px;
-
     display: flex;
     flex-direction: column;
     justify-content: center;

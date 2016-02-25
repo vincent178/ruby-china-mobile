@@ -1,6 +1,10 @@
 const path = require('path');
 const webpack = require('webpack');
 
+var autoprefixer = require('autoprefixer');
+var precss       = require('precss');
+
+
 const PATH = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
@@ -20,7 +24,7 @@ module.exports = {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style', 'css'],
+        loaders: ['style', 'css', 'postcss'],
         // loader evaluated from right to left
         include: PATH.app
       },
@@ -32,6 +36,10 @@ module.exports = {
       }
     ]
 
+  },
+
+  postcss: function() {
+    return [autoprefixer, precss];
   },
 
   devtool: 'eval-source-map',
