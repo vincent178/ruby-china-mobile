@@ -70,7 +70,6 @@ class App extends Component {
   render() {
     return (
       <div>
-        {this.renderTabBar()}
         {this.renderScene()}
       </div>
     );

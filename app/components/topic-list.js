@@ -4,10 +4,13 @@ import React, {
 } from 'react';
 
 import TopicItem from './topic-item';
+import InfiniteScroll from './infinite-scroll';
 
 export default class TopicList extends Component {
   constructor(props) {
     super(props);
+    this.renderTopicItems = this.renderTopicItems.bind(this);
+    this.renderSpinner = this.renderSpinner.bind(this);
   }
 
   componentDidMount() {
@@ -15,11 +18,28 @@ export default class TopicList extends Component {
     dispatch(this.props.actions.getTopic);
   }
 
-  render() {
+  renderTopicItems() {
     return (
-      <div>
-        Topic List
-      </div>
+      <div>H</div>
+    );
+  }
+
+  renderSpinner() {
+    return (
+      <div>Spinner</div>
+    );
+  }
+
+  render() {
+    const { dispatch } = this.props;
+    return (
+      <InfiniteScroll
+        dispatch={dispatch}
+        scrollFunc={console.log("hello")}
+      >
+        {this.renderTopicItems()}
+        {this.renderSpinner()}
+      </InfiniteScroll>
     )
   }
 }
