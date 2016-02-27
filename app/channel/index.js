@@ -2,6 +2,7 @@
 
 import address from './address';
 import producer from './producer';
+import 'whatwg-fetch';
 
 
 export default class Channel {
@@ -12,11 +13,12 @@ export default class Channel {
   getTopics() {
     const url = address.topics();
 
-    //return window.fetch(url)
-    //  .then(res => res.json())
-    //  .then(data => producer.getTopics(data.topics))
-    //  .catch(e => console.log(e))
-
-    return {};
+    return fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        debugger;
+        return producer.getTopics(data.topics)
+      })
+      .catch(e => console.log(e));
   }
 }

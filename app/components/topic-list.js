@@ -5,6 +5,7 @@ import React, {
 
 import TopicItem from './topic-item';
 import InfiniteScroll from './infinite-scroll';
+import {getTopics} from '../actions/topic';
 
 export default class TopicList extends Component {
   constructor(props) {
@@ -14,8 +15,8 @@ export default class TopicList extends Component {
   }
 
   componentDidMount() {
-    var { dispatch } = this.props;
-    dispatch(this.props.actions.getTopic);
+    const { dispatch } = this.props;
+    dispatch(getTopics);
   }
 
   renderTopicItems() {
@@ -32,6 +33,7 @@ export default class TopicList extends Component {
 
   render() {
     const { dispatch } = this.props;
+    debugger;
     return (
       <InfiniteScroll
         dispatch={dispatch}

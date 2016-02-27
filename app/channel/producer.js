@@ -5,6 +5,8 @@ import Util from '../lib/util';
 const producer = {
   getTopics: (topics) => {
 
+    debugger;
+
     return topics.map((topic) => {
 
       for (let key in topic) {

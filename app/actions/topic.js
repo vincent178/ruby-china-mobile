@@ -2,6 +2,7 @@ import * as types from '../constants/action-types';
 import Channel from '../channel';
 
 function receiveTopics(topics) {
+  debugger;
   return {
     type: types.RECEIVE_TOPICS,
     topics: topics
