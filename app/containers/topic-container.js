@@ -17,11 +17,14 @@ TopicContainer.propTypes = {
 
 function mapStateToProps(state) {
 
-    const { environment } = state;
-    return {
-        width: environment.width,
-        height: environment.height
-    }
+  debugger;
+  const { environment, entities, topic } = state;
+  return {
+    width: environment.width,
+    height: environment.height,
+    topic,
+    entities
+  }
 }
 
 export default connect(mapStateToProps)(TopicContainer);

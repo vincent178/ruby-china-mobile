@@ -22,6 +22,8 @@ const producer = {
           topic[Util.toCamel(key)] = value;
         }
       }
+
+      return topic;
     })
   }
 };

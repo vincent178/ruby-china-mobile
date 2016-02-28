@@ -16,9 +16,6 @@ const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 
 const store = createStoreWithMiddleware(reducers);
 
-const channel = new Channel();
-channel.getTopics();
-
 render(
   <Provider store={store}>
     <App />

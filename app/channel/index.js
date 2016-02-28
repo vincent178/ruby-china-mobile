@@ -3,6 +3,8 @@
 import address from './address';
 import producer from './producer';
 import 'whatwg-fetch';
+import {arrayOf, normalize} from 'normalizr';
+import {topicSchema} from '../constants/schema';
 
 
 export default class Channel {
@@ -16,8 +18,9 @@ export default class Channel {
     return fetch(url)
       .then(res => res.json())
       .then(data => {
+        const topics = producer.getTopics(data.topics);
+        const normalized = normalize(topics, arrayOf(topicSchema));
         debugger;
-        return producer.getTopics(data.topics)
       })
       .catch(e => console.log(e));
   }

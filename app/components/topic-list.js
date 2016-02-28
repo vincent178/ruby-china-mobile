@@ -16,7 +16,7 @@ export default class TopicList extends Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(getTopics);
+    dispatch(getTopics());
   }
 
   renderTopicItems() {
@@ -33,7 +33,6 @@ export default class TopicList extends Component {
 
   render() {
     const { dispatch } = this.props;
-    debugger;
     return (
       <InfiniteScroll
         dispatch={dispatch}

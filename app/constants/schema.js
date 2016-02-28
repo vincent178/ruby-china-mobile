@@ -6,3 +6,5 @@ const user = new Schema('users');
 topic.define({
   user: user
 });
+
+export const topicSchema = topic;
