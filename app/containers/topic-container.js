@@ -17,7 +17,6 @@ TopicContainer.propTypes = {
 
 function mapStateToProps(state) {
 
-  debugger;
   const { environment, entities, topic } = state;
   return {
     width: environment.width,
