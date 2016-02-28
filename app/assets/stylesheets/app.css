@@ -1,3 +1,4 @@
+
 .tab-bar {
     position: fixed;
     top: 0;
@@ -17,7 +18,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 2em;
+    font-size: 20px;
 }
 
 .tab-item-container.selected {

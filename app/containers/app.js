@@ -69,7 +69,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div style={{width: this.props.width, height: this.props.height}}>
         {this.renderScene()}
       </div>
     );

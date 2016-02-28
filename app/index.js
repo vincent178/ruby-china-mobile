@@ -7,9 +7,6 @@ import { render } from 'react-dom';
 
 import reducers from './reducers';
 import App from './containers/app';
-import Channel from './channel';
-
-
 
 const middleware = [ thunk ];
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);

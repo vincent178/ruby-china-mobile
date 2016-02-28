@@ -20,15 +20,29 @@ export default class TopicList extends Component {
   }
 
   renderTopicItems() {
-    return (
-      <div>H</div>
-    );
+    const { topic, entities } = this.props;
+
+    if (topic.items.length === 0) {
+      return;
+    }
+
+    return topic.items.map((topicId, i) => {
+      const topic = entities.topics[topicId];
+
+      return (
+        <div key={topicId + '-' + i}>
+          {topic.title}
+        </div>
+      )
+    });
   }
 
   renderSpinner() {
-    return (
-      <div>Spinner</div>
-    );
+    const { topic } = this.props;
+    if (topic.isFetching) {
+      return <div>Spinner</div>;
+    }
+    return;
   }
 
   render() {
@@ -45,11 +59,11 @@ export default class TopicList extends Component {
   }
 }
 
-TopicList.propTypes = {
-  topics: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    title: PropTypes.string,
-    price: PropTypes.number,
-    quantity: PropTypes.number
-  })).isRequired
-};
+//TopicList.propTypes = {
+//  topics: PropTypes.arrayOf(PropTypes.shape({
+//    id: PropTypes.number.isRequired,
+//    title: PropTypes.string,
+//    price: PropTypes.number,
+//    quantity: PropTypes.number
+//  })).isRequired
+//};

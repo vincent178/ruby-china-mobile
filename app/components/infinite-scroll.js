@@ -9,6 +9,7 @@ export default class InfiniteScroll extends Component {
 
   componentDidMount() {
     const el = ReactDOM.findDOMNode(this.refs.scroll);
+    debugger;
     el.addEventListener('scroll', this.onScroll, false);
   }
 
