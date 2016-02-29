@@ -3,7 +3,7 @@ import React, {
   PropTypes
 } from 'react';
 
-import TopicItem from './topic-item';
+import TopicListItem from './topic-list-item';
 import InfiniteScroll from './infinite-scroll';
 import {getTopics} from '../actions/topic';
 
@@ -12,6 +12,7 @@ export default class TopicList extends Component {
     super(props);
     this.renderTopicItems = this.renderTopicItems.bind(this);
     this.renderSpinner = this.renderSpinner.bind(this);
+    this.renderMoreTopics = this.renderMoreTopics.bind(this);
   }
 
   componentDidMount() {
@@ -31,6 +32,7 @@ export default class TopicList extends Component {
 
       return (
         <div key={topicId + '-' + i}>
+          <TopicListItem {...this.props} />
           {topic.title}
         </div>
       )
@@ -45,12 +47,19 @@ export default class TopicList extends Component {
     return;
   }
 
+  renderMoreTopics() {
+    debugger;
+    console.log("Hello world");
+
+    return getTopics();
+  }
+
   render() {
     const { dispatch } = this.props;
     return (
       <InfiniteScroll
         dispatch={dispatch}
-        scrollFunc={console.log("hello")}
+        scrollFunc={this.renderMoreTopics}
       >
         {this.renderTopicItems()}
         {this.renderSpinner()}

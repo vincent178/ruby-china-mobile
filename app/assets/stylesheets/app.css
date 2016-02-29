@@ -28,3 +28,8 @@
 .tab-item-container.selected {
     border-bottom: 2px solid #009de0;
 }
+
+.scroll {
+    flex: 1;
+    overflow: scroll;
+}
