@@ -16,7 +16,7 @@ export default function topicReducer(state = initialState, action) {
     case types.RECEIVE_TOPICS:
       return Object.assign({}, state, {
         isFetching: false,
-        items: [...state.items, ...action.topics]
+        items: new Set([...state.items, ...action.topics])
       });
     default:
       return state;

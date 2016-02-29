@@ -50,8 +50,9 @@ export default class TopicList extends Component {
   renderMoreTopics() {
     debugger;
     console.log("Hello world");
+    const {topic} = this.props;
 
-    return getTopics();
+    return getTopics(topic.items.length);
   }
 
   render() {

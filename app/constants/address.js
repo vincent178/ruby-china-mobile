@@ -11,7 +11,7 @@ const TOPIC_PARAMS = {
 
 const address = {
 
-  topics: (type = "last_actived", offset = 0, limit = 20) => {
+  topics: (offset = 0, limit = 20, type = "last_actived") => {
     return `${BASE_URL}/topics.json?type=${type}&offset=${offset}&limit=${limit}`;
   }
 };

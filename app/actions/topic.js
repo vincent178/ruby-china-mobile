@@ -25,11 +25,11 @@ function requestTopics() {
 // 这里的 getTopics 虽然是一种action, 但不会直接产生 state 的变化
 // 通过 dispatch 已经产生的变化的action, 例如 receiveTopics
 
-export function getTopics() {
+export function getTopics(offset, limit, type) {
 
   return (dispatch) => {
     dispatch(requestTopics());
-    return fetch(address.topics())
+    return fetch(address.topics(offset, limit, type))
       .then(res => {
         return res.json()
       })
