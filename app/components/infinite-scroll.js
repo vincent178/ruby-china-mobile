@@ -28,7 +28,7 @@ export default class InfiniteScroll extends Component {
 
   onScroll() {
     const el = ReactDOM.findDOMNode(this.refs.scroll);
-    if (el.scrollTop >= (el.scrollHeight - el.offsetHeight - 200)) {
+    if (el.scrollTop >= (el.scrollHeight - el.offsetHeight - 300)) {
       this.props.dispatch(this.props.scrollFunc());
     }
   }
