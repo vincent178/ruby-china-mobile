@@ -4,7 +4,7 @@ import React, {
 } from 'react';
 
 import TopicListItem from './topic-list-item';
-import InfiniteScroll from './infinite-scroll';
+import NativeScroll from './native-scroll';
 import {getTopics} from '../actions/topic';
 
 export default class TopicList extends Component {
@@ -55,13 +55,13 @@ export default class TopicList extends Component {
   render() {
     const { dispatch } = this.props;
     return (
-      <InfiniteScroll
+      <NativeScroll
         dispatch={dispatch}
         scrollFunc={this.renderMoreTopics}
       >
         {this.renderTopicItems()}
         {this.renderSpinner()}
-      </InfiniteScroll>
+      </NativeScroll>
     )
   }
 }

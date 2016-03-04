@@ -33,3 +33,17 @@
     flex: 1;
     overflow: scroll;
 }
+
+.scroll-container {
+    overflow: auto;
+}
+
+#ptr {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: -50px;
+    height: 50px;
+    background-color: darkgray;
+    z-index: 10;
+}

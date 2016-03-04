@@ -16,6 +16,8 @@ export default function topicReducer(state = initialState, action) {
     case types.RECEIVE_TOPICS:
       return Object.assign({}, state, {
         isFetching: false,
+        // new Set to reject the duplicate topicIds
+        // return array to conveniently use array interface
         items: Array.from(new Set([...state.items, ...action.topics]))
       });
     default:
