@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
-var resistance = 2.5;
+var resistance = 2;
 
 export default class NativeScroll extends Component {
   constructor(props) {
@@ -103,7 +103,7 @@ export default class NativeScroll extends Component {
   render() {
     let scrollStyle = {
       transform: `translateY(${this.state.pullDistance}px)`,
-      Webkittransform: `translateY(${this.state.pullDistance}px)`
+      WebkitTransform: `translateY(${this.state.pullDistance}px)`
     };
 
     return (
