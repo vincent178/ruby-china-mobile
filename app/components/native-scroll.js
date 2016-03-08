@@ -14,7 +14,6 @@ export default class NativeScroll extends Component {
     this.handleTouchMove = this.handleTouchMove.bind(this);
     this.handleTouchEnd = this.handleTouchEnd.bind(this);
 
-
     this.state = {
       pullDistance: 0
     }
@@ -30,7 +29,7 @@ export default class NativeScroll extends Component {
 
     this._startingPositionY = 0;
     this._enablePullToRefresh = false;
-    this._start = 0;
+    this._startY = 0;
   }
 
   componentWillUnmount() {
@@ -44,7 +43,7 @@ export default class NativeScroll extends Component {
     // destroy instance data
     this._startingPositionY = null;
     this._enablePullToRefresh = null;
-    this._start = null;
+    this._startY = null;
   }
 
   onScroll() {
@@ -64,7 +63,7 @@ export default class NativeScroll extends Component {
     }
 
     const touchObj = e.changedTouches[0];
-    this._start = parseInt(touchObj.clientY, 10);
+    this._startY = parseInt(touchObj.clientY, 10);
 
     e.preventDefault();
   }
@@ -74,12 +73,12 @@ export default class NativeScroll extends Component {
 
     if (this._enablePullToRefresh) {
       const touchObj = e.changedTouches[0];
-      const distance = parseInt(touchObj.clientY, 10) - this.startY;
+      const distance = parseInt(touchObj.clientY, 10) - this._startY;
       if (distance > 0) {
         this.setState({pullDistance: distance / resistance});
+        console.log("[NativeScroll] pullDistance: " + this.state.pullDistance);
       }
     }
-
 
     //const el = ReactDOM.findDOMNode(this.refs.scroll);
     //if (window.scrollY >= (el.scrollHeight - window.innerHeight - 200)) {
@@ -96,18 +95,17 @@ export default class NativeScroll extends Component {
     console.log("handleTouchEnd");
 
     if (this._enablePullToRefresh) {
-      this._enablePullToRefresh = false;
       this.setState({pullDistance: 0});
-    }
-  }
-
-  translateCss() {
-    return {
-      transform: `${this.state.pan}px`
+      this._enablePullToRefresh = false;
     }
   }
 
   render() {
+    let scrollStyle = {
+      transform: `translateY(${this.state.pullDistance}px)`,
+      Webkittransform: `translateY(${this.state.pullDistance}px)`
+    };
+
     return (
       <div ref="scroll">
 
@@ -119,7 +117,7 @@ export default class NativeScroll extends Component {
           </div>
         </div>
 
-        <div id="gt-scroll-content">
+        <div id="gt-scroll-content" style={scrollStyle}>
           {this.props.children}
         </div>
       </div>
