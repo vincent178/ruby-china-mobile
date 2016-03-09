@@ -47,3 +47,11 @@
     background-color: darkgray;
     z-index: 10;
 }
+
+.scroll-background {
+    background-color: #333;
+}
+
+.scroll-content {
+    background-color: #fff;
+}

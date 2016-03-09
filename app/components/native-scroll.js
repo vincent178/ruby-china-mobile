@@ -107,7 +107,7 @@ export default class NativeScroll extends Component {
     };
 
     return (
-      <div ref="scroll">
+      <div ref="scroll" className="scroll-background">
 
         <div id="ptr">
           <div className="loading">
@@ -117,7 +117,7 @@ export default class NativeScroll extends Component {
           </div>
         </div>
 
-        <div id="gt-scroll-content" style={scrollStyle}>
+        <div id="gt-scroll-content" className="scroll-content" style={scrollStyle}>
           {this.props.children}
         </div>
       </div>
