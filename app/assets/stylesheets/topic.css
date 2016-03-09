@@ -1,2 +1,7 @@
+.topics-container {
+    margin: 0 10px;
+}
+
 .topic-container {
+    border-bottom: 1px solid #e1e8ed;
 }

@@ -7,6 +7,8 @@ import TopicListItem from './topic-list-item';
 import NativeScroll from './native-scroll';
 import {getTopics} from '../actions/topic';
 
+import '../assets/stylesheets/topic.css';
+
 export default class TopicList extends Component {
   constructor(props) {
     super(props);
@@ -30,12 +32,7 @@ export default class TopicList extends Component {
     return topic.items.map((topicId, i) => {
       const topic = entities.topics[topicId];
 
-      return (
-        <div key={topicId + '-' + i}>
-          <TopicListItem {...this.props} />
-          {topic.title}
-        </div>
-      )
+      return <TopicListItem {...this.props} topic={topic} key={topicId + '-' + i} />;
     });
   }
 
@@ -59,8 +56,10 @@ export default class TopicList extends Component {
         dispatch={dispatch}
         scrollFunc={this.renderMoreTopics}
       >
-        {this.renderTopicItems()}
-        {this.renderSpinner()}
+        <div className="topics-container">
+          {this.renderTopicItems()}
+          {this.renderSpinner()}
+        </div>
       </NativeScroll>
     )
   }

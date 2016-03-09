@@ -36,12 +36,6 @@ export default class NativeScroll extends Component {
     const touchObj = e.changedTouches[0];
     this._startY = parseInt(touchObj.clientY, 10);
 
-    //this._startingPositionY = document.body.scrollTop;
-    //if (this._startingPositionY === 0) {
-    //  this._enablePullToRefresh = true;
-    //  const touchObj = e.changedTouches[0];
-    //  this._startY = parseInt(touchObj.clientY, 10);
-    //}
   }
 
   handleTouchMove(e) {
@@ -69,7 +63,7 @@ export default class NativeScroll extends Component {
       //debugger;
     }
 
-    if ((panDirection === "down") && (document.body.scrollTop <= 0)) {
+    if ((panDirection === "down") && (document.body.scrollTop === 0)) {
 
       e.preventDefault();
 
@@ -78,32 +72,10 @@ export default class NativeScroll extends Component {
       console.log("[NativeScroll] pullDistance: " + this.state.pullDistance);
     }
 
-
-    //if (this._enablePullToRefresh) {
-    //  const touchObj = e.changedTouches[0];
-    //  const distance = parseInt(touchObj.clientY, 10) - this._startY;
-    //  if (distance > 0) {
-    //    e.preventDefault();
-    //    this.setState({pullDistance: distance / RESISTANCE });
-    //    console.log("[NativeScroll] pullDistance: " + this.state.pullDistance);
-    //  }
-    //} else {
-    //  console.log("[NativeScroll] document.body.scrollTop: " + document.body.scrollTop);
-    //  if (document.body.scrollTop === 0) {
-    //    debugger;
-    //    this._enablePullToRefresh = true;
-    //  }
-    //}
-
-    //const el = ReactDOM.findDOMNode(this.refs.scroll);
-    //if (window.scrollY >= (el.scrollHeight - window.innerHeight - 200)) {
-    //  this.props.dispatch(this.props.scrollFunc());
-    //}
-    //
-    //if (window.scrollY < 0) {
-    //  var ptr = document.getElementById('ptr');
-    //  ptr.style.transform = `translateY(0, 50px)`;
-    //}
+    if (window.scrollY >= (scroll.scrollHeight - window.innerHeight - 200)) {
+      console.log("[NativeScroll] this.props.dispatch(this.props.scrollFunc())");
+      this.props.dispatch(this.props.scrollFunc());
+    }
   }
 
   handleTouchEnd(e) {
@@ -139,7 +111,6 @@ export default class NativeScroll extends Component {
              onTouchMove={this.handleTouchMove.bind(this)}
              onTouchEnd={this.handleTouchEnd.bind(this)}
         >
-          {this.props.children}
           {this.props.children}
         </div>
       </div>

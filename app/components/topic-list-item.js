@@ -7,6 +7,10 @@ import '../assets/stylesheets/topic.css';
 export default class TopicListItem extends Component {
 
   render() {
-    return <div>H</div>;
+    return (
+      <div className="topic-container">
+        {this.props.topic.title}
+      </div>
+    )
   }
 }
