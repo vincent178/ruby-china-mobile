@@ -16,7 +16,7 @@ import NotificationContainer from './notification-container';
 import MeContainer from './me-container';
 
 
-import '../assets/stylesheets/index.css';
+import '../assets/stylesheets/base.css';
 import '../assets/stylesheets/app.css';
 
 class App extends Component {

@@ -1,18 +1,11 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
-var resistance = 2;
+const RESISTANCE = 3;
 
 export default class NativeScroll extends Component {
   constructor(props) {
     super(props);
-
-
-    // make bindings
-    //this.onScroll = this.onScroll.bind(this);
-    this.handleTouchStart = this.handleTouchStart.bind(this);
-    this.handleTouchMove = this.handleTouchMove.bind(this);
-    this.handleTouchEnd = this.handleTouchEnd.bind(this);
 
     this.state = {
       pullDistance: 0
@@ -20,28 +13,11 @@ export default class NativeScroll extends Component {
   }
 
   componentDidMount() {
-    const scroll = document.getElementById('gt-scroll-content');
-
-    //el.addEventListener('scroll', this.onScroll, false);
-    scroll.addEventListener('touchstart', this.handleTouchStart, false);
-    scroll.addEventListener('touchmove', this.handleTouchMove, false);
-    scroll.addEventListener('touchend', this.handleTouchEnd, false);
-
-    this._startingPositionY = 0;
     this._enablePullToRefresh = false;
     this._startY = 0;
   }
 
   componentWillUnmount() {
-    const scroll = document.getElementById('gt-scroll-content');
-
-    scroll.removeEventListener('scroll', this.onScroll, false);
-    scroll.removeEventListener('touchstart', this.handleTouchStart, false);
-    scroll.removeEventListener('touchmove', this.handleTouchMove, false);
-    scroll.removeEventListener('touchend', this.handleTouchEnd, false);
-
-    // destroy instance data
-    this._startingPositionY = null;
     this._enablePullToRefresh = null;
     this._startY = null;
   }
@@ -57,28 +33,67 @@ export default class NativeScroll extends Component {
   handleTouchStart(e) {
     console.log("[NativeScroll] handleTouchStart");
 
-    this._startingPositionY = document.body.scrollTop;
-    if (this._startingPositionY === 0) {
-      this._enablePullToRefresh = true;
-    }
-
     const touchObj = e.changedTouches[0];
     this._startY = parseInt(touchObj.clientY, 10);
 
-    e.preventDefault();
+    //this._startingPositionY = document.body.scrollTop;
+    //if (this._startingPositionY === 0) {
+    //  this._enablePullToRefresh = true;
+    //  const touchObj = e.changedTouches[0];
+    //  this._startY = parseInt(touchObj.clientY, 10);
+    //}
   }
 
   handleTouchMove(e) {
     console.log("handleTouchMove");
+    const scroll = document.getElementById('gt-scroll-content');
 
-    if (this._enablePullToRefresh) {
-      const touchObj = e.changedTouches[0];
-      const distance = parseInt(touchObj.clientY, 10) - this._startY;
-      if (distance > 0) {
-        this.setState({pullDistance: distance / resistance});
-        console.log("[NativeScroll] pullDistance: " + this.state.pullDistance);
-      }
+    let panDirection = null;
+
+    const touchObj = e.changedTouches[0];
+    const distance = parseInt(touchObj.clientY, 10) - this._startY;
+
+    if (distance > 0) {
+      panDirection = "down";
+    } else {
+      panDirection = "up";
     }
+
+    console.log("[NativeScroll] document.body.scrollTop: " + document.body.scrollTop);
+
+    if (panDirection === "down") {
+      //debugger;
+    }
+
+    if (document.body.scrollTop <= 0) {
+      //debugger;
+    }
+
+    if ((panDirection === "down") && (document.body.scrollTop <= 0)) {
+
+      e.preventDefault();
+
+      this._enablePullToRefresh = true;
+      this.setState({pullDistance: distance / RESISTANCE });
+      console.log("[NativeScroll] pullDistance: " + this.state.pullDistance);
+    }
+
+
+    //if (this._enablePullToRefresh) {
+    //  const touchObj = e.changedTouches[0];
+    //  const distance = parseInt(touchObj.clientY, 10) - this._startY;
+    //  if (distance > 0) {
+    //    e.preventDefault();
+    //    this.setState({pullDistance: distance / RESISTANCE });
+    //    console.log("[NativeScroll] pullDistance: " + this.state.pullDistance);
+    //  }
+    //} else {
+    //  console.log("[NativeScroll] document.body.scrollTop: " + document.body.scrollTop);
+    //  if (document.body.scrollTop === 0) {
+    //    debugger;
+    //    this._enablePullToRefresh = true;
+    //  }
+    //}
 
     //const el = ReactDOM.findDOMNode(this.refs.scroll);
     //if (window.scrollY >= (el.scrollHeight - window.innerHeight - 200)) {
@@ -91,7 +106,7 @@ export default class NativeScroll extends Component {
     //}
   }
 
-  handleTouchEnd(evt) {
+  handleTouchEnd(e) {
     console.log("handleTouchEnd");
 
     if (this._enablePullToRefresh) {
@@ -117,7 +132,14 @@ export default class NativeScroll extends Component {
           </div>
         </div>
 
-        <div id="gt-scroll-content" className="scroll-content" style={scrollStyle}>
+        <div id="gt-scroll-content"
+             className="scroll-content"
+             style={scrollStyle}
+             onTouchStart={this.handleTouchStart.bind(this)}
+             onTouchMove={this.handleTouchMove.bind(this)}
+             onTouchEnd={this.handleTouchEnd.bind(this)}
+        >
+          {this.props.children}
           {this.props.children}
         </div>
       </div>
