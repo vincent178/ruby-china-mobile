@@ -7,7 +7,7 @@ import TopicListItem from './topic-list-item';
 import NativeScroll from './native-scroll';
 import {getTopics} from '../actions/topic';
 
-import '../assets/stylesheets/topic.css';
+import './topic-list.css';
 
 export default class TopicList extends Component {
   constructor(props) {

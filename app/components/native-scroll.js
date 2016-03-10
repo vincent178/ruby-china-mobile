@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM from 'react-dom';
 
-const RESISTANCE = 3;
+const RESISTANCE = 2.6;
 
 export default class NativeScroll extends Component {
   constructor(props) {
