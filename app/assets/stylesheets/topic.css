@@ -5,3 +5,8 @@
 .topic-container {
     border-bottom: 1px solid #e1e8ed;
 }
+
+.topic-content {
+    padding: 9px 12px;
+    display: flex;
+}

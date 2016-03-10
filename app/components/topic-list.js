@@ -31,8 +31,13 @@ export default class TopicList extends Component {
 
     return topic.items.map((topicId, i) => {
       const topic = entities.topics[topicId];
+      const user = entities.users[topic.user];
 
-      return <TopicListItem {...this.props} topic={topic} key={topicId + '-' + i} />;
+      return <TopicListItem {...this.props}
+        key={topicId + '-' + i}
+        topic={topic}
+        user={user}
+      />;
     });
   }
 
@@ -41,7 +46,6 @@ export default class TopicList extends Component {
     if (topic.isFetching) {
       return <div>Spinner</div>;
     }
-    return;
   }
 
   renderMoreTopics() {
