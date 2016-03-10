@@ -9,4 +9,13 @@
 .topic-content {
     padding: 9px 12px;
     display: flex;
+    align-items: flex-start;
+}
+
+.topic-content .topic-main {
+    flex: 1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }

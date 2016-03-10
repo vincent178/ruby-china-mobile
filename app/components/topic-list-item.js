@@ -14,8 +14,16 @@ export default class TopicListItem extends Component {
         <div className="topic-context"></div>
 
         <div className="topic-content">
-          <UserAvatar size={48} radius={5} src={this.props.user.avatar_url} />
-          {this.props.topic.title}
+
+          <div style={{width: 60}}>
+            <UserAvatar size={48} radius={5} src={this.props.user.avatar_url} />
+          </div>
+
+          <div className="topic-main">
+            <p>
+              {this.props.topic.title}
+            </p>
+          </div>
         </div>
       </div>
     )
