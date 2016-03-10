@@ -1,0 +1,18 @@
+.topic-action-container {
+    display: flex;
+    flex: 1;
+    justify-content: space-between;
+
+    color: #AAB8B4;
+    font-size: 14px;
+    height: 30px;
+}
+
+.topic-action-item {
+    align-self: center;
+}
+
+.topic-action-container span {
+    margin-left: 8px;
+}
+

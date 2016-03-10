@@ -32,3 +32,8 @@
 .topic-login {
     color: #666;
 }
+
+.topic-action {
+    width: 70%;
+    max-width: 240px;
+}

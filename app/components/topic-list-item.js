@@ -1,7 +1,9 @@
 'use strict';
 
 import React, {Component} from 'react';
+
 import UserAvatar from './user-avatar';
+import TopicActionBar from './topic-action-bar';
 
 import './topic-list-item.css';
 
@@ -26,9 +28,10 @@ export default class TopicListItem extends Component {
               <span className="topic-node">{this.props.topic.node_name}</span>
               <span className="topic-login">{`@${this.props.user.login}`}</span>
             </div>
-            <p>
-              {this.props.topic.title}
-            </p>
+            <p>{this.props.topic.title}</p>
+            <div className="topic-action">
+              <TopicActionBar replyCount={this.props.topic.replies_count} />
+            </div>
           </div>
         </div>
       </div>
