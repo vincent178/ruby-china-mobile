@@ -5,7 +5,7 @@ import React, {
   PropTypes
 } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, Link, browserHistory } from 'react-router'
 
 import { initEnvironment } from '../actions/environment';
 import { initTab } from '../actions/application';
@@ -14,7 +14,6 @@ import Tabs from '../constants/tabs';
 import TopicContainer from './topic-container';
 import NotificationContainer from './notification-container';
 import MeContainer from './me-container';
-
 
 import '../assets/stylesheets/base.css';
 import '../assets/stylesheets/app.css';
@@ -27,7 +26,7 @@ class App extends Component {
     dispatch(initTab());
   }
 
-  renderTabBar() {
+  renderNavigationBar() {
 
     const { selectedTab } = this.props;
 
@@ -41,41 +40,23 @@ class App extends Component {
     return (
       <div className="tab-bar">
         <div className={tabItemClass(Tabs.TOPIC_TAB)}>
-          <span className="tab-item">Topics</span>
+          <span className="tab-item"><Link to={"/"}>Topics</Link></span>
         </div>
         <div className={tabItemClass(Tabs.NOTIFICATION_TAB)}>
-          <span className="tab-item">Notification</span>
+          <span className="tab-item"><Link to={"/notifications"}>Notification</Link></span>
         </div>
         <div className={tabItemClass(Tabs.ME_TAB)}>
-          <span className="tab-item">Me</span>
+          <span className="tab-item"><Link to={"/me"}>Me</Link></span>
         </div>
       </div>
     );
   }
 
-  renderScene() {
-
-    const { selectedTab } = this.props;
-
-    switch (selectedTab) {
-      case Tabs.TOPIC_TAB:
-        return <TopicContainer />;
-      case Tabs.NOTIFICATION_TAB:
-        return <NotificationContainer />;
-      case Tabs.ME_TAB:
-        return <MeContainer />;
-    }
-  }
-
   render() {
     return (
       <div className="container">
-        <Router history={browserHistory}>
-          <Route path="/" component={TopicContainer}>
-            <Route path="me" component={MeContainer}/>
-            <Route path="notifications" component={NotificationContainer}/>
-          </Route>
-        </Router>
+        {this.renderNavigationBar()}
+        {this.props.children}
       </div>
     );
   }
