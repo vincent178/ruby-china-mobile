@@ -10,8 +10,6 @@ import './topic-list-item.css';
 export default class TopicListItem extends Component {
 
   render() {
-    console.log(this.props.topic);
-    console.log(this.props.user);
     return (
       <div className="topic-container">
 

@@ -7,6 +7,9 @@ body {
     padding: 0;
     font: normal 100% Helvetica, Arial, sans-serif;
     font-family: sans-serif;
+    -webkit-user-select: none;
+    -webkit-user-drag: none;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 p {
