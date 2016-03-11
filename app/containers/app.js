@@ -5,7 +5,7 @@ import React, {
   PropTypes
 } from 'react';
 import { connect } from 'react-redux';
-import classNames from 'classnames';
+import { Router, Route, browserHistory } from 'react-router'
 
 import { initEnvironment } from '../actions/environment';
 import { initTab } from '../actions/application';
@@ -70,7 +70,12 @@ class App extends Component {
   render() {
     return (
       <div className="container">
-        {this.renderScene()}
+        <Router history={browserHistory}>
+          <Route path="/" component={TopicContainer}>
+            <Route path="me" component={MeContainer}/>
+            <Route path="notifications" component={NotificationContainer}/>
+          </Route>
+        </Router>
       </div>
     );
   }
