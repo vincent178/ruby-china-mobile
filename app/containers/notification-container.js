@@ -5,6 +5,10 @@ export default class Notification extends Component {
     super(props);
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   render() {
     return (
       <div>
