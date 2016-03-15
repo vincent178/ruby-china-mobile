@@ -13,6 +13,10 @@ const address = {
 
   topics: (offset = 0, limit = 20, type = "last_actived") => {
     return `${BASE_URL}/topics.json?type=${type}&offset=${offset}&limit=${limit}`;
+  },
+
+  topic: (id) => {
+    return `${BASE_URL}/topics/${id}.json`;
   }
 };
 

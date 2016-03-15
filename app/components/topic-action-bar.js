@@ -18,12 +18,14 @@ export default class TopicActionBar extends Component {
 
   handleReplyStart(e) {
     e.stopPropagation();
+    e.preventDefault();
     console.debug("[TopicActionBar] handleReplyStart");
     this.setState({isPressed: true});
   }
 
   handleReplyEnd(e) {
     e.stopPropagation();
+    e.preventDefault();
     console.debug("[TopicActionBar] handleReplyEnd");
     this.setState({isPressed: false});
   }

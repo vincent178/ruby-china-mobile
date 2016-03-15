@@ -1,18 +1,30 @@
-import React, { Component, PropTypes } from 'react';
+import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router'
 
-import TopicList from '../components/topic-list';
-import Tabs from '../constants/tabs';
+import TopicDetail from '../components/topic-detail';
+import ReplyList from '../components/reply-list';
+import {getTopic} from '../actions/topic';
 
 class TopicContainer extends Component {
+
+  constructor(props) {
+    super(props);
+  }
+
+  componentDidMount() {
+    const { dispatch, params } = this.props;
+    dispatch(getTopic(params.topicId));
+  }
+
   render() {
-    return <TopicList {...this.props} />;
+    return (
+      <div className="topic-container">
+        <TopicDetail {...this.props} />
+        <ReplyList {...this.props} />
+      </div>
+    );
   }
 }
-
-TopicContainer.propTypes = {
-};
 
 function mapStateToProps(state) {
 

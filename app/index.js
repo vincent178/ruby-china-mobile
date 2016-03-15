@@ -9,9 +9,10 @@ import {Router, IndexRoute, Route, browserHistory} from 'react-router'
 
 import reducers from './reducers';
 import App from './containers/app';
-import TopicContainer from './containers/topic-container';
+import TopicsContainer from './containers/topics-container';
 import NotificationContainer from './containers/notification-container';
 import MeContainer from './containers/me-container';
+import TopicContainer from './containers/topic-container';
 
 
 const middleware = [ thunk ];
@@ -22,9 +23,10 @@ render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={App}>
-        <IndexRoute component={TopicContainer}/>
+        <IndexRoute component={TopicsContainer} />
         <Route path="me" component={MeContainer}/>
         <Route path="notifications" component={NotificationContainer}/>
+        <Route path="/topics/:topicId" component={TopicContainer}/>
       </Route>
     </Router>
   </Provider>,

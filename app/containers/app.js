@@ -11,7 +11,7 @@ import { initEnvironment } from '../actions/environment';
 import { initTab } from '../actions/application';
 import Tabs from '../constants/tabs';
 
-import TopicContainer from './topic-container';
+import TopicContainer from './topics-container';
 import NotificationContainer from './notification-container';
 import MeContainer from './me-container';
 

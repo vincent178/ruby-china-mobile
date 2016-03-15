@@ -1,6 +1,7 @@
 'use strict';
 
 import React, {Component} from 'react';
+import {browserHistory} from 'react-router';
 
 import UserAvatar from './user-avatar';
 import TopicActionBar from './topic-action-bar';
@@ -9,9 +10,13 @@ import './topic-list-item.css';
 
 export default class TopicListItem extends Component {
 
+  handleClick() {
+    browserHistory.push(`/topics/${this.props.topic.id}`)
+  }
+
   render() {
     return (
-      <div className="topic-container">
+      <div className="topic-list-item" onClick={this.handleClick.bind(this)}>
 
         <div className="topic-context"></div>
 

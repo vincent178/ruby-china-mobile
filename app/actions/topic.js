@@ -42,6 +42,20 @@ export function getTopics(offset, limit, type) {
   };
 }
 
+export function getTopic(id) {
+  return (dispatch) => {
+    dispatch(requestTopics());
+    return fetch(address.topic(id))
+      .then(res => res.json())
+      .then(data => {
+        const normalized = normalize([data.topic], arrayOf(topicSchema));
+        debugger;
+        dispatch(receiveTopics(normalized.entities, normalized.result));
+      })
+      .catch(e => console.log(e));
+  }
+}
+
 //有两种情况, 第一种是没有
 export function fetchTopicsIfNeeded(node) {
 }

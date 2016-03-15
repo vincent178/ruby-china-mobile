@@ -56,15 +56,19 @@ export default class TopicList extends Component {
   render() {
     const { dispatch } = this.props;
     return (
-      <NativeScroll
-        dispatch={dispatch}
-        scrollFunc={this.renderMoreTopics}
-      >
-        <div className="topics-container">
-          {this.renderTopicItems()}
-          {this.renderSpinner()}
-        </div>
-      </NativeScroll>
+      <div>
+        <NativeScroll
+          dispatch={dispatch}
+          scrollFunc={this.renderMoreTopics}
+        >
+          <div className="topics-container">
+            {this.renderTopicItems()}
+            {this.renderSpinner()}
+          </div>
+        </NativeScroll>
+        {this.props.children}
+      </div>
+
     )
   }
 }
