@@ -12,11 +12,18 @@ class TopicContainer extends Component {
   }
 
   componentDidMount() {
-    const { dispatch, params } = this.props;
-    dispatch(getTopic(params.topicId));
+
+    // defer to TopicDetail component to decide to fetch topic or not
+    //const { dispatch, params, entities } = this.props;
+    //const topicId = params.topicId;
+    //if (!entities.topics[topicId]) {
+    //  dispatch(getTopic(params.topicId));
+    //}
   }
 
   render() {
+    const { params, entities } = this.props;
+    const topicId = params.topicId;
     return (
       <div className="topic-container">
         <TopicDetail {...this.props} />
@@ -28,6 +35,7 @@ class TopicContainer extends Component {
 
 function mapStateToProps(state) {
 
+  // topic is an array of topic id
   const { environment, entities, topic } = state;
   return {
     width: environment.width,
