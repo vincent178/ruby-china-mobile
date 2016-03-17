@@ -1,11 +1,16 @@
 .container {
     width: 100%;
     height: 100%;
+    padding-top: 46px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .tab-bar {
     position: fixed;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
     height: 46px;
@@ -13,6 +18,11 @@
     display: flex;
     justify-content: space-around;
     z-index: 100;
+}
+
+.shadow-bar {
+    width: 100%;
+    height: 46px;
 }
 
 .tab-item-container {
@@ -55,3 +65,4 @@
 .scroll-content {
     background-color: #F5F8FA;
 }
+

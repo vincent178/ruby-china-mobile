@@ -49,7 +49,6 @@ export function getTopic(id) {
       .then(res => res.json())
       .then(data => {
         const normalized = normalize([data.topic], arrayOf(topicSchema));
-        debugger;
         dispatch(receiveTopics(normalized.entities, normalized.result));
       })
       .catch(e => console.log(e));

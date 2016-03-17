@@ -23,8 +23,9 @@ export default class NativeScroll extends Component {
   }
 
   onScroll() {
-    const el = ReactDOM.findDOMNode(this.refs.scroll);
-    if (el.scrollTop >= (el.scrollHeight - el.offsetHeight - 300)) {
+    console.log("OnScroll");
+    if (window.scrollY >= (scroll.scrollHeight - window.innerHeight - 200)) {
+      console.log("[NativeScroll] this.props.dispatch(this.props.scrollFunc())");
       this.props.dispatch(this.props.scrollFunc());
     }
   }

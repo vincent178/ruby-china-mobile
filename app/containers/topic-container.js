@@ -13,6 +13,8 @@ class TopicContainer extends Component {
 
   componentDidMount() {
 
+    window.scrollTo(0, 0);
+
     // defer to TopicDetail component to decide to fetch topic or not
     //const { dispatch, params, entities } = this.props;
     //const topicId = params.topicId;

@@ -6,6 +6,7 @@ export default class TopicDetail extends Component {
 
   constructor(props) {
     super(props);
+    this.renderTopic = this.renderTopic.bind(this);
   }
 
   componentDidMount() {
@@ -17,7 +18,6 @@ export default class TopicDetail extends Component {
   }
 
   renderTopic() {
-    debugger;
     const { topic, params, entities } = this.props;
     if (topic.isFetching) {
       return <div>Spinner</div>;
@@ -32,7 +32,7 @@ export default class TopicDetail extends Component {
   render() {
     return (
       <div>
-        {this.renderTopic.bind(this)}
+        {this.renderTopic()}
       </div>
     );
   }
