@@ -62,21 +62,7 @@
 }
 
 .scroll-container {
-    overflow: auto;
-}
-
-#ptr {
-    width: 100%;
-    position: absolute;
-    left: 0;
-    top: -50px;
-    height: 50px;
-    background-color: darkgray;
-    z-index: 10;
-}
-
-.scroll-background {
-    background-color: #333;
+    /*overflow: auto;*/
 }
 
 .scroll-content {
