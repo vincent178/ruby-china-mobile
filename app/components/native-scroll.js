@@ -13,6 +13,7 @@ export default class NativeScroll extends Component {
 
   onScroll() {
     console.log("OnScroll");
+    const scroll = document.getElementById('scroll-content');
     if (window.scrollY >= (scroll.scrollHeight - window.innerHeight - 200)) {
       console.log("[NativeScroll] this.props.dispatch(this.props.scrollFunc())");
       this.props.dispatch(this.props.scrollFunc());
@@ -25,7 +26,8 @@ export default class NativeScroll extends Component {
 
   render() {
     return (
-      <div className="scroll-content"
+      <div id="scroll-content"
+           className="scroll-content"
            onTouchMove={this.handleTouchMove.bind(this)}
       >
         {this.props.children}
