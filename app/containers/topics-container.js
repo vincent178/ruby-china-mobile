@@ -4,7 +4,7 @@ import {Route, Link} from 'react-router'
 
 import TopicList from '../components/topic-list';
 import TopicDetail from '../components/topic-detail';
-import Tabs from '../constants/tabs';
+import Tabs from '../constants/items';
 
 class TopicsContainer extends Component {
 

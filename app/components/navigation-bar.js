@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 import { browserHistory } from 'react-router';
 
 import { initTab, changeTab } from '../actions/application';
-import Tabs from '../constants/tabs';
+import Items from '../constants/items';
 
 import './navigation-bar.css';
 
-injectTapEventPlugin();
 export default class NavigationBar extends Component {
 
   componentDidMount() {
@@ -36,20 +34,20 @@ export default class NavigationBar extends Component {
 
     return (
       <div className="tab-bar">
-        <div className={tabItemClass(Tabs.TOPIC_TAB)}
-             onTouchTap={this.handleTouchTap.bind(this, "/", Tabs.TOPIC_TAB)}>
+        <div className={tabItemClass(Items.TOPIC_TAB)}
+             onTouchTap={this.handleTouchTap.bind(this, "/", Items.TOPIC_TAB)}>
           <span className="tab-item">
             <i className="fa fa-comments"/>Topics
           </span>
         </div>
-        <div className={tabItemClass(Tabs.NOTIFICATION_TAB)}
-             onTouchTap={this.handleTouchTap.bind(this, "/notifications", Tabs.NOTIFICATION_TAB)}>
+        <div className={tabItemClass(Items.NOTIFICATION_TAB)}
+             onTouchTap={this.handleTouchTap.bind(this, "/notifications", Items.NOTIFICATION_TAB)}>
           <span className="tab-item">
             <i className="fa fa-bell"/>Notification
           </span>
         </div>
-        <div className={tabItemClass(Tabs.ME_TAB)}
-             onTouchTap={this.handleTouchTap.bind(this, "/me", Tabs.ME_TAB)}>
+        <div className={tabItemClass(Items.ME_TAB)}
+             onTouchTap={this.handleTouchTap.bind(this, "/me", Items.ME_TAB)}>
           <span className="tab-item">
             <i className="fa fa-user"/>Me
           </span>

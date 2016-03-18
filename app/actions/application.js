@@ -1,7 +1,7 @@
 'use strict';
 
 import * as types from '../constants/action-types';
-import Tabs from '../constants/tabs';
+import Items from '../constants/items';
 
 export function changeTab(selectedTab) {
   return {
@@ -10,7 +10,7 @@ export function changeTab(selectedTab) {
   }
 }
 
-export function initTab(selectedTab = Tabs.TOPIC_TAB) {
+export function initTab(selectedTab = Items.TOPIC_TAB) {
   return dispatch => {
     return dispatch(changeTab(selectedTab))
   }

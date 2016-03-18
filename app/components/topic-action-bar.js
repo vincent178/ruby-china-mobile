@@ -1,10 +1,12 @@
 import React, {Component} from 'react';
 import {Motion, spring} from 'react-motion';
 
+import Items from '../constants/items';
+
 import "font-awesome/css/font-awesome.css";
 import "./topic-action-bar.css";
 
-const springConfig = {stiffness: 60, damping: 50};
+const springConfig = {stiffness: 60, damping: 15};
 
 export default class TopicActionBar extends Component {
 
@@ -30,14 +32,22 @@ export default class TopicActionBar extends Component {
     this.setState({isPressed: false});
   }
 
+  clickReply(e) {
+    e.preventDefault();
+    this.setState({isPressed: true});
+    setTimeout(() => {
+      this.setState({isPressed: false});
+    }, 300);
+  }
+
   clickLike(e) {
     console.debug("[TopicActionBar] clickLike");
-    e.stopPropagation();
+    e.preventDefault();
   }
 
   clickFollow(e) {
     console.debug("[TopicActionBar] clickFollow");
-    e.stopPropagation();
+    e.preventDefault();
   }
 
   render() {
@@ -45,7 +55,7 @@ export default class TopicActionBar extends Component {
     const style = this.state.isPressed ? {
       scale: spring(1.1, springConfig),
       shadow: spring(16, springConfig),
-      size: spring(80, springConfig)
+      size: spring(36, springConfig)
     } : {
       scale: spring(1.0, springConfig),
       shadow: spring(1, springConfig),
@@ -59,11 +69,11 @@ export default class TopicActionBar extends Component {
         <Motion style={style}>
           {({scale, shadow, size}) =>
             <div className="topic-action-item"
-                 onTouchStart={this.handleReplyStart.bind(this)}
-                 onTouchEnd={this.handleReplyEnd.bind(this)}
+                 onTouchTap={this.clickReply.bind(this)}
                  style={{
                  transform: `scale(${scale})`,
-                 WebkitTransform: `scale(${scale})`
+                 WebkitTransform: `scale(${scale})`,
+                 color: this.state.isPressed ? '#EB5424' : '#AAB8B4'
               }}
             >
               <i className="fa fa-reply"  style={{

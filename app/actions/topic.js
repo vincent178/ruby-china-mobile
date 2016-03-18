@@ -1,9 +1,10 @@
 import * as types from '../constants/action-types';
 import 'whatwg-fetch';
-import {normalize, arrayOf} from 'normalizr';
+import Q from 'q';
+import { normalize, arrayOf } from 'normalizr';
 
 import address from '../constants/address';
-import {topicSchema} from '../constants/schema';
+import { topicSchema, replySchema } from '../constants/schema';
 
 // 这里的所有都是 action creator,
 // 通过receiveTopics 可以创建一个type是receiveTopics包含topics内容的action

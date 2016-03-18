@@ -1,8 +1,10 @@
 - [x] topic list page
 - [x] router navigation
 - [ ] tap injection
-- [ ] navigation fix top
+- [x] navigation fix top
 - [ ] native-scroll div without style
+- [ ] multiple fetch request to get topic detail and replies
+- [ ] different handle navigation with partial data or first load topic detail page
 - [ ] topic detail page
 - [ ] login
 - [ ] reply

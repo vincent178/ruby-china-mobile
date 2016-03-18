@@ -2,6 +2,7 @@
     display: flex;
     flex: 1;
     justify-content: space-between;
+    align-items: stretch;
 
     color: #AAB8B4;
     font-size: 14px;
@@ -9,7 +10,10 @@
 }
 
 .topic-action-item {
-    align-self: center;
+    min-width: 60px;
+
+    display: flex;
+    align-items: center;
 }
 
 .topic-action-container span {

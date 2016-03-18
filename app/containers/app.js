@@ -7,6 +7,7 @@ import React, {
 import { connect } from 'react-redux';
 import { Router, Route, Link, browserHistory } from 'react-router'
 import { Motion, spring } from 'react-motion';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { initEnvironment } from '../actions/environment';
 
@@ -18,6 +19,7 @@ import NavigationBar from '../components/navigation-bar';
 import '../assets/stylesheets/base.css';
 import '../assets/stylesheets/app.css';
 
+injectTapEventPlugin();
 class App extends Component {
 
   constructor(props) {

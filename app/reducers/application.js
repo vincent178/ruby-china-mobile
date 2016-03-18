@@ -1,6 +1,6 @@
 'use strict';
 
-import Tabs from '../constants/tabs';
+import Items from '../constants/items';
 import * as actionTypes from '../constants/action-types';
 
 const initialState = {
