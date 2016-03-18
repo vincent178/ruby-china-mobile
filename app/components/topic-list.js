@@ -10,6 +10,7 @@ import {getTopics} from '../actions/topic';
 import './topic-list.css';
 
 export default class TopicList extends Component {
+
   constructor(props) {
     super(props);
     this.renderTopicItems = this.renderTopicItems.bind(this);
@@ -62,8 +63,10 @@ export default class TopicList extends Component {
           scrollFunc={this.renderMoreTopics}
         >
           <div className="topic-list-container">
-            {this.renderTopicItems()}
-            {this.renderSpinner()}
+            <div className="shadow-container">
+              {this.renderTopicItems()}
+              {this.renderSpinner()}
+            </div>
           </div>
         </NativeScroll>
       </div>

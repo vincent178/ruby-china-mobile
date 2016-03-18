@@ -32,6 +32,12 @@ class App extends Component {
     const { dispatch } = this.props;
     dispatch(initEnvironment());
     dispatch(initTab());
+    window.addEventListener('scroll', this.handleScroll.bind(this));
+    this._initScrollY = 0;
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll, false);
   }
 
   renderNavigationBar() {
@@ -53,13 +59,23 @@ class App extends Component {
                 transform: `translate3d(0, ${y}px, 0)`
             }}>
             <div className={tabItemClass(Tabs.TOPIC_TAB)}>
-              <span className="tab-item"><Link to={"/"}>Topics</Link></span>
+              <Link to={"/"}>
+                <span className="tab-item">
+                  <i className="fa fa-comments" />Topics
+                </span>
+              </Link>
             </div>
             <div className={tabItemClass(Tabs.NOTIFICATION_TAB)}>
-              <span className="tab-item"><Link to={"/notifications"}>Notification</Link></span>
+              <span className="tab-item">
+                <i className="fa fa-bell" />
+                <Link to={"/notifications"}>Notification</Link>
+              </span>
             </div>
             <div className={tabItemClass(Tabs.ME_TAB)}>
-              <span className="tab-item"><Link to={"/me"}>Me</Link></span>
+              <span className="tab-item">
+                <i className="fa fa-user" />
+                <Link to={"/me"}>Me</Link>
+              </span>
             </div>
           </div>
         }
@@ -67,28 +83,35 @@ class App extends Component {
     );
   }
 
-  handleMouseMove() {
-    if (window.scrollY >= 46) {
-      this.setState(() => {
-        return {navHide: true}
-      });
-    } else {
+  handleTouchStart(e) {
+    this._initScrollY = window.scrollY;
+  }
+
+  handleTouchMove(e) {
+    if (window.scrollY < this._initScrollY) {
+      this._initScrollY = window.scrollY;
       this.setState(() => {
         return {navHide: false}
       });
     }
+
+    if (window.scrollY >= 46 && window.scrollY > this._initScrollY) {
+      this._initScrollY = window.scrollY;
+      this.setState(() => {
+        return {navHide: true}
+      });
+    }
   }
 
-  handleTouchMove(e) {
-    this.handleMouseMove(e.touches[0]);
+  handleScroll(e) {
+    this.handleTouchMove(e);
   }
 
   render() {
     return (
       <div className="container"
-           onMouseMove={this.handleMouseMove.bind(this)}
+           onTouchStart={this.handleTouchStart.bind(this)}
            onTouchMove={this.handleTouchMove.bind(this)}
-           onTouchEnd={this.handleTouchMove.bind(this)}
       >
         {this.renderNavigationBar()}
         {this.props.children}

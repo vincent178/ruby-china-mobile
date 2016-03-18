@@ -64,14 +64,14 @@ export default class NativeScroll extends Component {
       //debugger;
     }
 
-    if ((panDirection === "down") && (document.body.scrollTop === 0)) {
-
-      e.preventDefault();
-
-      this._enablePullToRefresh = true;
-      this.setState({pullDistance: distance / RESISTANCE });
-      console.log("[NativeScroll] pullDistance: " + this.state.pullDistance);
-    }
+    //if ((panDirection === "down") && (document.body.scrollTop === 0)) {
+    //
+    //  e.preventDefault();
+    //
+    //  this._enablePullToRefresh = true;
+    //  this.setState({pullDistance: distance / RESISTANCE });
+    //  console.log("[NativeScroll] pullDistance: " + this.state.pullDistance);
+    //}
 
     if (window.scrollY >= (scroll.scrollHeight - window.innerHeight - 200)) {
       console.log("[NativeScroll] this.props.dispatch(this.props.scrollFunc())");
@@ -82,10 +82,10 @@ export default class NativeScroll extends Component {
   handleTouchEnd(e) {
     console.log("handleTouchEnd");
 
-    if (this._enablePullToRefresh) {
-      this.setState({pullDistance: 0});
-      this._enablePullToRefresh = false;
-    }
+    //if (this._enablePullToRefresh) {
+    //  this.setState({pullDistance: 0});
+    //  this._enablePullToRefresh = false;
+    //}
   }
 
   render() {
