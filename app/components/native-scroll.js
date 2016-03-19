@@ -27,7 +27,6 @@ export default class NativeScroll extends Component {
   render() {
     return (
       <div id="scroll-content"
-           className="scroll-content"
            onTouchMove={this.handleTouchMove.bind(this)}
       >
         {this.props.children}

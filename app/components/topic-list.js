@@ -4,9 +4,6 @@ import React, {
 } from 'react';
 
 import TopicListItem from './topic-list-item';
-import NativeScroll from './native-scroll';
-import {getTopics} from '../actions/topic';
-
 import './topic-list.css';
 
 export default class TopicList extends Component {
@@ -14,13 +11,6 @@ export default class TopicList extends Component {
   constructor(props) {
     super(props);
     this.renderTopicItems = this.renderTopicItems.bind(this);
-    this.renderSpinner = this.renderSpinner.bind(this);
-    this.renderMoreTopics = this.renderMoreTopics.bind(this);
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(getTopics());
   }
 
   renderTopicItems() {
@@ -42,35 +32,11 @@ export default class TopicList extends Component {
     });
   }
 
-  renderSpinner() {
-    const { topic } = this.props;
-    if (topic.isFetching) {
-      return <div>Spinner</div>;
-    }
-  }
-
-  renderMoreTopics() {
-    const {topic} = this.props;
-    return getTopics(topic.items.length);
-  }
-
   render() {
-    const { dispatch } = this.props;
     return (
-      <div className="topic-list">
-        <NativeScroll
-          dispatch={dispatch}
-          scrollFunc={this.renderMoreTopics}
-        >
-          <div className="topic-list-container">
-            <div className="shadow-container">
-              {this.renderTopicItems()}
-              {this.renderSpinner()}
-            </div>
-          </div>
-        </NativeScroll>
+      <div className="topic-list-container">
+        {this.renderTopicItems()}
       </div>
-
     )
   }
 }

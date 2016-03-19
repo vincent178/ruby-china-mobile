@@ -4,16 +4,45 @@ import {Route, Link} from 'react-router'
 
 import TopicList from '../components/topic-list';
 import TopicDetail from '../components/topic-detail';
-import Tabs from '../constants/items';
+import NativeScroll from '../components/native-scroll';
+import FakeTopicList from '../components/fake-topic-list';
+import Spinner from '../components/spinner';
+import {getTopics} from '../actions/topic';
 
 class TopicsContainer extends Component {
 
+  constructor(props) {
+    super(props);
+    this.renderSpinner = this.renderSpinner.bind(this);
+  }
+
   componentDidMount() {
     window.scrollTo(0, 0);
+    const { dispatch, topic } = this.props;
+
+    if (topic.items.length === 0) {
+      dispatch(getTopics());
+    }
   }
 
   render() {
-    return <TopicList {...this.props} />;
+    const { topic, dispatch } = this.props;
+
+    if (topic.items.length === 0) {
+      return <FakeTopicList />;
+    }
+
+    return (
+      <NativeScroll
+        dispatch={dispatch}
+        scrollFunc={() => getTopics(topic.items.length)}
+      >
+        <div className="topics-container">
+          <TopicList {...this.props} />
+          <Spinner />
+        </div>
+      </NativeScroll>
+    );
   }
 }
 
@@ -32,3 +61,5 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(TopicsContainer);
+
+

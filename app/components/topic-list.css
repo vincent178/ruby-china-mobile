@@ -1,8 +1,4 @@
 .topic-list-container {
-    margin: 0 10px;
-    padding-top: 15px;
-}
-
-.shadow-container {
     box-shadow: 0 0px 3px 2px rgba(0,0,0,0.03);
 }
+

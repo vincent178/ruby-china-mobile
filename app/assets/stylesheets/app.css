@@ -9,22 +9,8 @@
     color: rgb(102, 117, 127);
 }
 
-.shadow-bar {
-    width: 100%;
-    height: 46px;
-}
-
-
-.scroll {
-    flex: 1;
-    overflow: scroll;
-}
-
-.scroll-container {
-    /*overflow: auto;*/
-}
-
-.scroll-content {
+.topics-container {
     background-color: #F5F8FA;
+    padding: 15px 10px 0 10px;
 }
 
