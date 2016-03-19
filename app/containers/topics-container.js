@@ -13,7 +13,6 @@ class TopicsContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.renderSpinner = this.renderSpinner.bind(this);
   }
 
   componentDidMount() {
