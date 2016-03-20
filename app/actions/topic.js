@@ -23,17 +23,16 @@ function requestTopics() {
   }
 }
 
-function requestTopicDetail() {
+function requestTopicReplies() {
   return {
-    type: types.REQUEST_TOPIC_DETAIL
+    type: types.REQUEST_TOPIC_REPLIES
   }
 }
 
-function receiveTopicDetail(entities, topics, replies) {
+function receiveTopicReplies(entities, replies) {
   return {
-    type: types.RECEIVE_TOPIC_DETAIL,
+    type: types.RECEIVE_TOPIC_REPLIES,
     entities,
-    topics,
     replies
   }
 }
@@ -58,22 +57,6 @@ export function getTopics(offset, limit, type) {
   };
 }
 
-export function getTopicDetail(id, offset, limit) {
-
-  return (dispatch) => {
-    dispatch(requestTopicDetail());
-    return Q.all([fetch(address.topic(id)), fetch(address.topicReplies(id, offset, limit))])
-      .done(res => {
-
-        debugger;
-        const data = res.map(_ => _.json());
-        debugger;
-        const topicDetail = data[0];
-        const replies = data[1];
-      });
-  }
-}
-
 export function getTopic(id) {
   return (dispatch) => {
     dispatch(requestTopics());
@@ -87,7 +70,17 @@ export function getTopic(id) {
   }
 }
 
-export function getDetails(id, offset, limit) {
+export function getTopicReplies(id, offset, limit) {
+  return (dispatch) => {
+    dispatch(requestTopicReplies());
+    return fetch(address.topicReplies(id, offset, limit))
+      .then(res => res.json())
+      .then(data => {
+        const normalized = normalize(data.replies, arrayOf(replySchema));
+        dispatch(receiveTopicReplies(normalized.entities, normalized.result));
+      })
+      .catch(e => console.log(e))
+  }
 }
 
 //有两种情况, 第一种是没有

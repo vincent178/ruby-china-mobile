@@ -12,3 +12,4 @@ GT
 - [ ] reply, follow, like... actions
 - [ ] me page
 - [ ] notification page
+- [ ] animations !important

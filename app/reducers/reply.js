@@ -9,22 +9,19 @@ const initialState = {
 
 export default function replyReducer(state = initialState, action) {
   switch(action.type) {
-    case types.REQUEST_REPLIES:
+    case types.REQUEST_TOPIC_REPLIES:
       return Object.assign({}, state, {
         isFetching: true
       });
-    case types.RECEIVE_MORE_REPLIES:
+    case types.RECEIVE_MORE_TOPIC_REPLIES:
       return Object.assign({}, state, {
         isFetching: false,
-        // new Set to reject the duplicate topicIds
-        // return array to conveniently use array interface
         items: Array.from(new Set([...state.items, ...action.replies]))
       });
-    case types.RECEIVE_REPLIES:
+    case types.RECEIVE_TOPIC_REPLIES:
       return Object.assign({}, state, {
         isFetching: false,
-        // new Set to reject the duplicate topicIds
-        // return array to conveniently use array interface
+        // 每个topic对应不同reply集合, 用新的reply集合覆盖原来的reply集合
         items: action.replies
       });
     default:

@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import TopicDetail from '../components/topic-detail';
 import ReplyList from '../components/reply-list';
-import { getTopicDetail } from '../actions/topic';
+import TempTopicContainer from '../components/temp-topic-conainer';
+import { getTopic, getTopicReplies } from '../actions/topic';
 
 class TopicContainer extends Component {
 
@@ -16,10 +17,21 @@ class TopicContainer extends Component {
 
     const { dispatch, params } = this.props;
     const topicId = params.topicId;
-    dispatch(getTopicDetail(topicId));
+    dispatch(getTopic(topicId));
+    dispatch(getTopicReplies(topicId));
   }
 
   render() {
+    const { topic, reply, params, entites } = this.props;
+
+    return <TempTopicContainer {...this.props} />;
+
+    if (topic.isFetching || reply.isFetching) {
+      return <div className="topic-container">
+        <TempTopicContainer {...this.props} />
+      </div>
+    }
+
     return (
       <div className="topic-container">
         <TopicDetail {...this.props} />
