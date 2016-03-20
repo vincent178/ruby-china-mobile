@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 import TopicDetail from '../components/topic-detail';
 import ReplyList from '../components/reply-list';
-import { getTopic } from '../actions/topic';
+import { getTopicDetail } from '../actions/topic';
 
 class TopicContainer extends Component {
 
@@ -13,6 +13,10 @@ class TopicContainer extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
+
+    const { dispatch, params } = this.props;
+    const topicId = params.topicId;
+    dispatch(getTopicDetail(topicId));
   }
 
   render() {

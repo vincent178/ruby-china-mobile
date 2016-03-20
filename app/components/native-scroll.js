@@ -41,7 +41,7 @@ export default class NativeScroll extends Component {
   onScroll() {
 
     console.log("OnScroll");
-    if (this.getDocHeight() == this.getScrollXY()[1] + window.innerHeight) {
+    if (this.getScrollXY()[1] >=  this.getDocHeight() - window.innerHeight - 100) {
       console.log("[NativeScroll] this.props.dispatch(this.props.scrollFunc())");
       this.props.dispatch(this.props.scrollFunc());
     }

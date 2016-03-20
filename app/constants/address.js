@@ -17,6 +17,10 @@ const address = {
 
   topic: (id) => {
     return `${BASE_URL}/topics/${id}.json`;
+  },
+
+  topicReplies: (id, offset = 0, limit = 20) => {
+    return `${BASE_URL}/topics/${id}/replies.json?offset=${offset}&limit=${limit}`
   }
 };
 

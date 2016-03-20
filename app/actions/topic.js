@@ -23,6 +23,21 @@ function requestTopics() {
   }
 }
 
+function requestTopicDetail() {
+  return {
+    type: types.REQUEST_TOPIC_DETAIL
+  }
+}
+
+function receiveTopicDetail(entities, topics, replies) {
+  return {
+    type: types.RECEIVE_TOPIC_DETAIL,
+    entities,
+    topics,
+    replies
+  }
+}
+
 // 这里的 getTopics 虽然是一种action, 但不会直接产生 state 的变化
 // 通过 dispatch 已经产生的变化的action, 例如 receiveTopics
 
@@ -43,6 +58,22 @@ export function getTopics(offset, limit, type) {
   };
 }
 
+export function getTopicDetail(id, offset, limit) {
+
+  return (dispatch) => {
+    dispatch(requestTopicDetail());
+    return Q.all([fetch(address.topic(id)), fetch(address.topicReplies(id, offset, limit))])
+      .done(res => {
+
+        debugger;
+        const data = res.map(_ => _.json());
+        debugger;
+        const topicDetail = data[0];
+        const replies = data[1];
+      });
+  }
+}
+
 export function getTopic(id) {
   return (dispatch) => {
     dispatch(requestTopics());
@@ -54,6 +85,9 @@ export function getTopic(id) {
       })
       .catch(e => console.log(e));
   }
+}
+
+export function getDetails(id, offset, limit) {
 }
 
 //有两种情况, 第一种是没有
