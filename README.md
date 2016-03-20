@@ -1,12 +1,14 @@
+GT
+=======================
+
+
+### Development progress
 - [x] topic list page
 - [x] router navigation
-- [x] tap injection
-- [x] navigation fix top
-- [x] native-scroll div without style
-- [ ] multiple fetch request to get topic detail and replies
-- [ ] different handle navigation with partial data or first load topic detail page
 - [ ] topic detail page
-- [ ] login
-- [ ] reply
-- [ ] notification
-
+- [ ] running in production
+- [ ] profile page
+- [ ] login page
+- [ ] reply, follow, like... actions
+- [ ] me page
+- [ ] notification page
