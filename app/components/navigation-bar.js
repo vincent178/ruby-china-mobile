@@ -5,6 +5,7 @@ import { initTab, changeTab } from '../actions/application';
 import Items from '../constants/items';
 
 import './navigation-bar.css';
+import "font-awesome/css/font-awesome.css";
 
 export default class NavigationBar extends Component {
 

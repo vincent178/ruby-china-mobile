@@ -19,7 +19,7 @@ export default class FakeTopicList extends Component {
 
   render() {
     return (
-      <div className="topics-container">
+      <div className="topic-container">
         {this.renderFakeTopicListItem()}
         {this.renderFakeTopicListItem()}
         {this.renderFakeTopicListItem()}

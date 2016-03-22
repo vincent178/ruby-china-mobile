@@ -17,8 +17,8 @@ class TopicContainer extends Component {
 
     const { dispatch, params } = this.props;
     const topicId = params.topicId;
-    dispatch(getTopic(topicId));
-    dispatch(getTopicReplies(topicId));
+    //dispatch(getTopic(topicId));
+    //dispatch(getTopicReplies(topicId));
   }
 
   render() {

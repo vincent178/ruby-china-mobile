@@ -36,7 +36,7 @@ class TopicsContainer extends Component {
         dispatch={dispatch}
         scrollFunc={() => getTopics(topic.items.length)}
       >
-        <div className="topics-container">
+        <div className="topic-container">
           <TopicList {...this.props} />
           <Spinner />
         </div>
