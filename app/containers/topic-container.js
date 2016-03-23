@@ -27,9 +27,7 @@ class TopicContainer extends Component {
     return <TempTopicContainer {...this.props} />;
 
     if (topic.isFetching || reply.isFetching) {
-      return <div className="topic-container">
-        <TempTopicContainer {...this.props} />
-      </div>
+      return <TempTopicContainer {...this.props} />;
     }
 
     return (
