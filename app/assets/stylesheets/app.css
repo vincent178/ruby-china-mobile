@@ -18,3 +18,10 @@
     background: white;
 }
 
+.panel-heading {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background: #f9f9f9;
+}

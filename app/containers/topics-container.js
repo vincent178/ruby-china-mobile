@@ -50,10 +50,8 @@ TopicsContainer.propTypes = {
 
 function mapStateToProps(state) {
 
-  const { environment, entities, topic } = state;
+  const {entities, topic } = state;
   return {
-    width: environment.width,
-    height: environment.height,
     topic,
     entities
   }

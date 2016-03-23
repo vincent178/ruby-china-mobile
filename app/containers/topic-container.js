@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 
 import TopicDetail from '../components/topic-detail';
 import ReplyList from '../components/reply-list';
-import TempTopicContainer from '../components/temp-topic-conainer';
+import PartialTopicDetail from '../components/partial-topic-detail';
+import FakeTopicDetail from '../components/fake-topic-detail';
 import { getTopic, getTopicReplies } from '../actions/topic';
 
 class TopicContainer extends Component {
@@ -17,17 +18,21 @@ class TopicContainer extends Component {
 
     const { dispatch, params } = this.props;
     const topicId = params.topicId;
-    //dispatch(getTopic(topicId));
-    //dispatch(getTopicReplies(topicId));
+    dispatch(getTopic(topicId));
+    dispatch(getTopicReplies(topicId));
   }
 
   render() {
-    const { topic, reply, params, entites } = this.props;
+    const { topic, reply, params, entities } = this.props;
 
-    return <TempTopicContainer {...this.props} />;
+    const topicDetail = entities.topics[params.topicId];
+
+    if (typeof topicDetail === 'undefined') {
+      return <FakeTopicDetail {...this.props} />;
+    }
 
     if (topic.isFetching || reply.isFetching) {
-      return <TempTopicContainer {...this.props} />;
+      return <PartialTopicDetail {...this.props} />;
     }
 
     return (
@@ -42,11 +47,10 @@ class TopicContainer extends Component {
 function mapStateToProps(state) {
 
   // topic is an array of topic id
-  const { environment, entities, topic } = state;
+  const { entities, topic, reply } = state;
   return {
-    width: environment.width,
-    height: environment.height,
     topic,
+    reply,
     entities
   }
 }
