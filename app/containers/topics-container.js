@@ -2,11 +2,11 @@ import React, { Component, PropTypes } from 'react';
 import {connect} from 'react-redux';
 import {Route, Link} from 'react-router'
 
-import TopicList from '../components/topic-list';
-import TopicDetail from '../components/topic-detail';
-import NativeScroll from '../components/native-scroll';
-import FakeTopicList from '../components/fake-topic-list';
-import Spinner from '../components/spinner';
+import TopicList from '../components/topics-container/topic-list';
+import TopicDetail from '../components/topic-container/topic-detail';
+import NativeScroll from '../components/shared/native-scroll';
+import FakeTopicList from '../components/topics-container/fake-topic-list';
+import Spinner from '../components/shared/spinner';
 import {getTopics} from '../actions/topic';
 
 class TopicsContainer extends Component {

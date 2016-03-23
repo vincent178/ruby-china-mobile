@@ -14,7 +14,7 @@ import { initEnvironment } from '../actions/environment';
 import TopicContainer from './topics-container';
 import NotificationContainer from './notification-container';
 import MeContainer from './me-container';
-import NavigationBar from '../components/navigation-bar';
+import NavigationBar from '../components/app/navigation-bar';
 
 import '../assets/stylesheets/base.css';
 import '../assets/stylesheets/app.css';

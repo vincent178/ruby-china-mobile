@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {getTopic} from '../actions/topic';
+import {getTopic} from '../../actions/topic';
 
 export default class TopicDetail extends Component {
 

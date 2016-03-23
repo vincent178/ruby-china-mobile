@@ -3,8 +3,8 @@
 import React, {Component} from 'react';
 import {browserHistory} from 'react-router';
 
-import UserAvatar from './user-avatar';
-import TopicActionBar from './topic-action-bar';
+import UserAvatar from './../shared/user-avatar';
+import TopicActionBar from './../shared/topic-action-bar';
 
 import './topic-list-item.css';
 

@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import {Motion, spring} from 'react-motion';
 
-import Items from '../constants/items';
+import Items from '../../constants/items';
 
-import "font-awesome/css/font-awesome.css";
+import "../../../node_modules/font-awesome/css/font-awesome.css";
 import "./topic-action-bar.css";
 
 const springConfig = {stiffness: 60, damping: 15};

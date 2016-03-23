@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 
-import { initTab, changeTab } from '../actions/application';
-import Items from '../constants/items';
+import { initTab, changeTab } from '../../actions/application';
+import Items from '../../constants/items';
 
 import './navigation-bar.css';
-import "font-awesome/css/font-awesome.css";
+import "../../../node_modules/font-awesome/css/font-awesome.css";
 
 export default class NavigationBar extends Component {
 
