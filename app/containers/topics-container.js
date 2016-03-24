@@ -7,7 +7,7 @@ import TopicDetail from '../components/topic-container/topic-detail';
 import NativeScroll from '../components/shared/native-scroll';
 import FakeTopicList from '../components/shared/fake-topic-list';
 import Spinner from '../components/shared/spinner';
-import {getTopics} from '../actions/topic';
+import { getTopics } from '../actions/topic';
 
 class TopicsContainer extends Component {
 
@@ -19,7 +19,7 @@ class TopicsContainer extends Component {
     window.scrollTo(0, 0);
     const { dispatch, topic } = this.props;
 
-    if (topic.items.length === 0) {
+    if (topic.items.length <= 10) {
       dispatch(getTopics());
     }
   }
@@ -27,7 +27,7 @@ class TopicsContainer extends Component {
   render() {
     const { topic, dispatch } = this.props;
 
-    if (topic.items.length === 0) {
+    if (topic.items.length <= 10) {
       return <FakeTopicList />;
     }
 
