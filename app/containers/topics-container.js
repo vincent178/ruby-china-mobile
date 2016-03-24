@@ -5,7 +5,7 @@ import {Route, Link} from 'react-router'
 import TopicList from '../components/topics-container/topic-list';
 import TopicDetail from '../components/topic-container/topic-detail';
 import NativeScroll from '../components/shared/native-scroll';
-import FakeTopicList from '../components/topics-container/fake-topic-list';
+import FakeTopicList from '../components/shared/fake-topic-list';
 import Spinner from '../components/shared/spinner';
 import {getTopics} from '../actions/topic';
 

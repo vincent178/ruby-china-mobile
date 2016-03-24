@@ -18,21 +18,16 @@ class TopicContainer extends Component {
 
     const { dispatch, params } = this.props;
     const topicId = params.topicId;
-    //dispatch(getTopic(topicId));
-    //dispatch(getTopicReplies(topicId));
+    dispatch(getTopic(topicId));
+    dispatch(getTopicReplies(topicId));
   }
 
   render() {
-    const { topic, reply, params, entities } = this.props;
-
+    const { params, entities } = this.props;
     const topicDetail = entities.topics[params.topicId];
 
     if (typeof topicDetail === 'undefined') {
       return <FakeTopicDetail {...this.props} />;
-    }
-
-    if (topic.isFetching || reply.isFetching) {
-      return <PartialTopicDetail {...this.props} />;
     }
 
     return (

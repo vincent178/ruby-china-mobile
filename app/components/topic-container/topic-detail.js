@@ -7,6 +7,7 @@ export default class TopicDetail extends Component {
   constructor(props) {
     super(props);
     this.renderTopic = this.renderTopic.bind(this);
+    this.renderLoadingBar = this.renderLoadingBar.bind(this);
   }
 
   componentDidMount() {
@@ -17,21 +18,30 @@ export default class TopicDetail extends Component {
     }
   }
 
-  renderTopic() {
-    const { topic, params, entities } = this.props;
-    if (topic.isFetching) {
-      return <div>Spinner</div>;
+  renderLoadingBar() {
+    const { topic, reply } = this.props;
+    // 以后加一个 下滑? 的动画
+    if (topic.isFetching || reply.isFetching) {
+      return (
+        <div>
+          loading
+        </div>
+      );
     }
+  }
 
-    const data = entities.topics[params.topicId];
+  renderTopic() {
+    const { params, entities } = this.props;
+    const topicDetail = entities.topics[params.topicId];
     return (
-      <div>{data.title}</div>
+      <div>{topicDetail.title}</div>
     )
   }
 
   render() {
     return (
       <div>
+        {this.renderLoadingBar()}
         {this.renderTopic()}
       </div>
     );
