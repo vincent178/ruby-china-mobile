@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { getTopic } from '../../actions/topic';
+import '../../assets/stylesheets/highlight.css';
 
 export default class TopicDetail extends Component {
 
@@ -32,9 +33,15 @@ export default class TopicDetail extends Component {
   renderTopic() {
     const { params, entities } = this.props;
     const topicDetail = entities.topics[params.topicId];
+    const topicBodyHtml = {__html: topicDetail.body_html};
+    console.log("--- topicBodyHtml ---");
+    console.log(topicBodyHtml);
     return (
-      <div>{topicDetail.title}</div>
-    )
+      <div>
+        <div>{topicDetail.title}</div>
+        <div dangerouslySetInnerHTML={topicBodyHtml} />
+      </div>
+    );
   }
 
   render() {
