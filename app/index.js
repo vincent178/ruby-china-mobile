@@ -22,7 +22,7 @@ const store = createStoreWithMiddleware(reducers);
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path={ process.env.NODE_ENV === 'production' ? "/gt" : "/"} component={App}>
+      <Route path="/" component={App}>
         <IndexRoute component={TopicsContainer} />
         <Route path="me" component={MeContainer}/>
         <Route path="notifications" component={NotificationContainer}/>
