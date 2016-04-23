@@ -7,7 +7,7 @@ var precss       = require('precss');
 
 const PATH = {
   app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'build')
+  build: path.join(__dirname)
 };
 
 module.exports = {
@@ -65,23 +65,16 @@ module.exports = {
     return [autoprefixer, precss];
   },
 
-  devtool: 'eval-source-map',
-
-  devServer: {
-    contentBase: PATH.build,
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    progress: true,
-    stats: 'errors-only',
-    host: process.env.HOST,
-    port: process.env.PORT
-  },
+  devtool: 'source-map',
 
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': '"development"'
+      'process.env.NODE_ENV': '"production"'
     }),
-    new webpack.HotModuleReplacementPlugin()
+    new webpack.optimize.UglifyJsPlugin({
+      compress: {
+        warnings: false
+      }
+    })
   ]
 };
