@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { getTopic } from '../../actions/topic';
+import UserAvatar from '../shared/user-avatar';
 import '../../assets/stylesheets/highlight.css';
+import './topic-detail.css';
 
 export default class TopicDetail extends Component {
 
@@ -32,13 +34,29 @@ export default class TopicDetail extends Component {
 
   renderTopic() {
     const { params, entities } = this.props;
-    const topicDetail = entities.topics[params.topicId];
-    const topicBodyHtml = {__html: topicDetail.body_html};
+    const topic = entities.topics[params.topicId];
+    const user = entities.users[topic.user];
+    const topicBodyHtml = {__html: topic.body_html};
     console.log("--- topicBodyHtml ---");
     console.log(topicBodyHtml);
     return (
-      <div>
-        <div>{topicDetail.title}</div>
+      <div className="topic-detail">
+        <div className="topic-header-container">
+
+          <div style={{marginRight: 12}}>
+            <UserAvatar size={48} radius={5} src={user.avatar_url} />
+          </div>
+
+          <div className="topic-main">
+            <div className="topic-info">
+              <span className="topic-node">{topic.node_name}</span>
+              <span className="topic-login">{`@${user.login}`}</span>
+            </div>
+            <p>{topic.title}</p>
+          </div>
+        </div>
+
+        <div>{topic.title}</div>
         <div dangerouslySetInnerHTML={topicBodyHtml} />
       </div>
     );

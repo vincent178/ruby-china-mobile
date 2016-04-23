@@ -34,7 +34,7 @@ export default class NavigationBar extends Component {
     }
 
     return (
-      <div className="tab-bar">
+      <div className="tab-bar" style={{width: this.props.width}}>
         <div className={tabItemClass(Items.TOPIC_TAB)}
              onTouchTap={this.handleTouchTap.bind(this, "/", Items.TOPIC_TAB)}>
           <span className="tab-item">

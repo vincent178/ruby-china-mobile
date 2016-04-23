@@ -1,0 +1,22 @@
+.topic-detail {
+}
+
+.topic-detail img {
+    width: 100%;
+}
+
+.topic-detail span {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.topic-detail code {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.topic-header-container {
+    display: flex;
+}
+
+
