@@ -21,6 +21,14 @@ export default class TopicDetail extends Component {
     }
   }
 
+  renderSpinner() {
+    return (
+      <div className="topic-detail-spinner">
+        <Spinner />
+      </div>
+    )
+  }
+
   renderTopic() {
     const { params, entities } = this.props;
     const topic = entities.topics[params.topicId];
@@ -44,7 +52,7 @@ export default class TopicDetail extends Component {
         </div>
 
         <div className="topic-detail-container">
-          { topic.isFetching ? <Spinner /> : <div dangerouslySetInnerHTML={topicBodyHtml} /> }
+          { this.props.topic.isFetching ? this.renderSpinner() : <div dangerouslySetInnerHTML={topicBodyHtml} /> }
         </div>
 
         <div className="topic-detail-action-bar">

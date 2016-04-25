@@ -15,7 +15,11 @@ export default class ReplyList extends Component {
       const user = entities.users[reply.user];
       const replyBodyHtml = {__html: reply.body_html};
 
-      return <div dangerouslySetInnerHTML={replyBodyHtml} />;
+      return (
+        <div key={"reply-" + i}>
+          <div dangerouslySetInnerHTML={replyBodyHtml} />
+        </div>
+      );
     });
   }
 
