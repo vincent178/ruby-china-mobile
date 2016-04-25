@@ -4,7 +4,8 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import thunk from 'redux-thunk';
 import {render} from 'react-dom';
-import {Router, IndexRoute, Route, browserHistory} from 'react-router'
+import { Router, IndexRoute, Route, useRouterHistory } from 'react-router'
+import { createHistory } from 'history';
 
 
 import reducers from './reducers';
@@ -18,10 +19,13 @@ import TopicContainer from './containers/topic-container';
 const middleware = [ thunk ];
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 const store = createStoreWithMiddleware(reducers);
+const history = useRouterHistory(createHistory)({
+  basename: '/'
+});
 
 render(
   <Provider store={store}>
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Route path="/" component={App}>
         <IndexRoute component={TopicsContainer} />
         <Route path="me" component={MeContainer}/>
