@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { getTopic } from '../../actions/topic';
 import UserAvatar from '../shared/user-avatar';
 import TopicActionBar from '../shared/topic-action-bar';
+import Spinner from '../shared/spinner';
 import '../../assets/stylesheets/highlight.css';
 import './topic-detail.css';
 
@@ -10,7 +11,6 @@ export default class TopicDetail extends Component {
   constructor(props) {
     super(props);
     this.renderTopic = this.renderTopic.bind(this);
-    this.renderLoadingBar = this.renderLoadingBar.bind(this);
   }
 
   componentDidMount() {
@@ -18,18 +18,6 @@ export default class TopicDetail extends Component {
     const topicId = params.topicId;
     if (!entities.topics[topicId]) {
       dispatch(getTopic(topicId));
-    }
-  }
-
-  renderLoadingBar() {
-    const { topic, reply } = this.props;
-    // 以后加一个 下滑? 的动画
-    if (topic.isFetching || reply.isFetching) {
-      return (
-        <div>
-          loading
-        </div>
-      );
     }
   }
 
@@ -56,7 +44,7 @@ export default class TopicDetail extends Component {
         </div>
 
         <div className="topic-detail-container">
-          <div dangerouslySetInnerHTML={topicBodyHtml} />
+          { topic.isFetching ? <Spinner /> : <div dangerouslySetInnerHTML={topicBodyHtml} /> }
         </div>
 
         <div className="topic-detail-action-bar">
@@ -67,11 +55,6 @@ export default class TopicDetail extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.renderLoadingBar()}
-        {this.renderTopic()}
-      </div>
-    );
+    return this.renderTopic();
   }
 }
