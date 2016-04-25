@@ -3,13 +3,15 @@ import ReactDOM from 'react-dom';
 
 export default class NativeScroll extends Component {
 
-  componentDidMount() {
-    window.addEventListener('scroll', this.onScroll.bind(this), false);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll.bind(this), false);
-  }
+  //componentDidMount() {
+  //  debugger;
+  //  this.addEventListener('scroll', this.onScroll.bind(this), false);
+  //}
+  //
+  //componentWillUnmount() {
+  //  debugger;
+  //  this.removeEventListener('scroll', this.onScroll.bind(this), false);
+  //}
 
   getScrollXY() {
     var scrOfX = 0, scrOfY = 0;
@@ -53,7 +55,7 @@ export default class NativeScroll extends Component {
 
   render() {
     return (
-      <div onTouchMove={this.handleTouchMove.bind(this)}>
+      <div onTouchMove={this.handleTouchMove.bind(this)} onScroll={this.onScroll.bind(this)}>
         {this.props.children}
       </div>
     );

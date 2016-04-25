@@ -1,6 +1,6 @@
 .tab-bar {
     position: fixed;
-    top: -46px;
+    top: 0;
     left: 0;
     width: 100%;
     height: 46px;
@@ -8,7 +8,6 @@
     display: flex;
     justify-content: space-around;
     z-index: 100;
-    transform: translateY(100%);
     border-bottom: 1px solid #eee;
 }
 

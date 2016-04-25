@@ -43,9 +43,7 @@ export default class TopicDetail extends Component {
       <div className="topic-detail">
         <div className="topic-header-container">
 
-          <div style={{marginRight: 12}}>
-            <UserAvatar size={48} radius={5} src={user.avatar_url} />
-          </div>
+          <UserAvatar size={48} radius={5} src={user.avatar_url} />
 
           <div className="topic-main">
             <div className="topic-info">

@@ -18,6 +18,7 @@
 
 .topic-header-container {
     display: flex;
+    justify-content: flex-start;
     border-bottom: 1px solid #eee;
     margin-bottom: 10px;
     padding-bottom: 10px;
@@ -29,4 +30,8 @@
     color: #3D464C;
 }
 
+.topic-main {
+    margin-left: 12px;
+    width: 90%;
+}
 

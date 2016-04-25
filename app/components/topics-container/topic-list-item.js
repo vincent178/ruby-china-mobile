@@ -22,9 +22,7 @@ export default class TopicListItem extends Component {
 
         <div className="topic-content">
 
-          <div style={{width: 60}}>
-            <UserAvatar size={48} radius={5} src={this.props.user.avatar_url} />
-          </div>
+          <UserAvatar size={48} radius={5} src={this.props.user.avatar_url} />
 
           <div className="topic-main">
             <div className="topic-info">
