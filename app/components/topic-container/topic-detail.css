@@ -1,4 +1,5 @@
 .topic-detail {
+    margin-top: 9px;
 }
 
 .topic-detail img {
@@ -17,6 +18,15 @@
 
 .topic-header-container {
     display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+.topic-title {
+    font-size: 24px;
+    margin: 0;
+    color: #3D464C;
 }
 
 

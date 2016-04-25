@@ -52,12 +52,14 @@ export default class TopicDetail extends Component {
               <span className="topic-node">{topic.node_name}</span>
               <span className="topic-login">{`@${user.login}`}</span>
             </div>
-            <p>{topic.title}</p>
+            <h1 className="topic-title">{topic.title}</h1>
           </div>
         </div>
 
-        <div>{topic.title}</div>
-        <div dangerouslySetInnerHTML={topicBodyHtml} />
+        <div className="topic-detail-container">
+          <div dangerouslySetInnerHTML={topicBodyHtml} />
+        </div>
+
       </div>
     );
   }

@@ -9,6 +9,7 @@
     justify-content: space-around;
     z-index: 100;
     transform: translateY(100%);
+    border-bottom: 1px solid #eee;
 }
 
 .tab-bar a {
