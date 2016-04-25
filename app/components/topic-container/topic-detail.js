@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { getTopic } from '../../actions/topic';
 import UserAvatar from '../shared/user-avatar';
+import TopicActionBar from '../shared/topic-action-bar';
 import '../../assets/stylesheets/highlight.css';
 import './topic-detail.css';
 
@@ -58,6 +59,9 @@ export default class TopicDetail extends Component {
           <div dangerouslySetInnerHTML={topicBodyHtml} />
         </div>
 
+        <div className="topic-detail-action-bar">
+          <TopicActionBar replyCount={topic.replies_count} />
+        </div>
       </div>
     );
   }
