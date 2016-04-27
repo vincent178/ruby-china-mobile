@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import ReplyListItem from './reply-list-item';
 
 export default class ReplyList extends Component {
 
@@ -13,19 +14,17 @@ export default class ReplyList extends Component {
 
       const reply = entities.replies[replyId];
       const user = entities.users[reply.user];
-      const replyBodyHtml = {__html: reply.body_html};
 
-      return (
-        <div key={"reply-" + i}>
-          <div dangerouslySetInnerHTML={replyBodyHtml} />
-        </div>
-      );
+      return <ReplyListItem {...this.props}
+            key={replyId + '-' + i}
+            reply={reply}
+            user={user} />;
     });
   }
 
   render() {
     return (
-      <div>
+      <div style={{width: this.props.width}}>
         {this.renderReplyItems()}
       </div>
     )

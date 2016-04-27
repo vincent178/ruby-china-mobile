@@ -1,0 +1,10 @@
+.reply-list-item-container {
+    margin-top: 9px;
+    display: flex;
+
+}
+
+.reply-main {
+    margin-left: 12px;
+    width: 90%;
+}
