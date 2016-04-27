@@ -34,8 +34,6 @@ export default class TopicDetail extends Component {
     const topic = entities.topics[params.topicId];
     const user = entities.users[topic.user];
     const topicBodyHtml = {__html: topic.body_html};
-    console.log("--- topicBodyHtml ---");
-    console.log(topicBodyHtml);
     return (
       <div className="topic-detail">
         <div className="topic-header-container">

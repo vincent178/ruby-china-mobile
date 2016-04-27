@@ -1,7 +1,8 @@
 .reply-list-item-container {
     margin-top: 9px;
+    padding-bottom: 9px;
     display: flex;
-
+    border-bottom: 1px solid #eee;
 }
 
 .reply-main {
