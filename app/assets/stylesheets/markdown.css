@@ -1,0 +1,6 @@
+.markdown hr {
+    border: 2px dashed #F0F4F6;
+    border-bottom: 0;
+    margin: 18px auto;
+    width: 50%;
+}

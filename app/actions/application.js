@@ -16,3 +16,10 @@ export function initTab(selectedTab = Items.TOPIC_TAB) {
   }
 }
 
+export function trackScrollPosition(scrollPosition) {
+  return {
+    type: types.TRACK_SCROLL_POSITION,
+    position: scrollPosition
+  }
+}
+

@@ -1,5 +1,5 @@
 import React, { Component, PropTypes } from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import {Route, Link} from 'react-router'
 
 import TopicList from '../components/topics-container/topic-list';
@@ -16,9 +16,9 @@ class TopicsContainer extends Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
-    const { dispatch, topic } = this.props;
+    const { dispatch, topic, application } = this.props;
 
+    window.scrollTo(0, application.position);
     if (topic.items.length <= 10) {
       dispatch(getTopics());
     }
@@ -50,10 +50,11 @@ TopicsContainer.propTypes = {
 
 function mapStateToProps(state) {
 
-  const {entities, topic } = state;
+  const { entities, topic, application } = state;
   return {
     topic,
-    entities
+    entities,
+    application
   }
 }
 

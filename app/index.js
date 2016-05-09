@@ -1,10 +1,11 @@
 import "babel-polyfill";
-import React, {Component} from 'react';
-import {createStore, applyMiddleware} from 'redux';
-import {Provider} from 'react-redux';
+import React from 'react';
+import { createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
-import {render} from 'react-dom';
-import {Router, IndexRoute, Route, browserHistory} from 'react-router'
+import { render } from 'react-dom';
+import { Router, IndexRoute, Route, browserHistory, useRouterHistory } from 'react-router'
+import { createHistory } from 'history';
 
 
 import reducers from './reducers';
@@ -22,11 +23,11 @@ const store = createStoreWithMiddleware(reducers);
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
-      <Route path="/" component={App}>
+      <Route path="/" component={App} >
         <IndexRoute component={TopicsContainer} />
-        <Route path="me" component={MeContainer}/>
-        <Route path="notifications" component={NotificationContainer}/>
-        <Route path="/topics/:topicId" component={TopicContainer}/>
+        <Route path="me" component={MeContainer} />
+        <Route path="notifications" component={NotificationContainer} />
+        <Route path="/topics/:topicId" component={TopicContainer} />
       </Route>
     </Router>
   </Provider>,

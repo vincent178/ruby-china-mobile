@@ -46,3 +46,11 @@
     padding: 0 40px;
     border-bottom: 1px solid #eee;
 }
+
+.topic-detail-spinner {
+    height: 160px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

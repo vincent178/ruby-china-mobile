@@ -3,16 +3,6 @@ import ReactDOM from 'react-dom';
 
 export default class NativeScroll extends Component {
 
-  //componentDidMount() {
-  //  debugger;
-  //  this.addEventListener('scroll', this.onScroll.bind(this), false);
-  //}
-  //
-  //componentWillUnmount() {
-  //  debugger;
-  //  this.removeEventListener('scroll', this.onScroll.bind(this), false);
-  //}
-
   getScrollXY() {
     var scrOfX = 0, scrOfY = 0;
     if( typeof( window.pageYOffset ) == 'number' ) {
@@ -40,7 +30,7 @@ export default class NativeScroll extends Component {
     );
   }
 
-  onScroll() {
+  handleScroll() {
 
     console.log("OnScroll");
     if (this.getScrollXY()[1] >=  this.getDocHeight() - window.innerHeight - 100) {
@@ -50,12 +40,12 @@ export default class NativeScroll extends Component {
   }
 
   handleTouchMove(e) {
-    this.onScroll(e);
+    this.handleScroll(e);
   }
 
   render() {
     return (
-      <div onTouchMove={this.handleTouchMove.bind(this)} onScroll={this.onScroll.bind(this)}>
+      <div onTouchMove={this.handleTouchMove.bind(this)} onScroll={this.handleScroll.bind(this)}>
         {this.props.children}
       </div>
     );

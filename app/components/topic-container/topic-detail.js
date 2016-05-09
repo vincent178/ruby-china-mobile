@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { getTopic } from '../../actions/topic';
 import UserAvatar from '../shared/user-avatar';
 import TopicActionBar from '../shared/topic-action-bar';
+import Spinner from '../shared/spinner';
 import '../../assets/stylesheets/highlight.css';
 import './topic-detail.css';
 
@@ -10,7 +11,6 @@ export default class TopicDetail extends Component {
   constructor(props) {
     super(props);
     this.renderTopic = this.renderTopic.bind(this);
-    this.renderLoadingBar = this.renderLoadingBar.bind(this);
   }
 
   componentDidMount() {
@@ -21,16 +21,12 @@ export default class TopicDetail extends Component {
     }
   }
 
-  renderLoadingBar() {
-    const { topic, reply } = this.props;
-    // 以后加一个 下滑? 的动画
-    if (topic.isFetching || reply.isFetching) {
-      return (
-        <div>
-          loading
-        </div>
-      );
-    }
+  renderSpinner() {
+    return (
+      <div className="topic-detail-spinner">
+        <Spinner />
+      </div>
+    )
   }
 
   renderTopic() {
@@ -38,8 +34,6 @@ export default class TopicDetail extends Component {
     const topic = entities.topics[params.topicId];
     const user = entities.users[topic.user];
     const topicBodyHtml = {__html: topic.body_html};
-    console.log("--- topicBodyHtml ---");
-    console.log(topicBodyHtml);
     return (
       <div className="topic-detail">
         <div className="topic-header-container">
@@ -56,7 +50,7 @@ export default class TopicDetail extends Component {
         </div>
 
         <div className="topic-detail-container">
-          <div dangerouslySetInnerHTML={topicBodyHtml} />
+          { this.props.topic.isFetching ? this.renderSpinner() : <div dangerouslySetInnerHTML={topicBodyHtml} /> }
         </div>
 
         <div className="topic-detail-action-bar">
@@ -67,11 +61,6 @@ export default class TopicDetail extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.renderLoadingBar()}
-        {this.renderTopic()}
-      </div>
-    );
+    return this.renderTopic();
   }
 }
