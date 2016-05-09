@@ -31,7 +31,7 @@ export default class TopicListItem extends Component {
             </div>
             <p>{this.props.topic.title}</p>
             <div className="topic-action">
-              <TopicActionBar replyCount={this.props.topic.replies_count} />
+              <TopicActionBar replyCount={this.props.topic.replies_count} likeCount={this.props.topic.likes_count} />
             </div>
           </div>
         </div>

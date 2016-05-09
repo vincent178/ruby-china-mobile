@@ -60,7 +60,7 @@ export default class TopicDetail extends Component {
         </div>
 
         <div className="topic-detail-action-bar">
-          <TopicActionBar replyCount={topic.replies_count} />
+          <TopicActionBar replyCount={topic.replies_count} likeCount={topic.likes_count} />
         </div>
       </div>
     );

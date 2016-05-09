@@ -86,7 +86,7 @@ export default class TopicActionBar extends Component {
 
         <div className="topic-action-item" onTouchTap={this.clickLike.bind(this)}>
           <i className="fa fa-thumbs-up" />
-          <span>18</span>
+          <span>{this.props.likeCount}</span>
         </div>
 
         <div className="topic-action-item" onTouchTap={this.clickFollow.bind(this)}>
