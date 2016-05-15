@@ -23,3 +23,21 @@ export function trackScrollPosition(scrollPosition) {
   }
 }
 
+function requestUserSesion(username, password) {
+  return {
+    type: types.REQUEST_USER_SESSION
+  }
+}
+
+function receiveUserSesion() {
+}
+
+export function loginUser(username, password) {
+
+  return (dispatch) => {
+    dispatch(requestUserSesion());
+
+    return fetch()
+  }
+}
+
