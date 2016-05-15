@@ -1,4 +1,5 @@
 source 'https://ruby.taobao.org'
 
-gem 'capistrano'
+gem 'capistrano', '~> 3.1.0'
+gem 'capistrano-npm'
 
