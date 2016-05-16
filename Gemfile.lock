@@ -1,5 +1,5 @@
 GEM
-  remote: https://ruby.taobao.org/
+  remote: https://rubygems.org/
   specs:
     capistrano (3.1.0)
       i18n
@@ -52,7 +52,8 @@ DEPENDENCIES
   capistrano-passenger
   json
   oauth2
+  rack
   sinatra
 
 BUNDLED WITH
-   1.11.2
+   1.12.3
