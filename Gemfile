@@ -10,6 +10,7 @@ gem 'oauth2'
 gem 'json'
 gem 'rack'
 gem 'byebug'
+gem 'rack-cors', require: 'rack/cors'
 
 
 

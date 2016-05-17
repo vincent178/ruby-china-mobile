@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import {Route, Link} from 'react-router'
+import { Route, Link } from 'react-router'
 
 import TopicList from '../components/topics-container/topic-list';
 import TopicDetail from '../components/topic-container/topic-detail';
