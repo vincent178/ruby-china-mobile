@@ -7,7 +7,8 @@ GT
 - [x] topic list page
 - [x] router navigation
 - [ ] topic detail page
-- [x] running in production // now running on [http://vincent178.github.io/gt/](http://vincent178.github.io/gt/)
+- [x] backend server for oauth
+- [ ] running in production
 - [ ] profile page
 - [ ] login page
 - [ ] reply, follow, like... actions
