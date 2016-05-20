@@ -54,7 +54,6 @@ class GTServer < Sinatra::Base
       halt 400, response.parsed_response.to_json
     else
       data = response.parsed_response
-      debugger
       halt 200, {
         OAuth: {
           accessToken: data["access_token"],

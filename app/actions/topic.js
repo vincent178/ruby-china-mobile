@@ -41,7 +41,7 @@ function receiveTopicReplies(entities, replies) {
 
 export function getTopics(offset, limit, type) {
 
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestTopics());
     return fetch(address.topics(offset, limit, type))
       .then(res => {
@@ -57,7 +57,7 @@ export function getTopics(offset, limit, type) {
 }
 
 export function getTopic(id) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestTopics());
     return fetch(address.topic(id))
       .then(res => res.json())
@@ -70,7 +70,7 @@ export function getTopic(id) {
 }
 
 export function getTopicReplies(id, offset, limit) {
-  return (dispatch) => {
+  return dispatch => {
     dispatch(requestTopicReplies());
     return fetch(address.topicReplies(id, offset, limit))
       .then(res => res.json())
