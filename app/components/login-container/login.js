@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Items from '../../constants/items';
 import address from '../../constants/address'
-import { loginUser } from '../../actions/application';
+import { getUserToken, dismissError } from '../../actions/application';
+
 import './login.css';
 
 export default class Login extends Component {
@@ -13,10 +14,7 @@ export default class Login extends Component {
 
   handleClick() {
     const { dispatch } = this.props;
-
-    dispatch(loginUser(this.username, this.password));
-
-    debugger;
+    dispatch(getUserToken(this.username, this.password));
   }
 
   handleUserInput(type, e) {
@@ -30,17 +28,30 @@ export default class Login extends Component {
     }
   }
 
+  handleFocus() {
+    const { dispatch } = this.props;
+    dispatch(dismissError());
+  }
+
   render() {
+
     return (
       <div className="login-container">
 
         <h2>登录Ruby China</h2>
+
+        {
+          this.props.application.requestTokenError.length > 0 ?
+            <div className="alert-error">{this.props.application.requestTokenError}</div> :
+            null
+        }
 
         <input
           type="text"
           className="form-input"
           placeholder="手机号码,邮箱或用户名"
           onChange={this.handleUserInput.bind(this, Items.USERNAME)}
+          onFocus={this.handleFocus.bind(this)}
         />
 
         <input
@@ -48,9 +59,15 @@ export default class Login extends Component {
           className="form-input"
           placeholder="密码"
           onChange={this.handleUserInput.bind(this, Items.PASSWORD)}
+          onFocus={this.handleFocus.bind(this)}
         />
 
-        <button className="login-button" onClick={this.handleClick.bind(this)}>登录</button>
+        {
+          this.props.application.isRequestToken ?
+            <button className="login-button" disabled><i className="fa fa-spinner fa-pulse fa-spin fa-3x fa-fw" /></button> :
+            <button className="login-button" onClick={this.handleClick.bind(this)}>登录</button>
+        }
+
       </div>
     );
   }

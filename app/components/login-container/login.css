@@ -12,3 +12,7 @@
     border: 1px solid #0D54AB;
     border-radius: 3px;
 }
+
+.login-button i {
+    font-size: 1.2em;
+}

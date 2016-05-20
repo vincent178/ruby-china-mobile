@@ -14,7 +14,7 @@ export default class TopicListItem extends Component {
   handleClick() {
     const { dispatch } = this.props;
     dispatch(trackScrollPosition(window.scrollY));
-    browserHistory.push(`/topics/${this.props.topic.id}`)
+    browserHistory.push(`/topics/${this.props.topic.id}`);
   }
 
   render() {
