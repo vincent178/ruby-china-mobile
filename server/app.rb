@@ -1,10 +1,13 @@
 require 'sinatra/base'
-require 'oauth2'
 require 'json'
+require 'httparty'
 require 'byebug'
 
 APP_ID = '8e8d5c42'
 APP_SECRET = 'eccbe71f8735a4dd2153337f5ec4242538f13bde423ca530062ca5ce6837b85a'
+RUBY_CHINA_SITE = 'https://ruby-china.org/oauth/token'
+PASSWORD_TYPE = 'password'
+REFRESH_TYPE = 'refresh_token'
 
 class GTServer < Sinatra::Base
 
@@ -24,16 +27,41 @@ class GTServer < Sinatra::Base
     content_type 'application/json', 'charset' => 'utf-8'
     request.body.rewind
     @request_payload = JSON.parse request.body.read
-    client = OAuth2::Client.new(APP_ID, APP_SECRET, site: 'https://ruby-china.org')
-    access_token = client.password.get_token(@request_payload["username"], @request_payload["password"])
 
-    { 
-      OAuth: {
-        token_type: access_token.params["token_type"],
-        access_token: access_token.token,
-        refresh_token: access_token.refresh_token,
-        expires_at: Time.at(access_token.expires_at)
+    if @request_payload["grant_type"] == PASSWORD_TYPE
+      body = {
+        username: @request_payload["username"],
+        password: @request_payload["password"]
       }
-    }.to_json
+    elsif @request_payload["grant_type"] == REFRESH_TYPE
+      body = {
+        refresh_token: @request_payload["refresh_token"]
+      }
+    else
+      halt 400, { "error": "grant_type_invalid", error_description: "" }.to_json
+    end
+
+    body.merge!({
+      grant_type: @request_payload["grant_type"],
+      client_id: APP_ID,
+      client_secret: APP_SECRET
+    })
+
+
+    response = HTTParty.post(RUBY_CHINA_SITE, body: body.to_json, headers: { 'Content-Type' => 'application/json' })
+
+    if response.parsed_response["error"]
+      halt 400, response.parsed_response.to_json
+    else
+      data = response.parsed_response
+      debugger
+      halt 200, {
+        OAuth: {
+          accessToken: data["access_token"],
+          refreshToken: data["refresh_token"],
+          expiresAt: Time.at(data["created_at"] + data["expires_in"])
+        }
+      }.to_json
+    end
   end
 end

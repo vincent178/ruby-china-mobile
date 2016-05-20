@@ -6,7 +6,7 @@ gem 'capistrano-bundler'
 gem 'capistrano-passenger'
 
 gem 'sinatra'
-gem 'oauth2'
+gem 'httparty'
 gem 'json'
 gem 'rack'
 gem 'byebug'
