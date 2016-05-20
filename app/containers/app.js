@@ -10,6 +10,7 @@ import { Motion, spring } from 'react-motion';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
 import { initEnvironment } from '../actions/environment';
+import { initApplication } from '../actions/application';
 
 import TopicContainer from './topics-container';
 import NotificationContainer from './notification-container';
@@ -29,6 +30,7 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(initEnvironment());
+    dispatch(initApplication());
   }
 
   render() {
