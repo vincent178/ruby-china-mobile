@@ -18,7 +18,7 @@ export default function applicationReducer(state = initialState, action) {
   switch(action.type) {
     case actionTypes.CHANGE_TAB:
       return Object.assign({}, state, {
-        selectedTab: action.selectedTab,
+        selectedTab: action.selectedTab
       });
     case actionTypes.TRACK_SCROLL_POSITION:
       return Object.assign({}, state, {
