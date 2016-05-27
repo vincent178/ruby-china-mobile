@@ -58,7 +58,7 @@ class GTServer < Sinatra::Base
         OAuth: {
           accessToken: data["access_token"],
           refreshToken: data["refresh_token"],
-          expiresAt: Time.at(data["created_at"] + data["expires_in"])
+          expiresAt: Time.at(data["created_at"] + data["expires_in"]) - 5*60
         }
       }.to_json
     end
