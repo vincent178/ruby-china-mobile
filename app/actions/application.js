@@ -109,6 +109,9 @@ export function refreshUserToken(refresh_token) {
       saveToken(data.OAuth);
       dispatch(receiveUserToken(data.OAuth));
     })
+    .catch(e => {
+      dispatch(receiveTokenError(e));
+    })
   }
 }
 
