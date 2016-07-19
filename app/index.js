@@ -21,6 +21,10 @@ const middleware = [ thunk ];
 const createStoreWithMiddleware = applyMiddleware(...middleware)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
+// store
+// history
+// route
+
 render(
   <Provider store={store}>
     <Router history={browserHistory}>
