@@ -3,21 +3,16 @@ import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import precss from 'precss';
 
-const PATH = {
-  app: path.join(__dirname, 'app'),
-  build: path.join(__dirname, 'public')
-};
-
 export default {
   devtool: '#inline-source-map',
 
   entry: [
-    PATH.app,
-    'webpack-hot-middleware/client?noInfo=true&reload=true',
+    './client/index.js',
+    'webpack-hot-middleware/client?noInfo=true&reload=true'
   ],
 
   output: {
-    path: PATH.build,
+    path: `${__dirname}/public`,
     filename: 'bundle.js'
   },
 
@@ -25,13 +20,13 @@ export default {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style', 'css', 'postcss'],
+        loaders: ['style', 'css', 'postcss']
       },
 
       {
         test: /\.jsx?$/,
         loaders: ['babel?cacheDirectory'],
-        include: PATH.app
+        include: [`${__dirname}/client`, `${__dirname}/common`]
       },
 
       {

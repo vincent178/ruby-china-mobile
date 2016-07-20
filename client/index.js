@@ -8,13 +8,13 @@ import { Router, IndexRoute, Route, browserHistory, useRouterHistory } from 'rea
 import { createHistory } from 'history';
 
 
-import reducers from './reducers';
-import App from './containers/app';
-import TopicsContainer from './containers/topics-container';
-import NotificationContainer from './containers/notification-container';
-import MeContainer from './containers/me-container';
-import TopicContainer from './containers/topic-container';
-import LoginContainer from './containers/login-container';
+import reducers from '../common/reducers';
+import App from '../common/containers/app';
+import TopicsContainer from '../common/containers/topics-container';
+import NotificationContainer from '../common/containers/notification-container';
+import MeContainer from '../common/containers/me-container';
+import TopicContainer from '../common/containers/topic-container';
+import LoginContainer from '../common/containers/login-container';
 
 
 const middleware = [ thunk ];
