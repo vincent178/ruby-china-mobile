@@ -7,7 +7,7 @@ import { trackScrollPosition } from '../../actions/application';
 import UserAvatar from './../shared/user-avatar';
 import TopicActionBar from './../shared/topic-action-bar';
 
-import './topic-list-item.css';
+import styles from './topic-list-item.css';
 
 export default class TopicListItem extends Component {
 

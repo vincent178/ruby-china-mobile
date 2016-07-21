@@ -5,7 +5,7 @@ import { initTab, changeTab, dismissError } from '../../actions/application';
 import Items from '../../constants/items';
 
 import './navigation-bar.css';
-import "../../../node_modules/font-awesome/css/font-awesome.css";
+//import "../../../node_modules/font-awesome/css/font-awesome.css";
 
 export default class NavigationBar extends Component {
 

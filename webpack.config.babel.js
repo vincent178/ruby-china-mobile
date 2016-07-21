@@ -2,6 +2,12 @@ import path from 'path';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import precss from 'precss';
+import qs from 'querystring';
+
+const cssLoaderQuries = qs.stringify({
+  modules: true,
+  importLoaders: 1
+});
 
 export default {
   devtool: '#inline-source-map',
@@ -20,7 +26,7 @@ export default {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style', 'css', 'postcss']
+        loaders: ['style', `css?${cssLoaderQuries}`, 'postcss']
       },
 
       {

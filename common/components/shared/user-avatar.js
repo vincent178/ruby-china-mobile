@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 export default class UserAvatar extends Component {
-  render() {
 
+  render() {
     var style = {
       width: this.props.size,
       height: this.props.size,

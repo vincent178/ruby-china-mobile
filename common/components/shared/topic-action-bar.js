@@ -3,8 +3,8 @@ import {Motion, spring} from 'react-motion';
 
 import Items from '../../constants/items';
 
-import "../../../node_modules/font-awesome/css/font-awesome.css";
-import "./topic-action-bar.css";
+//import "../../../node_modules/font-awesome/css/font-awesome.css";
+//import "./topic-action-bar.css";
 
 const springConfig = {stiffness: 60, damping: 15};
 
@@ -52,6 +52,26 @@ export default class TopicActionBar extends Component {
 
   render() {
 
+    let containerStyle = {
+      display: "flex",
+      flex: 1,
+      justifyContent: "space-between",
+      alignItems: "stretch",
+      color: "#AAB8B4",
+      fontSize: 14,
+      height: 30
+    };
+
+    let itemStyle = {
+        minWidth: 60,
+        display: 'flex',
+        alignItems: 'center'
+    };
+
+    let itemSpanStyle = {
+      marginLeft: 8
+    };
+
     const style = this.state.isPressed ? {
       scale: spring(1.1, springConfig),
       shadow: spring(16, springConfig),
@@ -64,7 +84,7 @@ export default class TopicActionBar extends Component {
 
 
     return (
-      <div className="topic-action-container">
+      <div className="topic-action-container" style={containerStyle}>
 
         <Motion style={style}>
           {({scale, shadow, size}) =>
@@ -79,14 +99,14 @@ export default class TopicActionBar extends Component {
               <i className="fa fa-reply"  style={{
                 fontSize: `${size}px`
               }}/>
-              <span>{this.props.replyCount}</span>
+              <span style={itemSpanStyle}>{this.props.replyCount}</span>
             </div>
           }
         </Motion>
 
         <div className="topic-action-item" onTouchTap={this.clickLike.bind(this)}>
           <i className="fa fa-thumbs-up" />
-          <span>{this.props.likeCount}</span>
+          <span style={itemSpanStyle}>{this.props.likeCount}</span>
         </div>
 
         <div className="topic-action-item" onTouchTap={this.clickFollow.bind(this)}>
