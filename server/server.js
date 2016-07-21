@@ -6,6 +6,7 @@ import methodOverride from 'method-override';
 
 import webpack from 'webpack';
 import config from '../webpack.config.babel';
+import ssr from './ssr';
 
 const app = express();
 app.use(compression());
@@ -24,6 +25,8 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 app.disable('x-powerd-by');
+
+app.use(ssr);
 
 const server = app.listen(process.env.PORT || 4000, () => {
   const { port } = server.address();

@@ -2,6 +2,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import { RouteContext } from 'react-router';
 import { renderToString } from 'react-dom/server';
+import createStore from '../../common/store';
 
 const createPage = (content = '', state = {}, options) => {
   return `
@@ -23,3 +24,14 @@ const createPage = (content = '', state = {}, options) => {
     </html>
   `;
 };
+
+export default(renderProps, initialData) => {
+  const store = createStore(initialData);
+  const content = renderToString(
+    <Provider store={store}>
+      <RouteContext {...renderProps} />
+    </Provider>
+  );
+  const state = store.getState();
+  return (options) => createPage(content, state, options);
+}
