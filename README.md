@@ -1,4 +1,4 @@
-GT
+Ruby China mobile react remake
 =======================
 
 
