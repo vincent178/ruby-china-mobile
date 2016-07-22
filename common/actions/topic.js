@@ -1,5 +1,5 @@
 import * as types from '../constants/action-types';
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import { normalize, arrayOf } from 'normalizr';
 
 import address from '../constants/address';

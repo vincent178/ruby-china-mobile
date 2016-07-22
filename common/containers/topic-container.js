@@ -6,6 +6,7 @@ import ReplyList from '../components/topic-container/reply-list';
 import PartialTopicDetail from '../components/topic-container/partial-topic-detail';
 import FakeTopicDetail from '../components/topic-container/fake-topic-detail';
 import { getTopic, getTopicReplies } from '../actions/topic';
+import styles from '../assets/stylesheets/app.css';
 
 class TopicContainer extends Component {
 
@@ -31,7 +32,7 @@ class TopicContainer extends Component {
     }
 
     return (
-      <div className="topic-container">
+      <div className={styles.topicContainer}>
         <TopicDetail {...this.props} />
         <ReplyList {...this.props} />
       </div>

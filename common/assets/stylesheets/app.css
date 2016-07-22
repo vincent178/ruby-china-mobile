@@ -9,16 +9,16 @@
     color: rgb(102, 117, 127);
 }
 
-.topic-container {
+.topicContainer {
     background-color: white;
     padding: 0 10px 0 10px;
 }
 
-.inner-topic-container {
+.innerTopicContainer {
     background: white;
 }
 
-.panel-heading {
+.panelHeading {
     padding: 15px;
     border-bottom: 1px solid #eee;
     border-top-left-radius: 3px;
@@ -26,7 +26,7 @@
     background: #f9f9f9;
 }
 
-.topic-detail-heading {
+:global(.topic-detail-heading) {
     padding: 15px;
     border-bottom: 1px solid #eee;
     border-top-left-radius: 3px;
@@ -34,7 +34,7 @@
     background: #f9f9f9;
 }
 
-.topic-detail-body {
+:global(.topic-detail-body) {
     line-height: 1.8em;
     font-size: 14px;
     text-overflow: ellipsis;
@@ -42,13 +42,13 @@
     padding: 15px;
 }
 
-.topic-detail-footer {
+:global(.topic-detail-footer) {
 
 }
 
 
 
-.form-input {
+:global(.form-input) {
     border-left: transparent;
     border-right: transparent;
     border-top: transparent;

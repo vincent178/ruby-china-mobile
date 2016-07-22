@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './partial-topic-detail.css';
+import styles from '../../assets/stylesheets/app.css';
 
 export default class TempTopicContainer extends Component {
 
@@ -11,9 +12,9 @@ export default class TempTopicContainer extends Component {
     console.log(topicData);
 
     return (
-      <div className="topic-container">
-        <div className="inner-topic-container">
-          <div className="panel-heading">
+      <div className={styles.topicContainer}>
+        <div className={styles.innerTopicContainer}>
+          <div className={styles.panelHeading}>
             <h1>{topicData.title}</h1>
             TempTopicContainer
           </div>

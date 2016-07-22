@@ -18,7 +18,7 @@ import MeContainer from './me-container';
 import NavigationBar from '../components/app/navigation-bar';
 
 import '../assets/stylesheets/base.css';
-import '../assets/stylesheets/app.css';
+import styles from '../assets/stylesheets/app.css';
 
 injectTapEventPlugin();
 class App extends Component {
@@ -35,7 +35,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className={styles.container}>
         <NavigationBar {...this.props} />
         {this.props.children}
       </div>

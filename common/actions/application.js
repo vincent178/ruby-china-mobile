@@ -1,6 +1,6 @@
 'use strict';
 
-import 'whatwg-fetch';
+import 'isomorphic-fetch';
 import * as types from '../constants/action-types';
 import Items from '../constants/items';
 import address from '../constants/address';
