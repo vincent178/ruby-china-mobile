@@ -6,7 +6,8 @@ import qs from 'querystring';
 
 const cssLoaderQuries = qs.stringify({
   modules: true,
-  importLoaders: 1
+  importLoaders: 1,
+  localIdentName: '[path]_[local]_[hash:base64:4]'
 });
 
 export default {
