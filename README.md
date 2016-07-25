@@ -1,6 +1,7 @@
-Ruby China mobile react remake
+Ruby China mobile
 =======================
 
+> Remake version built with react, redux, react-router and using material design
 
 
 ### Development progress
