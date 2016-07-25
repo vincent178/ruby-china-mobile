@@ -1,13 +1,20 @@
 import path from 'path';
 import webpack from 'webpack';
-import autoprefixer from 'autoprefixer';
-import precss from 'precss';
 import qs from 'querystring';
+import autoprefixer from 'autoprefixer';
+import postcssImport from 'postcss-import';
+import postcssVariable from 'postcss-custom-properties';
 
-const cssLoaderQuries = qs.stringify({
+const cssLoaderQuery = qs.stringify({
   modules: true,
   importLoaders: 1,
   localIdentName: '[path]_[local]_[hash:base64:4]'
+});
+
+const fontLoaderQuery = qs.stringify({
+  importLoaders: 1,
+  limit: 1000,
+  name: '/fonts/[name].[ext]'
 });
 
 export default {
@@ -27,7 +34,7 @@ export default {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style', `css?${cssLoaderQuries}`, 'postcss']
+        loaders: ['style', `css?${cssLoaderQuery}`, 'postcss']
       },
 
       {
@@ -38,13 +45,13 @@ export default {
 
       {
         test: /\.(woff|woff2|eot|ttf|svg)(\?.*$|$)/,
-        loader: 'url-loader?importLoaders=1&limit=1000&name=/fonts/[name].[ext]'
+        loader: [`url?${fontLoaderQuery}`]
       }
     ]
   },
 
   postcss: function() {
-    return [autoprefixer, precss];
+    return [postcssImport, postcssVariable, autoprefixer];
   },
 
   plugins: [

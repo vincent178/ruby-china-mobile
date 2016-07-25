@@ -47,6 +47,8 @@
     "json-loader": "^0.5.4",
     "nodemon": "^1.9.2",
     "postcss": "^5.0.16",
+    "postcss-custom-properties": "^5.0.1",
+    "postcss-import": "^8.1.2",
     "postcss-loader": "^0.8.1",
     "precss": "^1.4.0",
     "querystring": "^0.2.0",
