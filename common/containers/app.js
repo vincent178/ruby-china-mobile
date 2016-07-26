@@ -5,9 +5,8 @@ import React, {
   PropTypes
 } from 'react';
 import { connect } from 'react-redux';
-import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import { initApplication } from '../actions/application';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 import { initEnvironment } from '../actions/environment';
 import NavigationBar from '../components/app/navigation-bar';
 import '../assets/stylesheets/global.css';
@@ -23,14 +22,15 @@ class App extends Component {
   componentDidMount() {
     const { dispatch } = this.props;
     dispatch(initEnvironment());
-    dispatch(initApplication());
   }
 
   render() {
     return (
         <div>
-          <NavigationBar {...this.props} />
-          {this.props.children}
+          <div className="container">
+            <NavigationBar {...this.props} />
+            {this.props.children}
+          </div>
         </div>
     );
   }
