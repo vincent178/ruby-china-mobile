@@ -6,13 +6,13 @@ import createPage from './page';
 
 const router = Router();
 
-router.use((req, res, next) => {
+router.use((req, res) => {
 
   const history = createHistory();
   const routes = createRoutes(history);
   const location = history.createLocation(req.url);
 
-  match({ routes, location }, (error, redirectLocation, renderProps) => {
+  match({routes, location}, (error, redirectLocation, renderProps) => {
 
     if (error) {
       res.status(500).send(error.message);
@@ -23,11 +23,10 @@ router.use((req, res, next) => {
     }
 
     if (renderProps) {
-      res.status(200).end(createPage(renderProps, {})({}));
+      res.status(200).end(createPage(renderProps));
     } else {
       res.staus(404).send('Not Found');
     }
-
   });
 
 });

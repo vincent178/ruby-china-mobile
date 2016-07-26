@@ -4,7 +4,7 @@ import { RouterContext, IndexRoute } from 'react-router';
 import { renderToString } from 'react-dom/server';
 import createStore from '../../common/store';
 
-const createPage = (content = '', state = {}, options) => {
+const createPage = (content = '', state = {}) => {
   return `
     <!DOCTYPE html>
     <html>
@@ -23,13 +23,13 @@ const createPage = (content = '', state = {}, options) => {
   `;
 };
 
-export default(renderProps, initialData) => {
-  const store = createStore(initialData);
+export default(renderProps) => {
+  const store = createStore();
   const content = renderToString(
     <Provider store={store}>
       <RouterContext {...renderProps} />
     </Provider>
   );
   const state = store.getState();
-  return (options) => createPage(content, state, options);
+  return createPage(content, state);
 }
