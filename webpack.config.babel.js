@@ -1,4 +1,3 @@
-import path from 'path';
 import webpack from 'webpack';
 import qs from 'querystring';
 import autoprefixer from 'autoprefixer';
