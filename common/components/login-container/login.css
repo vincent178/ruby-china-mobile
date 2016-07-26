@@ -1,8 +1,4 @@
 
-.loginContainer {
-    padding: 0 10px;
-}
-
 .hero {
     font-size: 2rem;
     text-align: center;
@@ -11,19 +7,34 @@
     margin-bottom: 24px;
 }
 
+.loginContainer {
+    padding: 0 10px;
+    margin: 0 10%;
+}
+
+.loginContainer input {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+
 .loginButton {
-    width: 80%;
+    width: 100%;
     height: 36px;
     background: rgb(56, 151, 240);
     color: white;
     font-size: 1.1em;
     border: 1px solid rgb(56, 151, 240);
     border-radius: 3px;
-    margin: 0 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.loginContainer input {
-    width: 80%;
-    margin: 0 10% 20px;
+.error {
+    font-size: 0.875rem;
+    color: rgb(237, 73, 86);
+    text-align: center;
+    margin-top: 24px;
 }
 

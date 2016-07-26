@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 
 import './spinner.css';
 
@@ -16,6 +16,6 @@ class Spinner extends Component {
       </div>
     );
   }
-};
+}
 
 export default Spinner;

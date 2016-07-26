@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Items from '../../constants/items';
 import address from '../../constants/address'
 import { getUserToken, dismissError } from '../../actions/application';
+import SpinnerCircle from '../shared/spinner-circle';
 
 import styles from './login.css';
 
@@ -11,13 +12,20 @@ import styles from './login.css';
 
 export default class Login extends Component {
 
+  constructor() {
+    super();
+    this.state = {
+      isSubmitting: false
+    };
+  }
+
   componentDidMount() {
     this.username = "";
     this.password = "";
   }
 
   handleSubmit() {
-    const { dispatch } = this.props;
+    this.setState({isSubmitting: true})
   }
 
   handleInput(type, e) {
@@ -62,7 +70,17 @@ export default class Login extends Component {
           onBlur={this.handleBlur.bind(this)}
         />
 
-        <button className={styles.loginButton} onClick={this.handleSubmit.bind(this)}>登录</button>
+        <button className={styles.loginButton} onClick={this.handleSubmit.bind(this)}>
+          {
+            this.state.isSubmitting ?
+              <SpinnerCircle width={26} /> :
+              "登录"
+          }
+        </button>
+
+        <div className={styles.error}>
+          Sorry, your password was incorrect. Please double-check your password.
+        </div>
       </div>
     );
   }
