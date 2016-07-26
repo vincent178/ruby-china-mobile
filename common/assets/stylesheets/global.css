@@ -34,5 +34,23 @@ body {
     line-height:1
 }
 
+input {
+    border-left: transparent;
+    border-right: transparent;
+    border-top: transparent;
+    height: 40px;
+    font-size: 14px;
+}
+
+:global(.container) {
+    width: 100%;
+    height: 100%;
+    padding-top: 46px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    color: rgb(102, 117, 127);
+}
 
 
