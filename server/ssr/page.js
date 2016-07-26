@@ -1,6 +1,6 @@
 import React from 'react';
 import { Provider } from 'react-redux';
-import { RouterContext, IndexRoute } from 'react-router';
+import { RouterContext } from 'react-router';
 import { renderToString } from 'react-dom/server';
 import createStore from '../../common/store';
 
