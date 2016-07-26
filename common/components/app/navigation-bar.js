@@ -1,15 +1,16 @@
 import React from 'react';
 import Items from '../../constants/items';
-import { initTab, changeTab } from '../../actions/application';
+import { changeTab } from '../../actions/application';
 import { initEnvironment } from '../../actions/environment';
 import { browserHistory } from 'react-router';
+import items from '../../constants/items';
 import styles from './navigation-bar.css';
 
 export default class NavigationBar extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
-    dispatch(initTab());
+    dispatch(changeTab(items.TOPIC_TAB));
   }
 
   componentWillReceiveProps(nextProps) {

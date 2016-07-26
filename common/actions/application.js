@@ -14,12 +14,6 @@ export function changeTab(selectedTab) {
   }
 }
 
-export function initTab(selectedTab = Items.TOPIC_TAB) {
-  return dispatch => {
-    return dispatch(changeTab(selectedTab))
-  }
-}
-
 export function trackScrollPosition(scrollPosition) {
   return {
     type: types.TRACK_SCROLL_POSITION,
