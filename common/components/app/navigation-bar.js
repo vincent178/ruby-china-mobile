@@ -1,13 +1,11 @@
-import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
-
-import { initTab, changeTab, dismissError } from '../../actions/application';
+import React from 'react';
 import Items from '../../constants/items';
+import { initTab, changeTab } from '../../actions/application';
+import { initEnvironment } from '../../actions/environment';
+import { browserHistory } from 'react-router';
+import styles from './navigation-bar.css';
 
-import './navigation-bar.css';
-//import "../../../node_modules/font-awesome/css/font-awesome.css";
-
-export default class NavigationBar extends Component {
+export default class NavigationBar extends React.Component {
 
   componentDidMount() {
     const { dispatch } = this.props;
@@ -27,7 +25,6 @@ export default class NavigationBar extends Component {
     e.preventDefault();
     browserHistory.push(path);
     const { dispatch } = this.props;
-    dispatch(dismissError());
     dispatch(changeTab(this.pathToTab(path)));
   }
 
@@ -48,29 +45,29 @@ export default class NavigationBar extends Component {
 
     function tabItemClass(tab) {
       if (tab === selectedTab) {
-        return "tab-item-container selected";
+        return `${styles.tabItemContainer} ${styles.selected}`;
       }
 
-      return "tab-item-container";
+      return styles.tabItemContainer;
     }
 
     return (
-      <div className="tab-bar" style={{width: this.props.width}}>
+      <div className={styles.tabBar} style={{width: this.props.width}}>
         <div className={tabItemClass(Items.TOPIC_TAB)}
              onTouchTap={this.handleTouchTap.bind(this, "/")}>
-          <span className="tab-item">
-            <i className="fa fa-comments"/>Topics
+          <span>
+            <i className="fa fa-comments" />Topics
           </span>
         </div>
         <div className={tabItemClass(Items.NOTIFICATION_TAB)}
              onTouchTap={this.handleTouchTap.bind(this, "/notifications")}>
-          <span className="tab-item">
+          <span>
             <i className="fa fa-bell"/>Notification
           </span>
         </div>
         <div className={tabItemClass(Items.ME_TAB)}
              onTouchTap={this.handleTouchTap.bind(this, "/me")}>
-          <span className="tab-item">
+          <span>
             <i className="fa fa-user"/>Me
           </span>
         </div>

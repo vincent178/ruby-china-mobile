@@ -5,22 +5,15 @@ import React, {
   PropTypes
 } from 'react';
 import { connect } from 'react-redux';
-import { Router, Route, Link, browserHistory } from 'react-router'
-import { Motion, spring } from 'react-motion';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
-import { initEnvironment } from '../actions/environment';
 import { initApplication } from '../actions/application';
-
-import TopicContainer from './topics-container';
-import NotificationContainer from './notification-container';
-import MeContainer from './me-container';
+import { initEnvironment } from '../actions/environment';
 import NavigationBar from '../components/app/navigation-bar';
-
-import '../assets/stylesheets/base.css';
-import styles from '../assets/stylesheets/app.css';
+import '../assets/stylesheets/global.css';
 
 injectTapEventPlugin();
+
 class App extends Component {
 
   constructor(props) {
@@ -35,10 +28,10 @@ class App extends Component {
 
   render() {
     return (
-      <div className={styles.container}>
-        <NavigationBar {...this.props} />
-        {this.props.children}
-      </div>
+        <div>
+          <NavigationBar {...this.props} />
+          {this.props.children}
+        </div>
     );
   }
 }
