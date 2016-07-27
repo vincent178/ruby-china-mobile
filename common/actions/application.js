@@ -127,6 +127,8 @@ export function fetchUserToken(username, password) {
           dispatch(receiveUserToken(data.OAuth));
         }
       })
-      .catch(e => { return { error: e.message }});
+      .catch(e => {
+        return { error: e.message }
+      });
   }
 }
