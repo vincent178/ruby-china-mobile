@@ -1,5 +1,5 @@
 
-.fake-topic-list-container {
+.fakeTopicListContainer {
     height: 100px;
     width: 100%;
 
@@ -8,7 +8,7 @@
     border-bottom: 1px solid #e1e8ed;
 }
 
-.fake-avatar {
+.fakeAvatar {
     margin-top: 9px;
     margin-left: 12px;
     width: 48px;
@@ -17,7 +17,7 @@
     border-radius: 5px;
 }
 
-.fake-topic-content {
+.fakeTopicContent {
     margin-top: 9px;
     margin-left: 20px;
     padding-bottom: 15px;
@@ -29,13 +29,13 @@
     justify-content: space-between;
 }
 
-.fake-topic-1 {
+.fakeTopic1 {
     width: 50%;
     height: 9px;
     background: #f6f7f8;
 }
 
-.fake-topic-2, .fake-topic-3 {
+.fakeTopic2 {
     width: 100%;
     height: 9px;
     background: #f6f7f8;

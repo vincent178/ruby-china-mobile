@@ -1,17 +1,8 @@
-import React, {
-  Component,
-  PropTypes
-} from 'react';
+import React, { Component } from 'react';
 
 import TopicListItem from './topic-list-item';
-import './topic-list.css';
 
 export default class TopicList extends Component {
-
-  constructor(props) {
-    super(props);
-    this.renderTopicItems = this.renderTopicItems.bind(this);
-  }
 
   renderTopicItems() {
     const { topic, entities } = this.props;
@@ -34,18 +25,9 @@ export default class TopicList extends Component {
 
   render() {
     return (
-      <div className="topic-list-container">
-        {this.renderTopicItems()}
+      <div>
+        { this.renderTopicItems.bind(this)() }
       </div>
-    )
+    );
   }
 }
-
-//TopicList.propTypes = {
-//  topics: PropTypes.arrayOf(PropTypes.shape({
-//    id: PropTypes.number.isRequired,
-//    title: PropTypes.string,
-//    price: PropTypes.number,
-//    quantity: PropTypes.number
-//  })).isRequired
-//};

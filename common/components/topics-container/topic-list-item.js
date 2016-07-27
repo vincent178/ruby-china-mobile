@@ -19,15 +19,15 @@ export default class TopicListItem extends Component {
 
   render() {
     return (
-      <div className="topic-list-item" onClick={this.handleClick.bind(this)}>
-
+      <div className="topic-list-item">
         <div className="topic-context"></div>
-
         <div className="topic-content">
 
-          <UserAvatar size={48} radius={5} src={this.props.user.avatar_url} />
+          <UserAvatar size={48} radius={5}
+                      src={this.props.user.avatar_url}
+                      userId={this.props.user.id} />
 
-          <div className="topic-main">
+          <div className="topic-main" onClick={this.handleClick.bind(this)}>
             <div className="topic-info">
               <span className="topic-node">{this.props.topic.node_name}</span>
               <span className="topic-login">{`@${this.props.user.login}`}</span>

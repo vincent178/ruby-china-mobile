@@ -37,7 +37,7 @@ class TopicsContainer extends Component {
 
     return (
       <NativeScroll
-        scrollFunc={() => dispatch(getTopics(topic.items.length))}>
+        scrollFunc={() => dispatch(fetchTopics(topic.items.length))}>
 
         <TopicList {...this.props} />
         <Spinner />

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router'
 
 export default class UserAvatar extends Component {
 
@@ -9,6 +10,9 @@ export default class UserAvatar extends Component {
       borderRadius: this.props.radius || 0
     };
 
-    return <img style={style} src={this.props.src} />;
+    return (
+      <Link to={`/users/${this.props.userId}`}>
+        <img style={style} src={this.props.src} />
+      </Link>);
   }
 }

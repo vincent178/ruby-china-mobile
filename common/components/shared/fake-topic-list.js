@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 
-import "./fake-topic-list.css";
+import styles from "./fake-topic-list.css";
 
 export default class FakeTopicList extends Component {
 
   renderFakeTopicListItem() {
     return (
-      <div className="fake-topic-list-container">
-        <div className="fake-avatar"></div>
-        <div className="fake-topic-content">
-          <div className="fake-topic-1"></div>
-          <div className="fake-topic-2"></div>
-          <div className="fake-topic-3"></div>
+      <div className={styles.fakeTopicListContainer}>
+        <div className={styles.fakeAvatar}></div>
+        <div className={styles.fakeTopicContent}>
+          <div className={styles.fakeTopic1}></div>
+          <div className={styles.fakeTopic2}></div>
+          <div className={styles.fakeTopic2}></div>
         </div>
       </div>
     )

@@ -1,12 +1,6 @@
-import React, {Component} from 'react';
-import {Motion, spring} from 'react-motion';
-
+import React, { Component } from 'react';
 import Items from '../../constants/items';
-
-//import "../../../node_modules/font-awesome/css/font-awesome.css";
-//import "./topic-action-bar.css";
-
-const springConfig = {stiffness: 60, damping: 15};
+import styles from "./topic-action-bar.css";
 
 export default class TopicActionBar extends Component {
 
@@ -21,14 +15,12 @@ export default class TopicActionBar extends Component {
   handleReplyStart(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.debug("[TopicActionBar] handleReplyStart");
     this.setState({isPressed: true});
   }
 
   handleReplyEnd(e) {
     e.stopPropagation();
     e.preventDefault();
-    console.debug("[TopicActionBar] handleReplyEnd");
     this.setState({isPressed: false});
   }
 
@@ -62,55 +54,22 @@ export default class TopicActionBar extends Component {
       height: 30
     };
 
-    let itemStyle = {
-        minWidth: 60,
-        display: 'flex',
-        alignItems: 'center'
-    };
-
-    let itemSpanStyle = {
-      marginLeft: 8
-    };
-
-    const style = this.state.isPressed ? {
-      scale: spring(1.1, springConfig),
-      shadow: spring(16, springConfig),
-      size: spring(36, springConfig)
-    } : {
-      scale: spring(1.0, springConfig),
-      shadow: spring(1, springConfig),
-      size: spring(12, springConfig)
-    };
-
-
     return (
-      <div className="topic-action-container" style={containerStyle}>
+      <div className={styles.topicActionContainer} style={containerStyle}>
 
-        <Motion style={style}>
-          {({scale, shadow, size}) =>
-            <div className="topic-action-item"
-                 onTouchTap={this.clickReply.bind(this)}
-                 style={{
-                 transform: `scale(${scale})`,
-                 WebkitTransform: `scale(${scale})`,
-                 color: this.state.isPressed ? '#EB5424' : '#AAB8B4'
-              }}
-            >
-              <i className="fa fa-reply"  style={{
-                fontSize: `${size}px`
-              }}/>
-              <span style={itemSpanStyle}>{this.props.replyCount}</span>
-            </div>
-          }
-        </Motion>
-
-        <div className="topic-action-item" onTouchTap={this.clickLike.bind(this)}>
-          <i className="fa fa-thumbs-up" />
-          <span style={itemSpanStyle}>{this.props.likeCount}</span>
+        <div>
+          <i className="fa fa-reply" />
+          <span>{this.props.replyCount}</span>
         </div>
 
-        <div className="topic-action-item" onTouchTap={this.clickFollow.bind(this)}>
+        <div className={styles.topicActionItem} onTouchTap={this.clickLike.bind(this)}>
+          <i className="fa fa-thumbs-up" />
+          <span className={styles.topicActionContainerSpan}>{this.props.likeCount}</span>
+        </div>
+
+        <div className={styles.topicActionItem} onTouchTap={this.clickFollow.bind(this)}>
           <i className="fa fa-eye" />
+          <span className={styles.topicActionContainerSpan}>{this.props.viewCount}</span>
         </div>
       </div>
     );

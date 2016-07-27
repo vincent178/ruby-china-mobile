@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 
-import './spinner.css';
+import styles from './spinner.css';
 
-class Spinner extends Component {
+export default class Spinner extends Component {
   render() {
     return (
-      <div className='spinner-container'>
-        <div className='spinner'>
-          <div className='rect1'></div>
-          <div className='rect2'></div>
-          <div className='rect3'></div>
-          <div className='rect4'></div>
-          <div className='rect5'></div>
+      <div className={styles.spinnerContainer}>
+        <div className={styles.spinner}>
+          <div className={styles.rect1}></div>
+          <div className={styles.rect2}></div>
+          <div className={styles.rect3}></div>
+          <div className={styles.rect4}></div>
+          <div className={styles.rect5}></div>
         </div>
       </div>
     );
   }
 }
-
-export default Spinner;
