@@ -1,13 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
-import { Route, Link } from 'react-router'
 
 import TopicList from '../components/topics-container/topic-list';
-import TopicDetail from '../components/topic-container/topic-detail';
 import NativeScroll from '../components/shared/native-scroll';
 import FakeTopicList from '../components/shared/fake-topic-list';
 import Spinner from '../components/shared/spinner';
-import { getTopics } from '../actions/topic';
+import { fetchTopics } from '../actions/topic';
 
 class TopicsContainer extends Component {
 
@@ -19,8 +17,14 @@ class TopicsContainer extends Component {
     const { dispatch, topic, application } = this.props;
 
     window.scrollTo(0, application.position);
+
     if (topic.items.length <= 10) {
-      dispatch(getTopics());
+      dispatch(fetchTopics())
+        .then((res) => {
+          if (res && res.error) {
+            this.setState({ error: res.error });
+          }
+        });
     }
   }
 
@@ -33,20 +37,14 @@ class TopicsContainer extends Component {
 
     return (
       <NativeScroll
-        dispatch={dispatch}
-        scrollFunc={() => getTopics(topic.items.length)}
-      >
-        <div className="topic-container">
-          <TopicList {...this.props} />
-          <Spinner />
-        </div>
+        scrollFunc={() => dispatch(getTopics(topic.items.length))}>
+
+        <TopicList {...this.props} />
+        <Spinner />
       </NativeScroll>
     );
   }
 }
-
-TopicsContainer.propTypes = {
-};
 
 function mapStateToProps(state) {
 
@@ -59,5 +57,3 @@ function mapStateToProps(state) {
 }
 
 export default connect(mapStateToProps)(TopicsContainer);
-
-

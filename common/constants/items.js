@@ -10,7 +10,5 @@ export default {
   FOLLOW_ITEM: 'FOLLOW_ITEM',
 
   USERNAME: 'USERNAME',
-  PASSWORD: 'PASSWORD',
-
-  ERROR_LOGIN: 'invalid_resource_owner'
+  PASSWORD: 'PASSWORD'
 };

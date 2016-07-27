@@ -5,26 +5,11 @@ import { normalize, arrayOf } from 'normalizr';
 import address from '../constants/address';
 import { topicSchema, replySchema } from '../constants/schema';
 
-// 这里的所有都是 action creator,
-// 通过receiveTopics 可以创建一个type是receiveTopics包含topics内容的action
-
 function receiveTopics(entities, topics) {
   return {
     type: types.RECEIVE_TOPICS,
     entities,
     topics
-  }
-}
-
-function requestTopics() {
-  return {
-    type: types.REQUEST_TOPICS
-  }
-}
-
-function requestTopicReplies() {
-  return {
-    type: types.REQUEST_TOPIC_REPLIES
   }
 }
 
@@ -34,26 +19,6 @@ function receiveTopicReplies(entities, replies) {
     entities,
     replies
   }
-}
-
-// 这里的 getTopics 虽然是一种action, 但不会直接产生 state 的变化
-// 通过 dispatch 已经产生的变化的action, 例如 receiveTopics
-
-export function getTopics(offset, limit, type) {
-
-  return dispatch => {
-    dispatch(requestTopics());
-    return fetch(address.topics(offset, limit, type))
-      .then(res => {
-        return res.json()
-      })
-      .then(data => {
-        const topics = data.topics;
-        const normalized = normalize(topics, arrayOf(topicSchema));
-        dispatch(receiveTopics(normalized.entities, normalized.result));
-      })
-      .catch(e => console.log(e));
-  };
 }
 
 export function getTopic(id) {
@@ -78,11 +43,46 @@ export function getTopicReplies(id, offset, limit) {
         const normalized = normalize(data.replies, arrayOf(replySchema));
         dispatch(receiveTopicReplies(normalized.entities, normalized.result));
       })
-      .catch(e => console.log(e))
+      .catch(e => console.log(e));
   }
 }
 
-//有两种情况, 第一种是没有
-export function fetchTopicsIfNeeded(node) {
+export function postTopicReply(id, body) {
+  return dispatch => {
+    dispatch(createTopicReply());
+    return fetch(address.replyTopic(id), {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        body: body
+      })
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+        dispatch(createTopicReplyDone());
+      })
+      .catch(e => console.log(e));
+
+  }
+}
+
+export function fetchTopics(offset, limit, type) {
+  return (dispatch) => {
+    return fetch(address.topics(offset, limit, type))
+      .then(res => res.json())
+      .then(data => {
+        const topics = data.topics;
+        const normalized = normalize(topics, arrayOf(topicSchema));
+        dispatch(receiveTopics(normalized.entities, normalized.result));
+      })
+      .catch((error) => { return {error: error.message} })
+  };
+}
+
+export function fetchTopicDetail() {
 }
 

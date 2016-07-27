@@ -1,5 +1,4 @@
-import React, {Component, PropTypes} from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component, PropTypes } from 'react';
 
 export default class NativeScroll extends Component {
 
@@ -33,7 +32,7 @@ export default class NativeScroll extends Component {
   handleScroll() {
     if (this.getScrollXY()[1] >=  this.getDocHeight() - window.innerHeight - 100) {
       console.log("[NativeScroll] this.props.dispatch(this.props.scrollFunc())");
-      this.props.dispatch(this.props.scrollFunc());
+      this.props.scrollFunc();
     }
   }
 
@@ -51,7 +50,7 @@ export default class NativeScroll extends Component {
 }
 
 NativeScroll.PropTypes = {
-  dispatch: PropTypes.func.isRequired,
+  scrollFunc: PropTypes.func.isRequired,
   children: PropTypes.object.isRequired
 };
 
