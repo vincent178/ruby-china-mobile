@@ -109,3 +109,20 @@ export function refreshUserToken(refresh_token) {
   }
 }
 
+export function fetchUserToken(username, password) {
+  return () => {
+    return fetch("/oauth/access_token", {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({grant_type: "password", username: username, password: password})
+    })
+      .then(res => res.json())
+      .then(data => {
+      })
+      .catch(err => {
+        return { errorMessage: err.message }
+      });
+  }
+}

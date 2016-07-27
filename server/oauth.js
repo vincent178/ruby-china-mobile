@@ -10,6 +10,7 @@ const PASSWORD_TYPE = 'password';
 const REFRESH_TYPE = 'refresh_token';
 
 router.post('/oauth/access_token', (req, res) => {
+
   let postBody = {
     "client_id": APP_ID,
     "client_secret": APP_SECRET
