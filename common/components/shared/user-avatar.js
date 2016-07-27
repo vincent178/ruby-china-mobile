@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes
+} from 'react';
 import { Link } from 'react-router'
 
 export default class UserAvatar extends Component {
@@ -16,3 +19,10 @@ export default class UserAvatar extends Component {
       </Link>);
   }
 }
+
+UserAvatar.PropTypes = {
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  borderRadius: PropTypes.number,
+  userId: PropTypes.number.isRequired
+};
