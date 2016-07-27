@@ -13,19 +13,24 @@ router.post('/oauth/access_token', (req, res) => {
 
   let postBody = {
     "client_id": APP_ID,
-    "client_secret": APP_SECRET
+    "client_secret": APP_SECRET,
+    "grant_type": req.body.grantType
   };
 
-  if (req.body.grant_type === PASSWORD_TYPE) {
+  switch (req.body.grantType) {
+    case PASSWORD_TYPE:
+      postBody.username = req.body.username;
+      postBody.password = req.body.password;
+      break;
+    case REFRESH_TYPE:
+      postBody["refresh_token"] = req.body.refreshToken;
+      break;
+    default:
+      res.status(400).end();
+  }
 
-    postBody.username = req.body.username;
-    postBody.password = req.body.password;
-
-  } else if (req.body.grant_type === REFRESH_TYPE) {
-
-    postBody["refresh_token"] = req.body.refreshToken;
-  } else {
-    res.status(400).end();
+  for (let key in postBody) {
+    console.log(`[OAUTH ROUTER][PARAMS] postBody ${postBody[key]}`);
   }
 
   fetch(API_URL, {
@@ -36,13 +41,9 @@ router.post('/oauth/access_token', (req, res) => {
     },
     body: JSON.stringify(postBody)
   })
-    .then( res => res.json())
-    .then( data => {
-      return res.send(data);
-    })
-    .catch(e => console.log(e));
-
-  res.status(200).end();
+    .then( res1 => res1.json())
+    .then( data => res.json(data))
+    .catch( e => res.status(500).json({ error: e.message }));
 });
 
 export default router;

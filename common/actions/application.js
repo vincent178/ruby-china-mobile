@@ -110,19 +110,23 @@ export function refreshUserToken(refresh_token) {
 }
 
 export function fetchUserToken(username, password) {
-  return () => {
+  return (dispatch) => {
     return fetch("/oauth/access_token", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({grant_type: "password", username: username, password: password})
+      body: JSON.stringify({grantType: "password", username: username, password: password})
     })
       .then(res => res.json())
       .then(data => {
+        if (data && data.error) {
+          return { error: data["error_description"] };
+        } else {
+          console.log(`111 ${data}`);
+          dispatch(receiveUserToken(data.OAuth));
+        }
       })
-      .catch(err => {
-        return { errorMessage: err.message }
-      });
+      .catch(e => { return { error: e.message }});
   }
 }
