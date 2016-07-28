@@ -10,18 +10,13 @@
     height: 30px;
 }
 
-.topicActionItem {
+.topicActionContainer div {
     min-width: 60px;
-
     display: flex;
     align-items: center;
 }
 
-.topicActionContainerSpan {
-    margin-left: 8px;
-}
-
-.topic-action-container span {
+.topicActionContainer span {
     margin-left: 8px;
 }
 

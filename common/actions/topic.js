@@ -21,19 +21,6 @@ function receiveTopicReplies(entities, replies) {
   }
 }
 
-export function getTopic(id) {
-  return dispatch => {
-    dispatch(requestTopics());
-    return fetch(address.topic(id))
-      .then(res => res.json())
-      .then(data => {
-        const normalized = normalize([data.topic], arrayOf(topicSchema));
-        dispatch(receiveTopics(normalized.entities, normalized.result));
-      })
-      .catch(e => console.log(e));
-  }
-}
-
 export function getTopicReplies(id, offset, limit) {
   return dispatch => {
     dispatch(requestTopicReplies());

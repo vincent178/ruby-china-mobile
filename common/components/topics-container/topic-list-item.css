@@ -1,43 +1,44 @@
-.topic-list-item {
+.topicListItemContainer {
     border-bottom: 1px solid #e1e8ed;
     background-color: white;
 }
 
-.topic-content {
+.topicContent {
     padding: 9px 12px;
     display: flex;
     align-items: flex-start;
 }
 
-.topic-content .topic-main {
+.topicContent .topicMain {
     color: #292f33;
-
-    flex: 1;
+    margin-left: 12px;
 
     display: flex;
+    flex: 1;
     flex-direction: column;
     justify-content: flex-start;
 }
 
-.topic-info {
+.topicInfo {
     display: flex;
     font-size: 12px;
     margin-bottom: 4px;
 }
 
-.topic-node {
+.topicNode {
     padding: 1px 5px;
+    line-height: 16px;
     color: #778087;
     background-color: #f5f5f5;
 }
 
-.topic-login {
+.topicLogin {
     color: #666;
     line-height: 16px;
     margin-left: 4px;
 }
 
-.topic-action {
+.topicAction {
     width: 90%;
     max-width: 240px;
 }

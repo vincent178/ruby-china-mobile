@@ -44,32 +44,22 @@ export default class TopicActionBar extends Component {
 
   render() {
 
-    let containerStyle = {
-      display: "flex",
-      flex: 1,
-      justifyContent: "space-between",
-      alignItems: "stretch",
-      color: "#AAB8B4",
-      fontSize: 14,
-      height: 30
-    };
-
     return (
-      <div className={styles.topicActionContainer} style={containerStyle}>
+      <div className={styles.topicActionContainer}>
 
         <div>
           <i className="fa fa-reply" />
           <span>{this.props.replyCount}</span>
         </div>
 
-        <div className={styles.topicActionItem} onTouchTap={this.clickLike.bind(this)}>
+        <div>
           <i className="fa fa-thumbs-up" />
-          <span className={styles.topicActionContainerSpan}>{this.props.likeCount}</span>
+          <span>{this.props.likeCount}</span>
         </div>
 
-        <div className={styles.topicActionItem} onTouchTap={this.clickFollow.bind(this)}>
+        <div>
           <i className="fa fa-eye" />
-          <span className={styles.topicActionContainerSpan}>{this.props.viewCount}</span>
+          <span>{this.props.viewCount}</span>
         </div>
       </div>
     );

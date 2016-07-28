@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import TopicList from '../components/topics-container/topic-list';
@@ -9,10 +9,6 @@ import { fetchTopics } from '../actions/topic';
 
 class TopicsContainer extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     const { dispatch, topic, application } = this.props;
 
@@ -22,6 +18,7 @@ class TopicsContainer extends Component {
       dispatch(fetchTopics())
         .then((res) => {
           if (res && res.error) {
+            console.log(`[TopicsContainer] error: ${res.error}`);
             this.setState({ error: res.error });
           }
         });
