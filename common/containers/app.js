@@ -35,11 +35,8 @@ App.propTypes = {
 };
 
 function mapStateToProps(state) {
-  const { environment, application } = state;
   return {
-    width: environment.width,
-    height: environment.height,
-    selectedTab: application.selectedTab
+    selectedTab: state.application.selectedTab
   }
 }
 

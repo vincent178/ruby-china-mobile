@@ -1,7 +1,6 @@
 import React from 'react';
 import Items from '../../constants/items';
 import { changeTab } from '../../actions/application';
-import { initEnvironment } from '../../actions/environment';
 import { browserHistory } from 'react-router';
 import items from '../../constants/items';
 import styles from './navigation-bar.css';
@@ -53,7 +52,7 @@ export default class NavigationBar extends React.Component {
     }
 
     return (
-      <div className={styles.tabBar} style={{width: this.props.width}}>
+      <div className={styles.tabBar}>
         <div className={tabItemClass(Items.TOPIC_TAB)}
              onTouchTap={this.handleTouchTap.bind(this, "/")}>
           <span>

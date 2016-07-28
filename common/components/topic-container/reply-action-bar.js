@@ -8,7 +8,7 @@ export default class ReplyActionBar extends Component {
   render() {
     return (
       <div className={styles.replyActionBarContainer}>
-        <div className={styles.replyHint}></div>
+        <input type="text" size="30" className={styles.replyHint} />
         <div className={styles.replyButton}>回复</div>
       </div>
     );
