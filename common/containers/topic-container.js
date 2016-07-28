@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import TopicDetail from '../components/topic-container/topic-detail';
 import ReplyList from '../components/topic-container/reply-list';
 import TopicDetailHeader from '../components/topic-container/topic-detail-header';
+import ReplyActionBar from '../components/topic-container/reply-action-bar';
 import FakeDetail from '../components/shared/fake-detail';
 import FakeList from '../components/shared/fake-list';
 import { fetchTopicDetailWithReplies } from '../actions/topic';
@@ -40,6 +41,8 @@ class TopicContainer extends Component {
       <div>
         <TopicDetail {...this.props} />
         <ReplyList {...this.props} />
+        <div style={{height: 46}}></div>
+        <ReplyActionBar />
       </div>
     );
   }
