@@ -3,13 +3,17 @@ import { connect } from 'react-redux';
 
 import TopicDetail from '../components/topic-container/topic-detail';
 import ReplyList from '../components/topic-container/reply-list';
-import FakeTopicDetail from '../components/topic-container/fake-topic-detail';
+import FakeDetail from '../components/shared/fake-detail';
+import FakeList from '../components/shared/fake-list';
 import { fetchTopicDetailWithReplies } from '../actions/topic';
 
 class TopicContainer extends Component {
 
   constructor(props) {
     super(props);
+    this.state = {
+      isLoading: false
+    };
   }
 
   componentDidMount() {
@@ -17,15 +21,23 @@ class TopicContainer extends Component {
 
     const { dispatch, params } = this.props;
     const topicId = params.topicId;
-    dispatch(fetchTopicDetailWithReplies(topicId));
+    this.setState({ isLoading: true });
+    dispatch(fetchTopicDetailWithReplies(topicId))
+      .then(() => {
+        this.setState({ isLoading: false });
+      });
   }
 
   render() {
-    const { params, entities } = this.props;
-    const topicDetail = entities.topics[params.topicId];
 
-    if (typeof topicDetail === 'undefined') {
-      return <FakeTopicDetail {...this.props} />;
+
+    if (this.state.isLoading) {
+      return (
+        <div>
+          <FakeDetail />
+          <FakeList count={2} />
+        </div>
+      );
     }
 
     return (

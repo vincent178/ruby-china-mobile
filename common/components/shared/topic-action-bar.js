@@ -70,7 +70,7 @@ export default class TopicActionBar extends Component {
 }
 
 TopicActionBar.propTypes = {
-  replyCount: PropTypes.number.required,
-  likeCount: PropTypes.number.required,
+  replyCount: PropTypes.number.isRequired,
+  likeCount: PropTypes.number.isRequired,
   viewCount: PropTypes.number
 };

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import UserAvatar from '../shared/user-avatar';
 import TopicActionBar from '../shared/topic-action-bar';
 import '../../assets/stylesheets/highlight.css';
-import './topic-detail.css';
+import styles from './topic-detail.css';
 
 export default class TopicDetail extends Component {
 
@@ -12,27 +12,27 @@ export default class TopicDetail extends Component {
     const user = entities.users[topic.user];
     const topicBodyHtml = {__html: topic.body_html};
     return (
-      <div className="topic-detail">
-        <div className="topic-header-container">
+      <div className={styles.topicDetail}>
+        <div className={styles.topicHeaderContainer}>
 
           <UserAvatar size={48} radius={5}
                       src={user.avatar_url}
                       userId={user.id} />
 
-          <div className="topic-main">
-            <div className="topic-info">
-              <span className="topic-node">{topic.node_name}</span>
-              <span className="topic-login">{`@${user.login}`}</span>
+          <div className={styles.topicMain}>
+            <div className={styles.topicInfo}>
+              <span className={styles.topicNode}>{topic.node_name}</span>
+              <span className={styles.topicLogin}>{`@${user.login}`}</span>
             </div>
-            <h1 className="topic-title">{topic.title}</h1>
+            <h1 className={styles.topicTitle}>{topic.title}</h1>
           </div>
         </div>
 
-        <div className="topic-detail-container">
+        <div className={styles.topicDetailBody}>
           <div dangerouslySetInnerHTML={topicBodyHtml} />
         </div>
 
-        <div className="topic-detail-action-bar">
+        <div className={styles.topicDetailActionBar}>
           <TopicActionBar replyCount={topic.replies_count} likeCount={topic.likes_count} />
         </div>
       </div>

@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 
 import TopicList from '../components/topics-container/topic-list';
 import NativeScroll from '../components/shared/native-scroll';
-import FakeTopicList from '../components/shared/fake-topic-list';
 import Spinner from '../components/shared/spinner';
+import FakeList from '../components/shared/fake-list';
 import { fetchTopics } from '../actions/topic';
 
 class TopicsContainer extends Component {
@@ -29,7 +29,7 @@ class TopicsContainer extends Component {
     const { topic, dispatch } = this.props;
 
     if (topic.items.length <= 10) {
-      return <FakeTopicList />;
+      return <FakeList />;
     }
 
     return (
