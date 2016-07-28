@@ -16,7 +16,7 @@ export default class ReplyList extends Component {
       const user = entities.users[reply.user];
 
       return <ReplyListItem {...this.props}
-            key={replyId + '-' + i}
+            key={`ReplyList-${reply.id}`}
             reply={reply}
             user={user} />;
     });
@@ -24,7 +24,7 @@ export default class ReplyList extends Component {
 
   render() {
     return (
-      <div style={{width: this.props.width}}>
+      <div>
         {this.renderReplyItems()}
       </div>
     )

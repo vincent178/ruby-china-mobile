@@ -1,3 +1,7 @@
+.topicDetail {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
 
 .topicDetail img {
     width: 100%;

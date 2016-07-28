@@ -7,6 +7,7 @@ import TopicDetailHeader from '../components/topic-container/topic-detail-header
 import FakeDetail from '../components/shared/fake-detail';
 import FakeList from '../components/shared/fake-list';
 import { fetchTopicDetailWithReplies } from '../actions/topic';
+import '../assets/stylesheets/highlight.css';
 
 class TopicContainer extends Component {
 

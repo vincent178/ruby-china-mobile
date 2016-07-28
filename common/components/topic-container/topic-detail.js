@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import UserAvatar from '../shared/user-avatar';
 import TopicActionBar from '../shared/topic-action-bar';
 import TopicDetailHeader from './topic-detail-header';
-import '../../assets/stylesheets/highlight.css';
 import styles from './topic-detail.css';
 
 

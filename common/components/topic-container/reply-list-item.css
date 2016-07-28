@@ -1,11 +1,40 @@
-.reply-list-item-container {
+.replyListItemContainer {
     margin-top: 9px;
-    padding-bottom: 9px;
+    padding: 0 12px 9px;
     display: flex;
     border-bottom: 1px solid #eee;
+    word-break: break-all;
+    white-space: pre-wrap;
 }
 
-.reply-main {
+.replyListItemContainer img {
+    width: 100%;
+}
+
+.replyListItemContainer span {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.replyListItemContainer code {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+
+.replyMain {
     margin-left: 12px;
     width: 90%;
+}
+
+.topicInfo {
+    display: flex;
+    font-size: 12px;
+    margin-bottom: 4px;
+}
+
+.topicLogin {
+    color: #666;
+    line-height: 16px;
+    margin-left: 4px;
 }
