@@ -9,7 +9,7 @@
 
 .fakeTopicDetailBodyInner {
     display: flex;
-    height: 336px;
+    height: 250px;
 
     flex-direction: column;
     justify-content: space-between;

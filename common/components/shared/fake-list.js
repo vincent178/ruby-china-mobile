@@ -12,7 +12,7 @@ export default class FakeList extends Component {
     let result = [];
     for (let i = 0; i < count; i++) {
       let fakeItem = (
-        <div className={styles.fakeTopicListContainer}>
+        <div className={styles.fakeTopicListContainer} key={`fake-list-key-${i}`}>
           <div className={styles.fakeAvatar}></div>
           <div className={styles.fakeTopicContent}>
             <div className={styles.fakeTopic1}></div>
