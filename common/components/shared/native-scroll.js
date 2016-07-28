@@ -49,8 +49,7 @@ export default class NativeScroll extends Component {
   }
 }
 
-NativeScroll.PropTypes = {
-  scrollFunc: PropTypes.func.isRequired,
-  children: PropTypes.object.isRequired
+NativeScroll.propTypes = {
+  scrollFunc: PropTypes.func.isRequired
 };
 

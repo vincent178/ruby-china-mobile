@@ -20,9 +20,8 @@ export default class UserAvatar extends Component {
   }
 }
 
-UserAvatar.PropTypes = {
-  width: PropTypes.number.isRequired,
-  height: PropTypes.number.isRequired,
-  borderRadius: PropTypes.number,
+UserAvatar.propTypes = {
+  size: PropTypes.number.isRequired,
+  radius: PropTypes.number,
   userId: PropTypes.number.isRequired
 };
