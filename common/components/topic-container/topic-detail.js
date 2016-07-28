@@ -1,35 +1,12 @@
-import React, {Component} from 'react';
-import { getTopic } from '../../actions/topic';
+import React, { Component } from 'react';
 import UserAvatar from '../shared/user-avatar';
 import TopicActionBar from '../shared/topic-action-bar';
-import Spinner from '../shared/spinner';
 import '../../assets/stylesheets/highlight.css';
 import './topic-detail.css';
 
 export default class TopicDetail extends Component {
 
-  constructor(props) {
-    super(props);
-    this.renderTopic = this.renderTopic.bind(this);
-  }
-
-  componentDidMount() {
-    const { dispatch, params, entities } =  this.props;
-    const topicId = params.topicId;
-    if (!entities.topics[topicId]) {
-      dispatch(getTopic(topicId));
-    }
-  }
-
-  renderSpinner() {
-    return (
-      <div className="topic-detail-spinner">
-        <Spinner />
-      </div>
-    )
-  }
-
-  renderTopic() {
+  render() {
     const { params, entities } = this.props;
     const topic = entities.topics[params.topicId];
     const user = entities.users[topic.user];
@@ -38,7 +15,9 @@ export default class TopicDetail extends Component {
       <div className="topic-detail">
         <div className="topic-header-container">
 
-          <UserAvatar size={48} radius={5} src={user.avatar_url} />
+          <UserAvatar size={48} radius={5}
+                      src={user.avatar_url}
+                      userId={user.id} />
 
           <div className="topic-main">
             <div className="topic-info">
@@ -50,7 +29,7 @@ export default class TopicDetail extends Component {
         </div>
 
         <div className="topic-detail-container">
-          { this.props.topic.isFetching ? this.renderSpinner() : <div dangerouslySetInnerHTML={topicBodyHtml} /> }
+          <div dangerouslySetInnerHTML={topicBodyHtml} />
         </div>
 
         <div className="topic-detail-action-bar">
@@ -58,9 +37,5 @@ export default class TopicDetail extends Component {
         </div>
       </div>
     );
-  }
-
-  render() {
-    return this.renderTopic();
   }
 }

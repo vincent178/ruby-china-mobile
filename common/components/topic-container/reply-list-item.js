@@ -9,7 +9,9 @@ export default class ReplyListItem extends Component {
 
     return (
       <div className="reply-list-item-container">
-        <UserAvatar size={48} radius={5} src={this.props.user.avatar_url} />
+        <UserAvatar size={48} radius={5}
+                    src={this.props.user.avatar_url}
+                    userId={this.props.user.id} />
         <div className="reply-main">
           <div className="topic-info">
             <span className="topic-login">{`@${this.props.user.login}`}</span>

@@ -40,3 +40,23 @@
     margin-top: 20px;
     background: white;
 }
+
+.topic-detail-heading {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+    background: #f9f9f9;
+}
+
+.topic-detail-body {
+    line-height: 1.8em;
+    font-size: 14px;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    padding: 15px;
+}
+
+.topic-detail-footer {
+
+}

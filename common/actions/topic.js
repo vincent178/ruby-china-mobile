@@ -13,7 +13,7 @@ function receiveTopics(entities, topics) {
   }
 }
 
-function receiveTopicReplies(entities, replies) {
+function receiveReplies(entities, replies) {
   return {
     type: types.RECEIVE_TOPIC_REPLIES,
     entities,
@@ -21,16 +21,52 @@ function receiveTopicReplies(entities, replies) {
   }
 }
 
-export function getTopicReplies(id, offset, limit) {
-  return dispatch => {
-    dispatch(requestTopicReplies());
-    return fetch(address.topicReplies(id, offset, limit))
+export function fetchTopics(offset, limit, type) {
+  return (dispatch) => {
+    return fetch(address.topics(offset, limit, type))
       .then(res => res.json())
       .then(data => {
-        const normalized = normalize(data.replies, arrayOf(replySchema));
-        dispatch(receiveTopicReplies(normalized.entities, normalized.result));
+        const topics = data.topics;
+        const normalized = normalize(topics, arrayOf(topicSchema));
+        dispatch(receiveTopics(normalized.entities, normalized.result));
       })
-      .catch(e => console.log(e));
+      .catch((error) => { return {error: error.message} })
+  };
+}
+
+export function fetchTopicDetail(id) {
+  return (dispatch) => {
+    return fetch(address.topic(id))
+      .then(res => res.json())
+      .then( topicPayload => {
+        if (topicPayload && topicPayload.topic) {
+          const normalized = normalize([topicPayload.topic], arrayOf(topicSchema));
+          dispatch(receiveTopics(normalized.entities, normalized.result));
+        }
+      });
+  };
+}
+
+export function fetchTopicReplies(id, offset, limit) {
+  return (dispatch) => {
+    return fetch(address.topicReplies(id, offset, limit))
+      .then(res => res.json())
+      .then( replyPayload => {
+        if (replyPayload && replyPayload.replies && replyPayload.replies.length > 0) {
+          const normalized = normalize(replyPayload.replies, arrayOf(replySchema));
+          dispatch(receiveReplies(normalized.entities, normalized.result));
+        }
+      });
+  };
+}
+
+export function fetchTopicDetailWithReplies(id) {
+  return (dispatch) => {
+    return Promise.all([
+        dispatch(fetchTopicDetail(id)),
+        dispatch(fetchTopicReplies(id))
+      ])
+      .catch( e => console.log(e.message));
   }
 }
 
@@ -55,21 +91,5 @@ export function postTopicReply(id, body) {
       .catch(e => console.log(e));
 
   }
-}
-
-export function fetchTopics(offset, limit, type) {
-  return (dispatch) => {
-    return fetch(address.topics(offset, limit, type))
-      .then(res => res.json())
-      .then(data => {
-        const topics = data.topics;
-        const normalized = normalize(topics, arrayOf(topicSchema));
-        dispatch(receiveTopics(normalized.entities, normalized.result));
-      })
-      .catch((error) => { return {error: error.message} })
-  };
-}
-
-export function fetchTopicDetail() {
 }
 

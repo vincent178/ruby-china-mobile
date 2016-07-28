@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes
+} from 'react';
 import Items from '../../constants/items';
 import styles from "./topic-action-bar.css";
 
@@ -65,3 +68,9 @@ export default class TopicActionBar extends Component {
     );
   }
 }
+
+TopicActionBar.propTypes = {
+  replyCount: PropTypes.number.required,
+  likeCount: PropTypes.number.required,
+  viewCount: PropTypes.number
+};
