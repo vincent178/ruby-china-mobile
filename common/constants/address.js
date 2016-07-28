@@ -4,13 +4,6 @@ import Items from '../constants/items';
 
 const BASE_URL = 'https://ruby-china.org/api/v3';
 
-//const TOPIC_PARAMS = {
-//  type: ["last_actived", "recent", "no_reply", "popular", "excellent"],
-//  node_id: 1,
-//  offset: 0,
-//  limit: 20
-//};
-
 function addressFactory(url, params: {}, accessToken) {
   let paramsStr = "";
 
@@ -21,13 +14,12 @@ function addressFactory(url, params: {}, accessToken) {
     }
   }
 
-  if (typeof accessToken === 'undefined') {
-    return `${url}?${paramsStr}`;
-  } else {
+  if (accessToken && typeof accessToken=== 'string') {
     return `${url}?access_token=${accessToken}${paramsStr}`;
+  } else {
+    return `${url}?${paramsStr}`;
   }
 }
-
 const address = {
 
   topics: (offset = 0, limit = 20, type = "last_actived", accessToken) => {
@@ -42,14 +34,16 @@ const address = {
     return addressFactory(`${BASE_URL}/topics/${id}/replies.json`, {offset: offset, limit: limit}, accessToken);
   },
 
+  replyTopic: (id, accessToken) => {
+    return addressFactory(`${BASE_URL}/topics/${id}/replies.json`, {}, accessToken)
+  },
+
+  replyReply: (id, accessToken) => {
+    // 暂时没有回复reply的api
+  },
+
   login: () => {
-    let url = "";
-    if (DEVELOPMENT) {
-      url = `http://localhost:9292/oauth/access_token`;
-    } else {
-      url = `http://ruby.gtispace.cc/oauth/access_token`;
-    }
-    return addressFactory(url, {}, undefined);
+    return addressFactory("/oauth/access_token", {}, null);
   }
 };
 

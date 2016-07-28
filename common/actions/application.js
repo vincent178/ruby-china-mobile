@@ -50,6 +50,7 @@ export function getUserToken(username, password) {
     return fetch(address.login(), {
       method: 'POST',
       headers: {
+        'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({grant_type: "password", username: username, password: password})
@@ -71,12 +72,6 @@ export function getUserToken(username, password) {
         let query = getQueryParams(window.location.search);
         browserHistory.push(query.next);
       });
-  }
-}
-
-export function dismissError() {
-  return {
-    type: types.DISMISS_ERROR
   }
 }
 
@@ -106,6 +101,25 @@ export function refreshUserToken(refresh_token) {
     .catch(e => {
       dispatch(receiveTokenError(e));
     })
+  }
+}
+
+
+export function changeWidthAndHeight(width, height) {
+  return {
+    type: types.CHANGE_WIDTH_AND_HEIGHT,
+    width,
+    height
+  }
+}
+
+export function initEnvironment() {
+
+  return dispatch => {
+    dispatch(changeWidthAndHeight(window.innerWidth, window.innerHeight));
+    window.onresize = () => {
+      dispatch(changeWidthAndHeight(window.innerWidth, window.innerHeight));
+    }
   }
 }
 

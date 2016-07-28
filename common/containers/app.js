@@ -7,7 +7,6 @@ import React, {
 import { connect } from 'react-redux';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
-import { initEnvironment } from '../actions/environment';
 import NavigationBar from '../components/app/navigation-bar';
 import '../assets/stylesheets/global.css';
 
@@ -17,11 +16,6 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(initEnvironment());
   }
 
   render() {
