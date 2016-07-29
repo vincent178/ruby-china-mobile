@@ -19,13 +19,13 @@ router.use((req, res) => {
     }
 
     if (redirectLocation) {
-      res.rediect(302, redirectLocation.pathname + redirectLocation.search);
+      res.redirect(302, redirectLocation.pathname + redirectLocation.search);
     }
 
     if (renderProps) {
       res.status(200).end(createPage(renderProps));
     } else {
-      res.staus(404).send('Not Found');
+      res.status(404).send('Not Found');
     }
   });
 
