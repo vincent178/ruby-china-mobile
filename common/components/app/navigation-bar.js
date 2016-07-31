@@ -56,19 +56,19 @@ export default class NavigationBar extends React.Component {
         <div className={tabItemClass(Items.TOPIC_TAB)}
              onTouchTap={this.handleTouchTap.bind(this, "/")}>
           <span>
-            <i className="fa fa-comments" />Topics
+            <i className="fa fa-comments" />社区
           </span>
         </div>
         <div className={tabItemClass(Items.NOTIFICATION_TAB)}
              onTouchTap={this.handleTouchTap.bind(this, "/notifications")}>
           <span>
-            <i className="fa fa-bell"/>Notification
+            <i className="fa fa-bell"/>通知
           </span>
         </div>
         <div className={tabItemClass(Items.ME_TAB)}
              onTouchTap={this.handleTouchTap.bind(this, "/me")}>
           <span>
-            <i className="fa fa-user"/>Me
+            <i className="fa fa-user"/>个人
           </span>
         </div>
       </div>

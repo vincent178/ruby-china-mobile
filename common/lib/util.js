@@ -1,5 +1,7 @@
 'use strict';
 
+import { browserHistory } from 'react-router';
+
 export function timeSince(date) {
   const seconds = Math.floor((new Date()) - date) / 1000;
 
@@ -58,10 +60,19 @@ export function retrieveToken() {
   }
 }
 
-export function saveToken(oAuth) {
-  localStorage.setItem('accessToken', oAuth.accessToken);
-  localStorage.setItem('refreshToken', oAuth.refreshToken);
-  localStorage.setItem('expiresAt', oAuth.expiresAt);
+export function saveToken(data) {
+  localStorage.setItem('accessToken', data.access_token);
+  localStorage.setItem('refreshToken', data.refresh_token);
+  localStorage.setItem('expiresAt', (data.expires_in + data.created_at) * 1000);
 }
 
+export function checkLoginAndTokenValid() {
+  const { accessToken, expiresAt } = retrieveToken();
+
+  if (accessToken.length > 0) {
+    return Date.now() < expiresAt - 5 * 60 * 1000;
+  } else {
+    browserHistory.push(`/login?next=${window.location.pathname}`);
+  }
+}
 
