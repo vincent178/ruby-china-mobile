@@ -23,7 +23,6 @@ export default function applicationReducer(state = initialState, action) {
       });
     case actionTypes.RECEIVE_USER_TOKEN:
       return Object.assign({}, state, {
-        isRequestToken: false,
         accessToken: action.accessToken,
         refreshToken: action.refreshToken,
         expiresAt: action.expiresAt

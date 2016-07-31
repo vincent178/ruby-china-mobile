@@ -1,6 +1,7 @@
 'use strict';
 
 import 'isomorphic-fetch';
+import { browserHistory } from 'react-router';
 import * as types from '../constants/action-types';
 import Items from '../constants/items';
 import address from '../constants/address';
@@ -59,7 +60,7 @@ export function initEnvironment() {
 }
 
 export function fetchUserToken(username, password) {
-  return dispatch => {
+  return () => {
     return fetch("/oauth/access_token", {
       method: "POST",
       headers: {
@@ -73,6 +74,8 @@ export function fetchUserToken(username, password) {
           return { error: data["error_description"] };
         } else {
           saveToken(data);
+          let params = getQueryParams(window.location.search);
+          browserHistory.push(params.next);
         }
       })
       .catch(e => {
