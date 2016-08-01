@@ -34,10 +34,4 @@ App.propTypes = {
   dispatch: PropTypes.func.isRequired
 };
 
-function mapStateToProps(state) {
-  return {
-    selectedTab: state.application.selectedTab
-  }
-}
-
-export default connect(mapStateToProps)(App);
+export default connect()(App);

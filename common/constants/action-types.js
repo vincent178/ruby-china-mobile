@@ -1,7 +1,6 @@
 'use strict';
 
 export const CHANGE_WIDTH_AND_HEIGHT = 'CHANGE_WIDTH_AND_HEIGHT';
-export const CHANGE_TAB = 'CHANGE_TAB';
 export const TRACK_SCROLL_POSITION = 'TRACK_SCROLL_POSITION';
 
 

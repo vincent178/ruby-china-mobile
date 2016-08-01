@@ -7,13 +7,6 @@ import Items from '../constants/items';
 import address from '../constants/address';
 import { saveToken, getQueryParams } from '../lib/util';
 
-export function changeTab(selectedTab) {
-  return {
-    type: types.CHANGE_TAB,
-    selectedTab
-  }
-}
-
 export function trackScrollPosition(scrollPosition) {
   return {
     type: types.TRACK_SCROLL_POSITION,

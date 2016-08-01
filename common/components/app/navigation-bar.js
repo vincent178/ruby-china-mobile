@@ -1,87 +1,35 @@
 import React from 'react';
-import Items from '../../constants/items';
-import { changeTab } from '../../actions/application';
-import { browserHistory } from 'react-router';
-import { isLoginOrRedirect } from '../../lib/util';
-import items from '../../constants/items';
+import { Link } from 'react-router';
 import styles from './navigation-bar.css';
 
 export default class NavigationBar extends React.Component {
 
-  componentDidMount() {
-    const { dispatch } = this.props;
-    dispatch(changeTab(items.TOPIC_TAB));
-  }
+  renderSubNav(path, icon, text) {
+    let classNames = styles.tabItemContainer;
 
-  componentWillReceiveProps(nextProps) {
-    const { dispatch } = this.props;
-    let path = nextProps.location.basename;
-    if (nextProps.location.pathname && nextProps.location.pathname !== "/") {
-      path += nextProps.location.pathname;
+    if (this.props.location.pathname === path) {
+      classNames = `${styles.tabItemContainer} ${styles.selected}`;
     }
-    dispatch(changeTab(this.pathToTab(path)));
-  }
 
-  handleTouchTap(path, e) {
-    e.preventDefault();
-    browserHistory.push(path);
-    const { dispatch } = this.props;
-    const tab = this.pathToTab(path);
-
-    if (tab === Items.NOTIFICATION_TAB || tab === Items.ME_TAB) {
-      isLoginOrRedirect();
-    }
-    dispatch(changeTab(this.pathToTab(path)));
-  }
-
-  pathToTab(path) {
-    switch (path) {
-      case "/notifications":
-        return Items.NOTIFICATION_TAB;
-      case "/me":
-        return Items.ME_TAB;
-      default:
-        return Items.TOPIC_TAB;
-    }
+    return (
+      <Link to={path}>
+        <div className={classNames}>
+              <span>
+                <i className={icon} />
+                { text }
+              </span>
+        </div>
+      </Link>
+    );
   }
 
   render() {
 
-    const { selectedTab } = this.props;
-
-    function currentTabClass() {
-      if ()
-
-    }
-
-    function tabItemClass(tab) {
-      if (tab === selectedTab) {
-        return `${styles.tabItemContainer} ${styles.selected}`;
-      }
-
-      return styles.tabItemContainer;
-    }
-
     return (
       <div className={styles.tabBar}>
-        <div className={tabItemClass(Items.TOPIC_TAB)}
-             onTouchTap={this.handleTouchTap.bind(this, "/")}>
-          <span>
-            <i className="fa fa-comments" />社区
-          </span>
-        </div>
-        <div className={tabItemClass(Items.NOTIFICATION_TAB)}
-             onTouchTap={this.handleTouchTap.bind(this, "/notifications")}>
-          <span>
-            <i className="fa fa-bell"/>通知
-          </span>
-        </div>
-        <div className={tabItemClass(Items.ME_TAB)}
-             onTouchTap={this.handleTouchTap.bind(this, "/me")}>
-          <span>
-            <i className="fa fa-user"/>个人
-          </span>
-        </div>
+        { this.renderSubNav.bind(this)("/", "fa fa-comments", "社区") }
+        { this.renderSubNav.bind(this)("/notifications", "fa fa-bell", "通知") }
+        { this.renderSubNav.bind(this)("/me", "fa fa-user", "个人") }
       </div>
     );
   }
