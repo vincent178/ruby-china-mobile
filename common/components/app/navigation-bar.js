@@ -2,6 +2,7 @@ import React from 'react';
 import Items from '../../constants/items';
 import { changeTab } from '../../actions/application';
 import { browserHistory } from 'react-router';
+import { isLoginOrRedirect } from '../../lib/util';
 import items from '../../constants/items';
 import styles from './navigation-bar.css';
 
@@ -25,6 +26,11 @@ export default class NavigationBar extends React.Component {
     e.preventDefault();
     browserHistory.push(path);
     const { dispatch } = this.props;
+    const tab = this.pathToTab(path);
+
+    if (tab === Items.NOTIFICATION_TAB || tab === Items.ME_TAB) {
+      isLoginOrRedirect();
+    }
     dispatch(changeTab(this.pathToTab(path)));
   }
 
@@ -42,6 +48,11 @@ export default class NavigationBar extends React.Component {
   render() {
 
     const { selectedTab } = this.props;
+
+    function currentTabClass() {
+      if ()
+
+    }
 
     function tabItemClass(tab) {
       if (tab === selectedTab) {

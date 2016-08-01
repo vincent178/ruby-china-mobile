@@ -66,6 +66,13 @@ export function saveToken(data) {
   localStorage.setItem('expiresAt', (data.expires_in + data.created_at) * 1000);
 }
 
+export function isLoginOrRedirect() {
+  const { accessToken } = retrieveToken();
+  if (accessToken.length === 0) {
+    browserHistory.push(`/login?next=${window.location.pathname}`);
+  }
+}
+
 export function checkLoginAndTokenValid() {
   const { accessToken, expiresAt } = retrieveToken();
 

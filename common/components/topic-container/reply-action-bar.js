@@ -1,21 +1,32 @@
 import React, { Component } from 'react';
 
-import { checkLoginAndTokenValid } from '../../lib/util';
+import { isLoginOrRedirect } from '../../lib/util';
+import { refreshUserToken } from '../../actions/application';
+import SpinnerCircle from '../shared/spinner-circle';
 import styles from './reply-action-bar.css';
 
 export default class ReplyActionBar extends Component {
 
-  handleClick(e) {
-    if (checkLoginAndTokenValid()) {
-      console.log("let's go");
-    }
+  constructor(props) {
+    super(props);
+    this.state = { isLoading: false };
+  }
+
+  handleReply(e) {
+    this.setState({ isLoading: true });
   }
 
   render() {
     return (
-      <div className={styles.replyActionBarContainer} onClick={this.handleClick.bind(this)}>
+      <div className={styles.replyActionBarContainer} onClick={isLoginOrRedirect}>
         <div type="text" size="30" className={styles.replyHint} contentEditable="true"></div>
-        <div className={styles.replyButton}>回复</div>
+        <div className={styles.replyButton} onClick={this.handleReply.bind(this)}>
+          {
+            this.state.isLoading ?
+              <SpinnerCircle width={20} color={'#9E9E9E'} /> :
+              "回复"
+          }
+        </div>
       </div>
     );
   }

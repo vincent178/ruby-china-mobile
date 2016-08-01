@@ -12,16 +12,7 @@
     stroke-dashoffset: 0;
     transform-origin: center;
     animation:
-    dash 1.4s ease-in-out infinite,
-    colors 5.6s ease-in-out infinite;
-}
-
-@keyframes colors {
-    0% { stroke: white; }
-    25% { stroke: white; }
-    50% { stroke: white; }
-    75% { stroke: white; }
-    100% { stroke: white; }
+    dash 1.4s ease-in-out infinite;
 }
 
 @keyframes dash {

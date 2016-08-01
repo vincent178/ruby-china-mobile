@@ -21,15 +21,6 @@ export function trackScrollPosition(scrollPosition) {
   }
 }
 
-function receiveUserToken(oAuth) {
-  return {
-    type: types.RECEIVE_USER_TOKEN,
-    accessToken: oAuth.accessToken,
-    refreshToken: oAuth.refreshToken,
-    expiresAt: oAuth.expiresAt
-  }
-}
-
 export function initApplication() {
   const OAuth = retrieveToken();
   if (OAuth.accessToken.length === 0) {
@@ -37,9 +28,6 @@ export function initApplication() {
   }
   return receiveUserToken(OAuth);
 }
-
-
-
 
 export function changeWidthAndHeight(width, height) {
   return {
@@ -85,33 +73,28 @@ export function fetchUserToken(username, password) {
 }
 
 
-export function refreshUserToken(refreshToken) {
-  return dispatch => {
+export function refreshUserToken() {
+  return () => {
     return fetch(address.refreshToken(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({grant_type: "refresh_token", refresh_token: refreshToken})
+      body: JSON.stringify({grant_type: "refresh_token", refresh_token: localStorage.getItem('refreshToken')})
     })
     .then(res => res.json())
     .then(data => {
       if (data) {
         if (data.error) {
-
           return { error: data["error_description"] };
-        } else if (data.OAuth) {
-
-          saveToken(data.OAuth);
-          dispatch(receiveUserToken(data.OAuth));
+        } else {
+          saveToken(data);
           return {};
         }
-
         return { error: " 111 fuck going here" };
       }
     })
     .catch(e => {
-
       return { error: e.message };
     })
   }

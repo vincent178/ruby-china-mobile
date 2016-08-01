@@ -5,10 +5,7 @@ import * as actionTypes from '../constants/action-types';
 
 const initialState = {
   selectedTab: "",
-  position: 0,
-  accessToken: "",
-  refreshToken: "",
-  expiresAt: ""
+  position: 0
 };
 
 export default function applicationReducer(state = initialState, action) {
@@ -20,12 +17,6 @@ export default function applicationReducer(state = initialState, action) {
     case actionTypes.TRACK_SCROLL_POSITION:
       return Object.assign({}, state, {
         position: action.position
-      });
-    case actionTypes.RECEIVE_USER_TOKEN:
-      return Object.assign({}, state, {
-        accessToken: action.accessToken,
-        refreshToken: action.refreshToken,
-        expiresAt: action.expiresAt
       });
     default:
       return state;

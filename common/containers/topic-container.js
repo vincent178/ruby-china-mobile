@@ -42,7 +42,7 @@ class TopicContainer extends Component {
         <TopicDetail {...this.props} />
         <ReplyList {...this.props} />
         <div style={{height: 46}}></div>
-        <ReplyActionBar />
+        <ReplyActionBar {...this.props} />
       </div>
     );
   }
