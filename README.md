@@ -7,13 +7,12 @@ Ruby China mobile
 ### Development progress
 - [x] topic list page
 - [x] router navigation
-- [ ] topic detail page
+- [x] topic detail page
 - [x] backend server for oauth
 - [ ] running in production
-- [ ] profile page
-- [ ] login page
+- [ ] profile/me page
+- [x] login page
 - [ ] reply, follow, like... actions
-- [ ] me page
 - [ ] notification page
 - [ ] server side rendering
 - [ ] animations !important
