@@ -17,23 +17,23 @@ function addressFactory(url, params) {
   }
 
   if (accessToken.length > 0) {
-    return `${url}?access_token=${accessToken}${paramsStr}`;
+    return `${BASE_URL}/${url}?access_token=${accessToken}${paramsStr}`;
   } else {
-    return `${url}?${paramsStr}`;
+    return `${BASE_URL}/${url}?${paramsStr}`;
   }
 }
 const address = {
 
   topics: (offset = 0, limit = 20, type = "last_actived") => {
-    return addressFactory(`${BASE_URL}/topics.json`, {type: type, offset: offset, limit: limit});
+    return addressFactory('topics.json', {type: type, offset: offset, limit: limit});
   },
 
   topic: (id) => {
-    return addressFactory(`${BASE_URL}/topics/${id}.json`);
+    return addressFactory(`topics/${id}.json`);
   },
 
   topicReplies: (id, offset = 0, limit = 20) => {
-    return addressFactory(`${BASE_URL}/topics/${id}/replies.json`, {offset: offset, limit: limit});
+    return addressFactory(`topics/${id}/replies.json`, {offset: offset, limit: limit});
   },
 
   token: () => {
@@ -41,7 +41,11 @@ const address = {
   },
 
   notifications: (offset = 0, limit = 20) => {
-    return addressFactory(`${BASE_URL}/notifications.json`, {offset: offset, limit: limit});
+    return addressFactory('notifications.json', {offset: offset, limit: limit});
+  },
+
+  me: () => {
+    return addressFactory('me.json');
   }
 
 };

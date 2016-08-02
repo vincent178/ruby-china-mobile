@@ -1,6 +1,14 @@
 import React, { Component } from 'react';
 
-export default class ProfileContainer extends Component {
+class ProfileContainer extends Component {
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
+    const pathname = this.props.route.location.pathname;
+
+    if (pathname === 'me') {
+    }
+  }
 
   render() {
     return (
@@ -10,3 +18,17 @@ export default class ProfileContainer extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+
+  const { entities, topic, reply } = state;
+  return {
+    topic,
+    reply,
+    entities
+  }
+}
+
+export default connect(mapStateToProps)(ProfileContainer);
+
+
