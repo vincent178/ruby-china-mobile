@@ -2,7 +2,7 @@ import * as types from '../constants/action-types';
 import 'isomorphic-fetch';
 import { normalize, arrayOf } from 'normalizr';
 
-import address from '../constants/address';
+import address from '../lib/address';
 import { topicSchema, replySchema } from '../constants/schema';
 
 function receiveTopics(entities, topics) {

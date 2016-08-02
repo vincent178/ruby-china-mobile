@@ -3,7 +3,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 
 import App from '../containers/app';
 import TopicsContainer from '../containers/topics-container';
-import NotificationContainer from '../containers/topic-container';
+import NotificationContainer from '../containers/notification-container';
 import MeContainer from '../containers/me-container';
 import TopicContainer from '../containers/topic-container';
 import LoginContainer from '../containers/login-container';

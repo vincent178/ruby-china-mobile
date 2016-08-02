@@ -4,7 +4,7 @@ import 'isomorphic-fetch';
 import { browserHistory } from 'react-router';
 import * as types from '../constants/action-types';
 import Items from '../constants/items';
-import address from '../constants/address';
+import address from '../lib/address';
 import { saveToken, getQueryParams } from '../lib/util';
 
 export function trackScrollPosition(scrollPosition) {

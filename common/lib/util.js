@@ -73,7 +73,7 @@ export function isLoginOrRedirect() {
   }
 }
 
-export function checkLoginAndTokenValid() {
+export function isValidLoginOrRedirect() {
   const { accessToken, expiresAt } = retrieveToken();
 
   if (accessToken.length > 0) {
