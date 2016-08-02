@@ -13,7 +13,7 @@ Ruby China mobile
 - [ ] profile/me page
 - [x] login page
 - [ ] reply, follow, like... actions
-- [ ] notification page
+- [x] notification page
 - [ ] server side rendering
 - [ ] animations !important
 
