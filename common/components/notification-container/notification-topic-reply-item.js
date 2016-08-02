@@ -3,11 +3,30 @@ import React, {
   PropTypes
 } from 'react';
 
+import { Link } from 'react-router';
+import UserAvatar from '../shared/user-avatar';
+import styles from './notification-topic-reply-item.css';
+
 
 export default class NotificationTopicReplyItem extends Component {
 
   render() {
-    return <div>NotificationTopicReplyItem</div>;
+    const { actor, topic, reply } = this.props;
+    return (
+      <div className={styles.topicReplyItemContainer}>
+        <UserAvatar
+          size={32}
+          radius={4}
+          src={actor.avatar_url}
+          userId={actor.id} />
+        <div className={styles.topicReplyItemDetails}>
+          <div className={styles.topicReplyItemInfo}>
+            在帖子 <Link to={`/topics/${topic.id}`}>{topic.title}</Link> 回复了
+          </div>
+          <div className={styles.topicReplyItemContent} dangerouslySetInnerHTML={{__html: reply.body_html}} />
+        </div>
+      </div>
+    );
   }
 }
 

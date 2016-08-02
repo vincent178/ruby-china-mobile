@@ -1,0 +1,26 @@
+
+.topicReplyItemContainer {
+    padding: 9px 12px;
+    display: flex;
+
+    border-bottom: 1px solid #eee;
+}
+
+.topicReplyItemDetails {
+    margin-left: 12px;
+}
+
+.topicReplyItemInfo {
+    font-weight: bold;
+    font-size: 0.875rem;
+    margin-bottom: 5px;
+}
+
+.topicReplyItemInfo a {
+    text-decoration: underline;
+}
+
+.topicReplyItemContent {
+    font-size: 0.8125rem;
+    line-height: 1rem;
+}

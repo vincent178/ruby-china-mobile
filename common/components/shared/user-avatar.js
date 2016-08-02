@@ -22,6 +22,7 @@ export default class UserAvatar extends Component {
 
 UserAvatar.propTypes = {
   size: PropTypes.number.isRequired,
+  src: PropTypes.string.isRequired,
   radius: PropTypes.number,
   userId: PropTypes.number.isRequired
 };
