@@ -14,7 +14,9 @@ reply.define({
 });
 
 notification.define({
-  user: user
+  actor: user,
+  topic: topic,
+  reply: reply
 });
 
 export const topicSchema = topic;

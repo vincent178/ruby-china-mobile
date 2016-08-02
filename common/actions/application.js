@@ -42,12 +42,16 @@ export function initEnvironment() {
 
 export function fetchUserToken(username, password) {
   return () => {
-    return fetch("/oauth/access_token", {
+    return fetch(address.token(), {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({grantType: "password", username: username, password: password})
+      body: JSON.stringify({
+        grantType: "password",
+        username: username,
+        password: password
+      })
     })
       .then(res => res.json())
       .then(data => {
@@ -68,12 +72,15 @@ export function fetchUserToken(username, password) {
 
 export function refreshUserToken() {
   return () => {
-    return fetch(address.refreshToken(), {
+    return fetch(address.token(), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({grant_type: "refresh_token", refresh_token: localStorage.getItem('refreshToken')})
+      body: JSON.stringify({
+        grantType: "refresh_token",
+        refreshToken: localStorage.getItem('refreshToken')
+      })
     })
     .then(res => res.json())
     .then(data => {
@@ -84,8 +91,8 @@ export function refreshUserToken() {
           saveToken(data);
           return {};
         }
-        return { error: " 111 fuck going here" };
       }
+      return { error: " 111 fuck going here" };
     })
     .catch(e => {
       return { error: e.message };

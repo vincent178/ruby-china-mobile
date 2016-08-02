@@ -33,12 +33,17 @@ const address = {
   },
 
   topicReplies: (id, offset = 0, limit = 20) => {
-    return addressFactory(`${BASE_URL}/topics/${id}/replies.json`, {offset: offset, limit: limit}, accessToken);
+    return addressFactory(`${BASE_URL}/topics/${id}/replies.json`, {offset: offset, limit: limit});
   },
 
-  login: () => {
-    return addressFactory("/oauth/access_token");
+  token: () => {
+    return "/oauth/access_token";
+  },
+
+  notifications: (offset = 0, limit = 20) => {
+    return addressFactory(`${BASE_URL}/notifications.json`, {offset: offset, limit: limit});
   }
+
 };
 
 export default address;

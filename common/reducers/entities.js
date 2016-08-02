@@ -4,7 +4,8 @@ import { merge } from 'lodash/object';
 
 const initialState = {
   topics: {},
-  users: {}
+  users: {},
+  notifications: {}
 };
 
 export default function entities(state = initialState, action) {

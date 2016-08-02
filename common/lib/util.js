@@ -70,6 +70,7 @@ export function isLoginOrRedirect() {
   const { accessToken } = retrieveToken();
   if (accessToken.length === 0) {
     browserHistory.push(`/login?next=${window.location.pathname}`);
+    return false;
   }
 }
 
@@ -80,6 +81,7 @@ export function isValidLoginOrRedirect() {
     return Date.now() < expiresAt - 5 * 60 * 1000;
   } else {
     browserHistory.push(`/login?next=${window.location.pathname}`);
+    return false;
   }
 }
 
