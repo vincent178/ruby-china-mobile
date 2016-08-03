@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import ProfileUserDetails from '../components/profile-container/profile-user-details';
 import ProfileNavigation from '../components/profile-container/profile-navigation';
 import ProfileTopicList from '../components/profile-container/profile-topic-list';
 import ProfileReplyList from '../components/profile-container/profile-reply-list';
 import ProfileUserList from '../components/profile-container/profile-user-list';
+import { retrieveToken, isValidLoginOrRedirect } from '../lib/util';
+import { refreshAccessToken } from '../actions/application';
+import { fetchUserProfile } from '../actions/user';
 
 class ProfileContainer extends Component {
 
@@ -18,11 +22,25 @@ class ProfileContainer extends Component {
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
-    debugger;
-    const { location: { pathname }, dispatch } = this.props;
+    const { dispatch } = this.props;
+    const { username } = retrieveToken();
 
-    if (pathname === '/me') {
+    window.scrollTo(0, 0);
+    this.setState({ isLoading: true });
+    if (!isValidLoginOrRedirect()) {
+      dispatch(refreshAccessToken())
+        .then( result => {
+          if (result.error) {
+            browserHistory.push('/login');
+          }
+          dispatch(fetchUserProfile(username)).then(() => {
+            this.setState({ isLoading: false });
+          });
+        });
+    } else {
+      dispatch(fetchUserProfile(username)).then(() => {
+        this.setState({ isLoading: false });
+      });
     }
   }
 
