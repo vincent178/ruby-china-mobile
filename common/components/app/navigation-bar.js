@@ -29,7 +29,7 @@ export default class NavigationBar extends React.Component {
       <div className={styles.tabBar}>
         { this.renderSubNav.bind(this)("/", "fa fa-comments", "社区") }
         { this.renderSubNav.bind(this)("/notifications", "fa fa-bell", "通知") }
-        { this.renderSubNav.bind(this)("/me", "fa fa-user", "个人") }
+        { this.renderSubNav.bind(this)("/me", "fa fa-user", "我") }
       </div>
     );
   }
