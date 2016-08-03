@@ -1,5 +1,5 @@
-import * as types from '../constants/action-types';
 import 'isomorphic-fetch';
+import * as types from '../constants/action-types';
 import { normalize, arrayOf } from 'normalizr';
 
 import address from '../lib/address';

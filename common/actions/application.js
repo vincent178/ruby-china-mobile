@@ -1,9 +1,6 @@
-'use strict';
-
 import 'isomorphic-fetch';
 import { browserHistory } from 'react-router';
 import * as types from '../constants/action-types';
-import Items from '../constants/items';
 import address from '../lib/address';
 import { saveToken, getQueryParams } from '../lib/util';
 
@@ -40,7 +37,7 @@ export function initEnvironment() {
   }
 }
 
-export function fetchUserToken(username, password) {
+export function fetchAccessToken(username, password) {
   return () => {
     return fetch(address.token(), {
       method: "POST",
@@ -70,7 +67,7 @@ export function fetchUserToken(username, password) {
 }
 
 
-export function refreshUserToken() {
+export function refreshAccessToken() {
   return () => {
     return fetch(address.token(), {
       method: 'POST',
@@ -99,3 +96,5 @@ export function refreshUserToken() {
     })
   }
 }
+
+

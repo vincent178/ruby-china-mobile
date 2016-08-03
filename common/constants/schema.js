@@ -1,4 +1,4 @@
-import {Schema} from 'normalizr';
+import { Schema, arrayOf } from 'normalizr';
 
 const topic = new Schema('topics');
 const user = new Schema('users');
@@ -19,6 +19,13 @@ notification.define({
   reply: reply
 });
 
+user.define({
+  topics: arrayOf(topic),
+  replies: arrayOf(reply),
+  followers: arrayOf(user)
+});
+
 export const topicSchema = topic;
+export const userSchema = user;
 export const replySchema = reply;
 export const notificationSchema = notification;

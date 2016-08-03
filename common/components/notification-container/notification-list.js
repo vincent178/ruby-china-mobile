@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import { isValidLoginOrRedirect } from '../../lib/util';
-import { refreshUserToken } from '../../actions/application';
+import { refreshAccessToken } from '../../actions/application';
 import items from '../../constants/items';
 import NotificationMentionItem from './notification-mention-item';
 import NotificationTopicReplyItem from './notification-topic-reply-item';

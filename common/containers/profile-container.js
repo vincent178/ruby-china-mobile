@@ -11,14 +11,18 @@ class ProfileContainer extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { selectedTab: 'topic' }
+    this.state = {
+      selectedTab: 'topic',
+      isLoading: false
+    }
   }
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    const pathname = this.props.route.location.pathname;
+    debugger;
+    const { location: { pathname }, dispatch } = this.props;
 
-    if (pathname === 'me') {
+    if (pathname === '/me') {
     }
   }
 

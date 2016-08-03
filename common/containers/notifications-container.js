@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
 import { isValidLoginOrRedirect } from '../lib/util';
-import { refreshUserToken } from '../actions/application';
+import { refreshAccessToken } from '../actions/application';
 import { fetchNotifications } from '../actions/notification';
 import NotificationList from '../components/notification-container/notification-list';
 import FakeList from '../components/shared/fake-list';
@@ -23,7 +23,7 @@ class NotificationsContainer extends Component {
     window.scrollTo(0, 0);
     this.setState({ isLoading: true });
     if (!isValidLoginOrRedirect()) {
-      dispatch(refreshUserToken())
+      dispatch(refreshAccessToken())
         .then( result => {
           if (result.error) {
             console.log(`[NotificationList] error ${result.error}`);

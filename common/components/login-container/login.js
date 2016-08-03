@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { fetchUserToken } from '../../actions/application';
+import { fetchAccessToken } from '../../actions/application';
 import Items from '../../constants/items';
 import SpinnerCircle from '../shared/spinner-circle';
 import styles from './login.css';
@@ -24,7 +24,7 @@ export default class Login extends Component {
     if (this.state.isSubmitting === false && this.validateParams(this.username || "", this.password || ""))  {
       const { dispatch } = this.props;
       this.setState({ isSubmitting: true });
-      dispatch(fetchUserToken(this.username, this.password))
+      dispatch(fetchAccessToken(this.username, this.password))
         .then( res => {
 
           this.password = "";

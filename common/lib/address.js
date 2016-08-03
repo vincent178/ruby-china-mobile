@@ -46,8 +46,27 @@ const address = {
 
   me: () => {
     return addressFactory('me.json');
-  }
+  },
 
+  user: (userId) => {
+    return addressFactory(`users/${userId}.json`);
+  },
+
+  userTopics: (userId) => {
+    return addressFactory(`users/${userId}/topics.json`);
+  },
+
+  userReplies: (userId) => {
+    return addressFactory(`users/${userId}/replies.json`);
+  },
+
+  userFollowers: (userId) => {
+    return addressFactory(`users/${userId}/followers.json`);
+  },
+
+  userFollow: (userId) => {
+    return addressFactory(`users/${userId}/follow.json`);
+  }
 };
 
 export default address;
