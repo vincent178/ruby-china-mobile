@@ -16,8 +16,7 @@ export function receiveUsers(entities, users) {
 export function fetchUserProfile(userId) {
 
   return (dispatch) => {
-    let endPoint = userId ? address.user(userId) : address.me();
-    return fetch(endPoint)
+    return fetch(address.user(userId))
       .then(res => res.json())
       .then(data => {
         if (data) {
@@ -28,7 +27,7 @@ export function fetchUserProfile(userId) {
           } else if (data.user) {
 
             const normalized = normalize([data.user], arrayOf(userSchema));
-            dispatch(receiveUsers(normalized.entities));
+            dispatch(receiveUsers(normalized.entities, normalized.result));
           }
           return { error: "fetch user error" };
         }

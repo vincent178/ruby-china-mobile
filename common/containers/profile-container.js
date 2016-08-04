@@ -17,12 +17,13 @@ class ProfileContainer extends Component {
     super(props);
     this.state = {
       selectedTab: 'topic',
-      isLoading: false
+      isLoading: false,
+      user: null
     }
   }
 
   componentDidMount() {
-    const { dispatch } = this.props;
+    const { dispatch, entities } = this.props;
     const { username } = retrieveToken();
 
     window.scrollTo(0, 0);
@@ -34,12 +35,19 @@ class ProfileContainer extends Component {
             browserHistory.push('/login');
           }
           dispatch(fetchUserProfile(username)).then(() => {
-            this.setState({ isLoading: false });
+            debugger;
+            this.setState({
+              isLoading: false,
+              user: entities.users[username]
+            });
           });
         });
     } else {
       dispatch(fetchUserProfile(username)).then(() => {
-        this.setState({ isLoading: false });
+        this.setState({
+          isLoading: false,
+          user: entities.users[username]
+        });
       });
     }
   }
@@ -63,22 +71,28 @@ class ProfileContainer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <ProfileUserDetails />
-        <ProfileNavigation />
-        { this.renderProfileList.bind(this)() }
-      </div>
-    );
+
+    if (this.state.user) {
+      return (
+        <div>
+          <ProfileUserDetails user={this.state.user} />
+          <ProfileNavigation />
+          { this.renderProfileList.bind(this)() }
+        </div>
+      );
+    } else {
+      return (<div>wait</div>);
+    }
   }
 }
 
 function mapStateToProps(state) {
 
-  const { entities, topic, reply } = state;
+  const { entities, topic, reply, user } = state;
   return {
     topic,
     reply,
+    user,
     entities
   }
 }
