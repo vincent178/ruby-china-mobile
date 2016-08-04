@@ -6,6 +6,8 @@ import ProfileNavigation from '../components/profile-container/profile-navigatio
 import ProfileTopicList from '../components/profile-container/profile-topic-list';
 import ProfileReplyList from '../components/profile-container/profile-reply-list';
 import ProfileUserList from '../components/profile-container/profile-user-list';
+import { getToken } from '../lib/util';
+import { fetchUserProfile } from '../actions/user';
 
 class ProfileContainer extends Component {
 
@@ -19,11 +21,12 @@ class ProfileContainer extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    debugger;
-    const { location: { pathname }, dispatch } = this.props;
 
-    if (pathname === '/me') {
-    }
+    const { dispatch } = this.props;
+    const { username } = getToken();
+
+    this.setState({ isLoading: true });
+    dispatch(fetchUserProfile(username));
   }
 
   renderProfileList() {
@@ -57,10 +60,11 @@ class ProfileContainer extends Component {
 
 function mapStateToProps(state) {
 
-  const { entities, topic, reply } = state;
+  const { entities, topic, reply, user } = state;
   return {
     topic,
     reply,
+    user,
     entities
   }
 }

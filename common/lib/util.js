@@ -51,7 +51,7 @@ export function getQueryParams(qs) {
   return params;
 }
 
-export function retrieveToken() {
+export function getToken() {
   return {
     accessToken: localStorage.getItem('accessToken') || '',
     refreshToken: localStorage.getItem('refreshToken') || '',
@@ -67,7 +67,7 @@ export function saveToken(data) {
 }
 
 export function isLoginOrRedirect() {
-  const { accessToken } = retrieveToken();
+  const { accessToken } = getToken();
   if (accessToken.length === 0) {
     browserHistory.push(`/login?next=${window.location.pathname}`);
     return false;
@@ -75,7 +75,7 @@ export function isLoginOrRedirect() {
 }
 
 export function isValidLoginOrRedirect() {
-  const { accessToken, expiresAt } = retrieveToken();
+  const { accessToken, expiresAt } = getToken();
 
   if (accessToken.length > 0) {
     return Date.now() < expiresAt - 5 * 60 * 1000;

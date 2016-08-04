@@ -1,10 +1,10 @@
 'use strict';
 
-import { retrieveToken } from './util';
+import { getToken } from './util';
 const BASE_URL = 'https://ruby-china.org/api/v3';
 
 function addressFactory(url, params) {
-  let { accessToken } = retrieveToken();
+  let { accessToken } = getToken();
   let paramsStr = "";
 
   if (params) {
@@ -45,7 +45,7 @@ const address = {
   },
 
   me: () => {
-    return addressFactory('me.json');
+    return addressFactory('users/me.json');
   },
 
   user: (userId) => {
