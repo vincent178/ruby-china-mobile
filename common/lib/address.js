@@ -64,7 +64,7 @@ const address = {
     return addressFactory(`users/${userId}/followers.json`);
   },
 
-  userFollow: (userId) => {
+  userFollowing: (userId) => {
     return addressFactory(`users/${userId}/follow.json`);
   }
 };

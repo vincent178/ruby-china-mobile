@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { browserHistory } from 'react-router';
 
 import ProfileUserDetails from '../components/profile-container/profile-user-details';
 import ProfileNavigation from '../components/profile-container/profile-navigation';
 import ProfileTopicList from '../components/profile-container/profile-topic-list';
 import ProfileReplyList from '../components/profile-container/profile-reply-list';
 import ProfileUserList from '../components/profile-container/profile-user-list';
-import { getToken } from '../lib/util';
+import { getToken, isValidLoginOrRedirect } from '../lib/util';
+import { refreshAccessToken } from '../actions/application';
 import { fetchUserProfile } from '../actions/user';
 
 class ProfileContainer extends Component {
@@ -15,18 +17,40 @@ class ProfileContainer extends Component {
     super(props);
     this.state = {
       selectedTab: 'topic',
-      isLoading: false
+      isLoading: false,
+      user: null
     }
   }
 
   componentDidMount() {
-    window.scrollTo(0, 0);
 
-    const { dispatch } = this.props;
+    const { dispatch, entities } = this.props;
     const { username } = getToken();
 
+    window.scrollTo(0, 0);
     this.setState({ isLoading: true });
-    dispatch(fetchUserProfile(username));
+    if (!isValidLoginOrRedirect()) {
+      dispatch(refreshAccessToken())
+        .then( result => {
+          if (result.error) {
+            browserHistory.push('/login');
+          }
+          dispatch(fetchUserProfile(username)).then(() => {
+            debugger;
+            this.setState({
+              isLoading: false,
+              user: entities.users[username]
+            });
+          });
+        });
+    } else {
+      dispatch(fetchUserProfile(username)).then(() => {
+        this.setState({
+          isLoading: false,
+          user: entities.users[username]
+        });
+      });
+    }
   }
 
   renderProfileList() {
@@ -48,13 +72,18 @@ class ProfileContainer extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <ProfileUserDetails />
-        <ProfileNavigation />
-        { this.renderProfileList.bind(this)() }
-      </div>
-    );
+
+    if (this.state.user) {
+      return (
+        <div>
+          <ProfileUserDetails user={this.state.user} />
+          <ProfileNavigation />
+          { this.renderProfileList.bind(this)() }
+        </div>
+      );
+    } else {
+      return (<div>wait</div>);
+    }
   }
 }
 

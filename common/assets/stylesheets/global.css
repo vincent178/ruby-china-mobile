@@ -46,6 +46,10 @@ input {
     font-size: 14px;
 }
 
+img {
+    vertical-align: middle;
+}
+
 :global(.container) {
     width: 100%;
     height: 100%;

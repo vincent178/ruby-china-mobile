@@ -53,6 +53,7 @@ export function getQueryParams(qs) {
 
 export function getToken() {
   return {
+    username: localStorage.getItem('username') || '',
     accessToken: localStorage.getItem('accessToken') || '',
     refreshToken: localStorage.getItem('refreshToken') || '',
     expiresAt: localStorage.getItem('expiresAt') || ''
@@ -60,24 +61,27 @@ export function getToken() {
   }
 }
 
-export function saveToken(data) {
+export function saveToken(data, username) {
+  if ( username && username.length > 0 ) {
+    localStorage.setItem('username', username);
+  }
   localStorage.setItem('accessToken', data.access_token);
   localStorage.setItem('refreshToken', data.refresh_token);
   localStorage.setItem('expiresAt', (data.expires_in + data.created_at) * 1000);
 }
 
 export function isLoginOrRedirect() {
-  const { accessToken } = getToken();
-  if (accessToken.length === 0) {
+  const { username, accessToken } = getToken();
+  if (accessToken.length === 0 || username.length === 0) {
     browserHistory.push(`/login?next=${window.location.pathname}`);
     return false;
   }
 }
 
 export function isValidLoginOrRedirect() {
-  const { accessToken, expiresAt } = getToken();
+  const { username, accessToken, expiresAt } = getToken();
 
-  if (accessToken.length > 0) {
+  if (accessToken.length > 0 && username.length > 0) {
     return Date.now() < expiresAt - 5 * 60 * 1000;
   } else {
     browserHistory.push(`/login?next=${window.location.pathname}`);
