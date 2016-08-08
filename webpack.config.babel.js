@@ -3,6 +3,7 @@ import qs from 'querystring';
 import autoprefixer from 'autoprefixer';
 import postcssImport from 'postcss-import';
 import postcssVariable from 'postcss-custom-properties';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const cssLoaderQuery = qs.stringify({
   modules: true,
@@ -26,14 +27,14 @@ export default {
 
   output: {
     path: `${__dirname}/public`,
-    filename: 'bundle.js'
+    filename: 'app.js'
   },
 
   module: {
     loaders: [
       {
         test: /\.css$/,
-        loaders: ['style', `css?${cssLoaderQuery}`, 'postcss']
+        loader: ExtractTextPlugin.extract('style', `css?${cssLoaderQuery}`, 'postcss')
       },
 
       {
@@ -57,6 +58,7 @@ export default {
     new webpack.DefinePlugin({
       'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
     }),
+    new ExtractTextPlugin('app.css', { allChunks: true }),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
