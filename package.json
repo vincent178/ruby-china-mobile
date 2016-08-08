@@ -21,7 +21,6 @@
     "history": "^3.0.0",
     "isomorphic-fetch": "^2.2.1",
     "lodash": "^4.5.1",
-    "material-ui": "^0.15.2",
     "method-override": "^2.3.6",
     "node-uuid": "1.4.7",
     "normalizr": "^2.0.0",
