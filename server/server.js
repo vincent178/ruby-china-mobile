@@ -31,7 +31,7 @@ app.disable('x-powerd-by');
 app.use(router);
 app.use(ssr);
 
-const server = app.listen(process.env.PORT || 4000, () => {
+const server = app.listen(process.env.PORT || 8888, () => {
   const { port } = server.address();
   console.info(`环境 -> ${process.env.NODE_ENV}`);
   console.info(`地址 -> http://localhost:${port}`);

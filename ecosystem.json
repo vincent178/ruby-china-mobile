@@ -1,23 +1,23 @@
 {
-  apps : [
+  "apps" : [
 
     {
-      name      : "ruby-china-mobile",
-      script    : "server",
-      env_production : {
-        NODE_ENV: "production"
+      "name"      : "ruby-china-mobile",
+      "script"    : "server",
+      "env_production" : {
+        "NODE_ENV": "production"
       }
     }
   ],
 
-  deploy : {
-    production : {
-      user : "node",
-      host : "212.83.163.1",
-      ref  : "origin/master",
-      repo : "https://github.com/vincent178/ruby-china-mobile",
-      path : "/var/www/production",
-      "post-deploy" : "npm install && pm2 startOrRestart ecosystem.json --env production"
+  "deploy" : {
+    "production" : {
+      "user" : "deploy",
+      "host" : "139.196.182.86",
+      "ref"  : "origin/master",
+      "repo" : "https://github.com/vincent178/ruby-china-mobile",
+      "path" : "/home/deploy",
+      "post-deploy" : "npm install && && npm build && pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }
