@@ -7,7 +7,8 @@
     "dev": "NODE_ENV=development nodemon --exec node server",
     "debug": "NODE_ENV=debug nodemon --exec devtool server",
     "build": "NODE_ENV=production webpack",
-    "production": "NODE_ENV=production node server"
+    "production": "NODE_ENV=production node server",
+    "deploy": "pm2 deploy ecosystem.json production"
   },
   "author": "vincent.007.cn@gmail.com",
   "license": "MIT",
