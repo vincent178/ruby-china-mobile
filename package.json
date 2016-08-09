@@ -1,8 +1,7 @@
 {
-  "name": "gt",
+  "name": "ruby-china-mobile",
   "version": "0.0.1",
-  "description": "",
-  "private": true,
+  "description": "Ruby-China site remake version with cutting edge frontend tech like React, Redux, isomorphic-app",
   "main": "index.js",
   "scripts": {
     "dev": "NODE_ENV=development nodemon --exec node server",
