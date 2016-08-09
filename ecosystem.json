@@ -16,8 +16,8 @@
       "host" : "139.196.182.86",
       "ref"  : "origin/master",
       "repo" : "https://github.com/vincent178/ruby-china-mobile",
-      "path" : "/home/deploy",
-      "post-deploy" : "pwd"
+      "path" : "/home/deploy/ruby-china-mobile",
+      "post-deploy" : "source ~/.bashrc && node -v && npm install --no-optional && npm build && pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }
