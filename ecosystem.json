@@ -17,7 +17,7 @@
       "ref"  : "origin/master",
       "repo" : "https://github.com/vincent178/ruby-china-mobile",
       "path" : "/home/deploy",
-      "post-deploy" : "/home/deploy/.nvm/versions/node/v6.3.0/bin/npm install --no-optional && /home/deploy/.nvm/versions/node/v6.3.0/bin/npm build && pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy" : "pwd"
     }
   }
 }
