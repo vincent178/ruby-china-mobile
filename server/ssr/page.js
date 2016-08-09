@@ -25,8 +25,7 @@ const createPage = (content = '', state = {}) => {
   `;
 };
 
-export default(renderProps) => {
-  const store = createStore();
+export default(store, renderProps) => {
   const content = renderToString(
     <Provider store={store}>
       <RouterContext {...renderProps} />

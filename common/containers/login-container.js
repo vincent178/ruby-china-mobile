@@ -2,8 +2,16 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import Login from '../components/login-container/login';
+import { fetchTopics } from '../actions/topic';
 
 export default class LoginContainer extends Component {
+
+  componentDidMount() {
+    const { dispatch } = this.props;
+
+    LoginContainer.fetchData(dispatch);
+  }
+
   render() {
     return <Login {...this.props} />;
   }
@@ -17,6 +25,10 @@ function mapStateToProps(state) {
     application
   }
 }
+
+LoginContainer.fetchData = (dispatch) => {
+  return dispatch(fetchTopics());
+};
 
 export default connect(mapStateToProps)(LoginContainer);
 

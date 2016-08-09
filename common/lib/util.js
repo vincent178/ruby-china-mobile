@@ -52,13 +52,14 @@ export function getQueryParams(qs) {
 }
 
 export function getToken() {
-  return {
-    username: localStorage.getItem('username') || '',
-    accessToken: localStorage.getItem('accessToken') || '',
-    refreshToken: localStorage.getItem('refreshToken') || '',
-    expiresAt: localStorage.getItem('expiresAt') || ''
-
-  }
+  return ['username', 'accessToken', 'refreshToken', 'expiresAt'].reduce((result, current) => {
+    if ( typeof localStorage !== 'undefined' && localStorage.getItem(current)) {
+      result[current] = localStorage.getItem(current);
+    } else {
+      result[current] = "";
+    }
+    return result;
+  }, {});
 }
 
 export function saveToken(data, username) {
