@@ -17,7 +17,7 @@
       "ref"  : "origin/master",
       "repo" : "https://github.com/vincent178/ruby-china-mobile",
       "path" : "/home/deploy",
-      "post-deploy" : "npm install && npm build && pm2 startOrRestart ecosystem.json --env production"
+      "post-deploy" : "npm install --no-optional && npm build && pm2 startOrRestart ecosystem.json --env production"
     }
   }
 }
