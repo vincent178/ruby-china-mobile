@@ -30,10 +30,14 @@ router.use((req, res) => {
 
       renderProps.components
         .filter( component => typeof component !== 'undefined' && component.fetchData )
-        .map( component => component.fetchData(store.dispatch) )
-        .then(() => {
-          res.status(200).end(createPage(store, renderProps));
+        .map( component => {
+          component.fetchData(store.dispatch)
+            .then(() => {
+              console.log(store);
+              res.status(200).end(createPage(store, renderProps));
+            })
         })
+
     } else {
       res.status(404).send('Not Found');
     }
