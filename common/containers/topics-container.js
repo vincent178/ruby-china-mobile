@@ -15,7 +15,7 @@ class TopicsContainer extends Component {
     window.scrollTo(0, application.position);
 
     if (topic.items.length <= 10) {
-      dispatch(fetchTopics())
+      TopicsContainer.fetchData(dispatch)
         .then((res) => {
           if (res && res.error) {
             console.log(`[TopicsContainer] error: ${res.error}`);
@@ -42,6 +42,10 @@ class TopicsContainer extends Component {
     );
   }
 }
+
+TopicsContainer.fetchData = (dispatch) => {
+  return dispatch(fetchTopics())
+};
 
 function mapStateToProps(state) {
 
