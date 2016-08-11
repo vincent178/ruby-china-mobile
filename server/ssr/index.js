@@ -28,12 +28,13 @@ router.use((req, res) => {
 
       const store = createStore();
 
+      console.log(renderProps);
       renderProps.components
         .slice(-1)
         .map( component => {
 
           if (typeof component !== 'undefined' && component.fetchData ) {
-            component.fetchData(store.dispatch)
+            component.fetchData(store.dispatch, renderProps.params)
               .then(() => {
                 res.status(200).end(createPage(store, renderProps));
               })

@@ -23,9 +23,8 @@ class TopicContainer extends Component {
     window.scrollTo(0, 0);
 
     const { dispatch, params } = this.props;
-    const topicId = params.topicId;
     this.setState({ isLoading: true });
-    dispatch(fetchTopicDetailWithReplies(topicId))
+    TopicContainer.fetchData(dispatch, params)
       .then(() => {
         this.setState({ isLoading: false });
       });
@@ -72,6 +71,11 @@ class TopicContainer extends Component {
     );
   }
 }
+
+TopicContainer.fetchData = (dispatch, params) => {
+  const topicId = params.topicId;
+  return dispatch(fetchTopicDetailWithReplies(topicId))
+};
 
 function mapStateToProps(state) {
 
