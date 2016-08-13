@@ -2,6 +2,16 @@ import React, { Component, PropTypes } from 'react';
 
 export default class NativeScroll extends Component {
 
+  componentDidMount() {
+    document.addEventListener('scroll', this.handleScroll.bind(this), false);
+    document.addEventListener('touchMove', this.handleTouchMove.bind(this), false);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this.handleScroll.bind(this));
+    document.removeEventListener('touchMove', this.handleTouchMove.bind(this));
+  }
+
   getScrollXY() {
     var scrOfX = 0, scrOfY = 0;
     if( typeof( window.pageYOffset ) == 'number' ) {
@@ -30,6 +40,7 @@ export default class NativeScroll extends Component {
   }
 
   handleScroll() {
+
     if (this.getScrollXY()[1] >=  this.getDocHeight() - window.innerHeight - 100) {
       console.log("[NativeScroll] this.props.dispatch(this.props.scrollFunc())");
       this.props.scrollFunc();

@@ -36,7 +36,6 @@ class ProfileContainer extends Component {
             browserHistory.push('/login');
           }
           dispatch(fetchUserProfile(username)).then(() => {
-            debugger;
             this.setState({
               isLoading: false,
               user: entities.users[username]

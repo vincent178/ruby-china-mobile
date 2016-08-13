@@ -28,7 +28,6 @@ router.use((req, res) => {
 
       const store = createStore();
 
-      console.log(renderProps);
       renderProps.components
         .slice(-1)
         .map( component => {
