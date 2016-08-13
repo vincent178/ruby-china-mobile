@@ -1,0 +1,11 @@
+.spinnerContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 12px auto;
+}
+
+.spinnerDiv {
+    width: 32px;
+    margin: 8px auto;
+}

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 
 import TopicList from '../components/topics-container/topic-list';
 import NativeScroll from '../components/shared/native-scroll';
-import Spinner from '../components/shared/spinner';
 import FakeList from '../components/shared/fake-list';
 import { fetchTopics } from '../actions/topic';
 
@@ -36,7 +35,6 @@ class TopicsContainer extends Component {
       <NativeScroll
         scrollFunc={() => dispatch(fetchTopics(topic.items.length))}>
         <TopicList {...this.props} />
-        <Spinner />
       </NativeScroll>
     );
   }
