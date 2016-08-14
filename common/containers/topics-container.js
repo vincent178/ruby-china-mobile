@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import TopicList from '../components/topics-container/topic-list';
 import NativeScroll from '../components/shared/native-scroll';
 import FakeList from '../components/shared/fake-list';
-import { fetchTopics } from '../actions/topic';
+import { getTopics } from '../actions/topic';
 
 class TopicsContainer extends Component {
 
@@ -33,7 +33,7 @@ class TopicsContainer extends Component {
 
     return (
       <NativeScroll
-        scrollFunc={() => dispatch(fetchTopics(topic.items.length))}>
+        scrollFunc={() => dispatch(getTopics(topic.items.length))}>
         <TopicList {...this.props} />
       </NativeScroll>
     );
@@ -41,7 +41,7 @@ class TopicsContainer extends Component {
 }
 
 TopicsContainer.fetchData = (dispatch) => {
-  return dispatch(fetchTopics())
+  return dispatch(getTopics())
 };
 
 function mapStateToProps(state) {

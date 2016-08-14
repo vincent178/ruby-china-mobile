@@ -21,7 +21,15 @@ function receiveReplies(entities, replies) {
   }
 }
 
-export function fetchTopics(offset, limit, type) {
+function receiveMoreReplies(entities, replies) {
+  return {
+    type: types.RECEIVE_MORE_TOPIC_REPLIES,
+    entities,
+    replies
+  }
+}
+
+export function getTopics(offset, limit, type) {
   return (dispatch) => {
     return fetch(address.topics(offset, limit, type))
       .then(res => res.json())
@@ -34,20 +42,21 @@ export function fetchTopics(offset, limit, type) {
   };
 }
 
-export function fetchTopicDetail(id) {
+export function getTopicDetail(id) {
   return (dispatch) => {
     return fetch(address.topic(id))
       .then(res => res.json())
       .then( topicPayload => {
         if (topicPayload && topicPayload.topic) {
           const normalized = normalize([topicPayload.topic], arrayOf(topicSchema));
+          console.log(normalized.entities);
           dispatch(receiveTopics(normalized.entities, normalized.result));
         }
       });
   };
 }
 
-export function fetchTopicReplies(id, offset, limit) {
+export function getTopicReplies(id, offset, limit) {
   return (dispatch) => {
     return fetch(address.topicReplies(id, offset, limit))
       .then(res => res.json())
@@ -60,14 +69,27 @@ export function fetchTopicReplies(id, offset, limit) {
   };
 }
 
-export function fetchTopicDetailWithReplies(id) {
+export function getTopicDetailWithReplies(id) {
   return (dispatch) => {
     return Promise.all([
-        dispatch(fetchTopicDetail(id)),
-        dispatch(fetchTopicReplies(id))
+        dispatch(getTopicDetail(id)),
+        dispatch(getTopicReplies(id))
       ])
       .catch( e => console.log(e.message));
   }
+}
+
+export function getMoreTopicReplies(id, offset, limit) {
+  return dispatch => {
+    return fetch(address.topicReplies(id, offset, limit))
+      .then(res => res.json())
+      .then( replyPayload => {
+        if (replyPayload && replyPayload.replies && replyPayload.replies.length > 0) {
+          const normalized = normalize(replyPayload.replies, arrayOf(replySchema));
+          dispatch(receiveMoreReplies(normalized.entities, normalized.result));
+        }
+      });
+  };
 }
 
 export function postTopicReply(id, body) {
