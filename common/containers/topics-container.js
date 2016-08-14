@@ -8,9 +8,17 @@ import { getTopics } from '../actions/topic';
 
 class TopicsContainer extends Component {
 
-  componentDidMount() {
-    const { dispatch, topic, application } = this.props;
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoading: false,
+      isLoadingMore: false
+    }
+  }
 
+  componentDidMount() {
+
+    const { dispatch, topic, application } = this.props;
     window.scrollTo(0, application.position);
 
     if (topic.items.length <= 10) {
@@ -33,7 +41,10 @@ class TopicsContainer extends Component {
 
     return (
       <NativeScroll
-        scrollFunc={() => dispatch(getTopics(topic.items.length))}>
+        scrollFunc={() => {
+          debugger;
+          return dispatch(getTopics(topic.items.length))}
+        }>
         <TopicList {...this.props} />
       </NativeScroll>
     );

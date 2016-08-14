@@ -4,10 +4,12 @@ import { connect } from 'react-redux';
 import TopicDetail from '../components/topic-container/topic-detail';
 import ReplyList from '../components/topic-container/reply-list';
 import TopicDetailHeader from '../components/topic-container/topic-detail-header';
+import NativeScroll from '../components/shared/native-scroll';
 import ReplyActionBar from '../components/topic-container/reply-action-bar';
 import FakeDetail from '../components/shared/fake-detail';
 import FakeList from '../components/shared/fake-list';
-import { fetchTopicDetailWithReplies } from '../actions/topic';
+import SpinnerCircle from '../components/shared/spinner-circle';
+import { getTopicDetailWithReplies, getMoreTopicReplies } from '../actions/topic';
 import '../assets/stylesheets/highlight.css';
 
 class TopicContainer extends Component {
@@ -36,10 +38,21 @@ class TopicContainer extends Component {
       return this.renderFakeOrPartial.bind(this)();
     }
 
+    const { params, entities, dispatch, reply } = this.props;
+    const topicId = params.topicId;
+    let topic = entities.topics[topicId];
+
     return (
       <div>
+
         <TopicDetail {...this.props} />
+
         <ReplyList {...this.props} />
+
+        { topic['replies_count'] > reply.items.length
+          ? <SpinnerCircle width={30} color={"rgb(102, 117, 127)"} />
+          : null }
+
         <div style={{height: 46}}></div>
         <ReplyActionBar {...this.props} />
       </div>
@@ -74,7 +87,7 @@ class TopicContainer extends Component {
 
 TopicContainer.fetchData = (dispatch, params) => {
   const topicId = params.topicId;
-  return dispatch(fetchTopicDetailWithReplies(topicId))
+  return dispatch(getTopicDetailWithReplies(topicId))
 };
 
 function mapStateToProps(state) {

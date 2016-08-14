@@ -8,6 +8,7 @@ export default class NativeScroll extends Component {
   }
 
   componentWillUnmount() {
+    debugger;
     document.removeEventListener('scroll', this.handleScroll.bind(this));
     document.removeEventListener('touchMove', this.handleTouchMove.bind(this));
   }
@@ -41,9 +42,11 @@ export default class NativeScroll extends Component {
 
   handleScroll() {
 
-    if (this.getScrollXY()[1] >=  this.getDocHeight() - window.innerHeight - 100) {
+    if (this.getScrollXY()[1] >=  this.getDocHeight() - window.innerHeight - 100 + 46) {
+
       console.log("[NativeScroll] this.props.dispatch(this.props.scrollFunc())");
       this.props.scrollFunc();
+
     }
   }
 
@@ -53,7 +56,7 @@ export default class NativeScroll extends Component {
 
   render() {
     return (
-      <div onTouchMove={this.handleTouchMove.bind(this)} onScroll={this.handleScroll.bind(this)}>
+      <div>
         {this.props.children}
       </div>
     );
@@ -61,6 +64,7 @@ export default class NativeScroll extends Component {
 }
 
 NativeScroll.propTypes = {
-  scrollFunc: PropTypes.func.isRequired
+  scrollFunc: PropTypes.func.isRequired,
+  stop: PropTypes.boolean
 };
 

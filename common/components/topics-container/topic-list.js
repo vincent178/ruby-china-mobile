@@ -29,6 +29,7 @@ export default class TopicList extends Component {
     return (
       <div>
         { this.renderTopicItems.bind(this)() }
+
         <div className={style.spinerContainer} >
           <div className={style.spinnerDiv}>
             <SpinnerCircle width={30} color={"rgb(102, 117, 127)"} />
