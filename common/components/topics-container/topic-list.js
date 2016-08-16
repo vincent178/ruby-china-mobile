@@ -2,9 +2,14 @@ import React, { Component } from 'react';
 
 import TopicListItem from './topic-list-item';
 import SpinnerCircle from '../shared/spinner-circle';
-import style from './topic-list.css';
 
 export default class TopicList extends Component {
+
+  constructor(props) {
+
+    super(props);
+    this.renderTopicItems = this.renderTopicItems.bind(this);
+  }
 
   renderTopicItems() {
     const { topic, entities } = this.props;
@@ -28,13 +33,7 @@ export default class TopicList extends Component {
   render() {
     return (
       <div>
-        { this.renderTopicItems.bind(this)() }
-
-        <div className={style.spinerContainer} >
-          <div className={style.spinnerDiv}>
-            <SpinnerCircle width={30} color={"rgb(102, 117, 127)"} />
-          </div>
-        </div>
+        { this.renderTopicItems() }
       </div>
     );
   }

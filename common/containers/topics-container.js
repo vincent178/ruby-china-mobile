@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import TopicList from '../components/topics-container/topic-list';
 import NativeScroll from '../components/shared/native-scroll';
 import FakeList from '../components/shared/fake-list';
+import SpinnerCircle from '../components/shared/spinner-circle';
 import { getTopics } from '../actions/topic';
 import { detectScrollEnd } from '../lib/scroll';
 
@@ -61,7 +62,12 @@ class TopicsContainer extends Component {
       return <FakeList />;
     }
 
-    return <TopicList {...this.props} />;
+    return (
+      <div>
+        <TopicList {...this.props} />
+        <SpinnerCircle width={30} color={"rgb(102, 117, 127)"} />
+      </div>
+    );
   }
 }
 
