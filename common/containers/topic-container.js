@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import TopicDetail from '../components/topic-container/topic-detail';
-import ReplyList from '../components/topic-container/reply-list';
-import TopicDetailHeader from '../components/topic-container/topic-detail-header';
-import NativeScroll from '../components/shared/native-scroll';
-import ReplyActionBar from '../components/topic-container/reply-action-bar';
-import FakeDetail from '../components/shared/fake-detail';
-import FakeList from '../components/shared/fake-list';
-import SpinnerCircle from '../components/shared/spinner-circle';
+import TopicDetailWithReplies from '../components/topic-container/topic-detail-with-replies';
+import Spinner from '../components/shared/spinner';
 import { getTopicDetailWithReplies, getMoreTopicReplies } from '../actions/topic';
 import { detectScrollEnd } from '../lib/scroll';
 import '../assets/stylesheets/highlight.css';
@@ -62,54 +56,23 @@ class TopicContainer extends Component {
 
   render() {
 
-    if (this.state.isLoading) {
-      return this.renderFakeOrPartial.bind(this)();
+    const { params, entities } = this.props;
+    let topic = entities.topics[params.topicId];
+    let isLoading = this.state.isLoading;
+    let isLoadingPartial = false;
+
+    if (topic && topic.user && entities.users[topic.user]) {
+      // 已经有部分数据了, 就看全局在不在加载
+      // 全局加载 => true
+      // 部分加载 => false
+      isLoadingPartial = isLoading && true;
     }
 
-    const { params, entities, dispatch, reply } = this.props;
-    const topicId = params.topicId;
-    let topic = entities.topics[topicId];
-
-    return (
-      <div>
-
-        <TopicDetail {...this.props} />
-
-        <ReplyList {...this.props} />
-
-        { topic['replies_count'] > reply.items.length
-          ? <SpinnerCircle width={30} color={"rgb(102, 117, 127)"} />
-          : null }
-
-        <div style={{height: 46}}></div>
-        <ReplyActionBar {...this.props} />
-      </div>
-    );
-  }
-
-  renderFakeOrPartial() {
-    let loadedPartial = false;
-    let user, topic;
-    const { entities, params } = this.props;
-    const topicId = params.topicId;
-    topic = entities.topics[topicId];
-    if (topic && topic.user) {
-      user = entities.users[topic.user];
-      if (user) {
-        loadedPartial = true;
-      }
+    if (isLoading && !isLoadingPartial) {
+      return <Spinner />;
     }
-    return (
-      <div>
-        {
-          loadedPartial ?
-            <TopicDetailHeader user={user} topic={topic} /> :
-            <FakeList count={1} />
-        }
-        <FakeDetail />
-        <FakeList count={2} />
-      </div>
-    );
+
+    return <TopicDetailWithReplies {...this.props} isLoadingPartial={ isLoadingPartial } />;
   }
 }
 

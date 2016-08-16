@@ -2,7 +2,7 @@ import React, {
   Component,
   PropTypes
 } from 'react';
-import style from './spinner-circle.css';
+import styles from './spinner-circle.css';
 
 export default class SpinnerCircle extends React.Component {
 
@@ -11,10 +11,10 @@ export default class SpinnerCircle extends React.Component {
     let width = this.props.width;
 
     return (
-      <div className={style.spinerContainer} >
-        <div className={style.spinnerDiv}>
-          <svg className={style.spinner} width={`${width}px`} height={`${width}px`} viewBox="0 0 66 66">
-            <circle className={style.path}
+      <div className={styles.spinerContainer} >
+        <div className={styles.spinnerDiv}>
+          <svg className={styles.spinner} width={`${width}px`} height={`${width}px`} viewBox="0 0 66 66">
+            <circle className={styles.path}
                     fill="none"
                     strokeWidth="6"
                     strokeLinecap="round"
