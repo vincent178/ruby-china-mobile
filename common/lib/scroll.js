@@ -1,5 +1,4 @@
-
-export function getScrollXY() {
+function getScrollXY() {
   var scrOfX = 0, scrOfY = 0;
   if( typeof( window.pageYOffset ) == 'number' ) {
     //Netscape compliant
@@ -18,7 +17,7 @@ export function getScrollXY() {
 }
 
 
-export function getDocHeight() {
+function getDocHeight() {
   var D = document;
   return Math.max(
     D.body.scrollHeight, D.documentElement.scrollHeight,
@@ -26,3 +25,8 @@ export function getDocHeight() {
     D.body.clientHeight, D.documentElement.clientHeight
   );
 }
+
+export function detectScrollEnd() {
+  return getScrollXY()[1] >= getDocHeight() - window.innerHeight - 60;
+}
+

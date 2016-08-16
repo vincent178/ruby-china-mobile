@@ -5,11 +5,13 @@ import TopicList from '../components/topics-container/topic-list';
 import NativeScroll from '../components/shared/native-scroll';
 import FakeList from '../components/shared/fake-list';
 import { getTopics } from '../actions/topic';
+import { detectScrollEnd } from '../lib/scroll';
 
 class TopicsContainer extends Component {
 
   constructor(props) {
     super(props);
+    this.loadMoreTopics = this.loadMoreTopics.bind(this);
     this.state = {
       isLoading: false,
       isLoadingMore: false
@@ -19,6 +21,10 @@ class TopicsContainer extends Component {
   componentDidMount() {
 
     const { dispatch, topic, application } = this.props;
+
+    document.addEventListener('scroll', this.loadMoreTopics, false);
+    document.addEventListener('touchMove', this.loadMoreTopics, false);
+
     window.scrollTo(0, application.position);
 
     if (topic.items.length <= 10) {
@@ -32,22 +38,28 @@ class TopicsContainer extends Component {
     }
   }
 
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this.loadMoreTopics);
+    document.removeEventListener('touchMove', this.loadMoreTopics);
+  }
+
+  loadMoreTopics() {
+    if (detectScrollEnd() && (this.state.isLoadingMore === false)) {
+      const { dispatch, topic } = this.props;
+      this.setState({ isLoadingMore: true });
+      return dispatch(getTopics(topic.items.length))
+        .then(() => this.setState({ isLoadingMore: false }));
+    }
+  }
+
   render() {
-    const { topic, dispatch } = this.props;
+    const { topic } = this.props;
 
     if (topic.items.length <= 10) {
       return <FakeList />;
     }
 
-    return (
-      <NativeScroll
-        scrollFunc={() => {
-          debugger;
-          return dispatch(getTopics(topic.items.length))}
-        }>
-        <TopicList {...this.props} />
-      </NativeScroll>
-    );
+    return <TopicList {...this.props} />;
   }
 }
 

@@ -8,7 +8,6 @@ export default class NativeScroll extends Component {
   }
 
   componentWillUnmount() {
-    debugger;
     document.removeEventListener('scroll', this.handleScroll.bind(this));
     document.removeEventListener('touchMove', this.handleTouchMove.bind(this));
   }
