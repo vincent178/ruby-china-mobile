@@ -46,8 +46,8 @@ export default {
     ],
     vendor: [
       'babel-polyfill', 'isomorphic-fetch',
-      'react', 'react-dom', 'react-router', 'redux', 'react-redux',
-    ],
+      'react', 'react-dom', 'react-router', 'redux', 'react-redux'
+    ]
   },
 
   output: {
@@ -80,8 +80,8 @@ export default {
   plugins: isProduction ? [
     ...plugins,
     new webpack.optimize.UglifyJsPlugin({
-      output: {comments: false},
-      compress: {warnings: false},
+      output: { comments: false },
+      compress: { warnings: false }
     })
   ] : [
     ...plugins,
