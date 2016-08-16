@@ -10,8 +10,10 @@ import { detectScrollEnd } from '../lib/scroll';
 class TopicsContainer extends Component {
 
   constructor(props) {
+
     super(props);
     this.loadMoreTopics = this.loadMoreTopics.bind(this);
+
     this.state = {
       isLoading: false,
       isLoadingMore: false

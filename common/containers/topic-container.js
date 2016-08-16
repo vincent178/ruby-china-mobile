@@ -10,26 +10,54 @@ import FakeDetail from '../components/shared/fake-detail';
 import FakeList from '../components/shared/fake-list';
 import SpinnerCircle from '../components/shared/spinner-circle';
 import { getTopicDetailWithReplies, getMoreTopicReplies } from '../actions/topic';
+import { detectScrollEnd } from '../lib/scroll';
 import '../assets/stylesheets/highlight.css';
 
 class TopicContainer extends Component {
 
   constructor(props) {
+
     super(props);
+    this.loadMoreReplies = this.loadMoreReplies.bind(this);
+
     this.state = {
-      isLoading: false
+      isLoading: false,
+      isLoadingMore: false
     };
   }
 
   componentDidMount() {
+    const { dispatch, params } = this.props;
+
+    document.addEventListener('scroll', this.loadMoreReplies, false);
+    document.addEventListener('touchMove', this.loadMoreReplies, false);
+
     window.scrollTo(0, 0);
 
-    const { dispatch, params } = this.props;
     this.setState({ isLoading: true });
     TopicContainer.fetchData(dispatch, params)
       .then(() => {
         this.setState({ isLoading: false });
       });
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this.loadMoreReplies);
+    document.removeEventListener('touchMove', this.loadMoreReplies);
+  }
+
+  loadMoreReplies() {
+    const { dispatch, params, entities, reply } = this.props;
+
+    const topicId = params.topicId;
+    let topic = entities.topics[topicId];
+
+    if (detectScrollEnd() && topic['replies_count'] > reply.items.length && (this.state.isLoadingMore === false)) {
+      this.setState({ isLoadingMore: true });
+      return dispatch(getMoreTopicReplies(topicId, reply.items.length))
+        .then(() => this.setState({ isLoadingMore: false }))
+        .catch(() => this.setState({ isLoadingMore: false }));
+    }
   }
 
   render() {
