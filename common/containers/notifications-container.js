@@ -6,7 +6,7 @@ import { isValidLoginOrRedirect } from '../lib/util';
 import { refreshAccessToken } from '../actions/application';
 import { fetchNotifications } from '../actions/notification';
 import NotificationList from '../components/notification-container/notification-list';
-import FakeList from '../components/shared/fake-list';
+import Spinner from '../components/shared/spinner';
 
 class NotificationsContainer extends Component {
 
@@ -42,7 +42,7 @@ class NotificationsContainer extends Component {
 
   render() {
     if (this.state.isLoading) {
-      return <FakeList />;
+      return <Spinner />;
     }
 
     if (this.props.notification.length === 0) {

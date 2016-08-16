@@ -59,7 +59,7 @@ export default {
     loaders: [
       {
         test: /\.css$/,
-        loader: ExtractTextPlugin.extract('style', `css?${cssLoaderQuery}`, 'postcss')
+        loader: ExtractTextPlugin.extract('style', `css?${cssLoaderQuery}!postcss`)
       },
 
       {

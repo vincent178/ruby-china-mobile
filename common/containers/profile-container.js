@@ -24,8 +24,10 @@ class ProfileContainer extends Component {
 
   componentDidMount() {
 
-    const { dispatch, entities } = this.props;
+    const { dispatch, entities, routes } = this.props;
     const { username } = getToken();
+
+    debugger;
 
     window.scrollTo(0, 0);
     this.setState({ isLoading: true });
@@ -66,7 +68,6 @@ class ProfileContainer extends Component {
       case 'followers':
         return <ProfileUserList />;
         break;
-
     }
   }
 

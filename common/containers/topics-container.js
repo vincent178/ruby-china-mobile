@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import TopicList from '../components/topics-container/topic-list';
-import NativeScroll from '../components/shared/native-scroll';
 import Spinner from '../components/shared/spinner';
 import SpinnerCircle from '../components/shared/spinner-circle';
 import { getTopics } from '../actions/topic';

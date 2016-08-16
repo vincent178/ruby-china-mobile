@@ -39,11 +39,11 @@ reply[body]:不好意思 在测试 @beyondouyuan #a :lollipop:
 2. 有 access_token, 已经过期, 更新 access_token, 然后发送请求
 3. 没有 access_token, 跳转
 
+server加载内容, 到了用户浏览器使用 access_token 加载一次信息, 服务器回复所有 meta data
+
 
 TODO
 真正的 hot reload
 错误处理
 run in production
-
-
 
