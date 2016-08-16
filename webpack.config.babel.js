@@ -1,14 +1,14 @@
 import webpack from 'webpack';
+import path from 'path';
 import qs from 'querystring';
 import autoprefixer from 'autoprefixer';
-import postcssImport from 'postcss-import';
-import postcssVariable from 'postcss-custom-properties';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import AssetsPlugin from 'assets-webpack-plugin'
 
 const cssLoaderQuery = qs.stringify({
   modules: true,
   importLoaders: 1,
-  localIdentName: '[path]_[local]_[hash:base64:4]'
+  localIdentName: '[hash:base64:4]'
 });
 
 const fontLoaderQuery = qs.stringify({
@@ -17,17 +17,42 @@ const fontLoaderQuery = qs.stringify({
   name: '/fonts/[name].[ext]'
 });
 
-export default {
-  devtool: '#inline-source-map',
+const isProduction = 'production' == process.env.NODE_ENV;
+const client = [ path.resolve('client/index.js') ];
+const plugins = [
+  new webpack.DefinePlugin({
+    'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
+  }),
+  new ExtractTextPlugin('app.css?[hash]', { allChunks: true }),
+  new webpack.optimize.OccurrenceOrderPlugin(),
+  new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.js?[hash]'),
+  new AssetsPlugin({
+    filename: 'manifest.json',
+    fullpath: true,
+    path: path.resolve('public'),
+    prettyPrint: !isProduction,
+    update: true
+  })
+];
 
-  entry: [
-    './client/index.js',
-    'webpack-hot-middleware/client?noInfo=true&reload=true'
-  ],
+
+export default {
+  devtool: isProduction ? '#source-map' : 'cheap-module-inline-source-map',
+
+  entry: {
+    client: isProduction ? client : [
+      ...client,
+      'webpack-hot-middleware/client?noInfo=true&reload=true'
+    ],
+    vendor: [
+      'babel-polyfill', 'isomorphic-fetch',
+      'react', 'react-dom', 'react-router', 'redux', 'react-redux',
+    ],
+  },
 
   output: {
-    path: `${__dirname}/public`,
-    filename: 'app.js'
+    path: path.resolve('public'),
+    filename: 'app.js?[hash]'
   },
 
   module: {
@@ -40,7 +65,7 @@ export default {
       {
         test: /\.jsx?$/,
         loaders: ['babel?cacheDirectory'],
-        include: [`${__dirname}/client`, `${__dirname}/common`]
+        include: /client|common/
       },
 
       {
@@ -50,16 +75,16 @@ export default {
     ]
   },
 
-  postcss: function() {
-    return [postcssImport, postcssVariable, autoprefixer];
-  },
+  postcss: [autoprefixer],
 
-  plugins: [
-    new webpack.DefinePlugin({
-      'NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-    }),
-    new ExtractTextPlugin('app.css', { allChunks: true }),
-    new webpack.optimize.OccurrenceOrderPlugin(),
+  plugins: isProduction ? [
+    ...plugins,
+    new webpack.optimize.UglifyJsPlugin({
+      output: {comments: false},
+      compress: {warnings: false},
+    })
+  ] : [
+    ...plugins,
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin()
   ]

@@ -36,6 +36,7 @@
     "serve-favicon": "^2.3.0"
   },
   "devDependencies": {
+    "assets-webpack-plugin": "^3.4.0",
     "autoprefixer": "^6.3.3",
     "babel-cli": "^6.4.5",
     "babel-core": "6.4.5",
