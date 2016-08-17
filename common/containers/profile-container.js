@@ -15,9 +15,13 @@ import { getUserProfileAndTopics } from '../actions/user';
 class ProfileContainer extends Component {
 
   constructor(props) {
+
     super(props);
+    this.renderProfileList = this.renderProfileList.bind(this);
+    this.changeNavigationTab = this.changeNavigationTab.bind(this);
+
     this.state = {
-      selectedTab: 'topic',
+      selectedTab: 0,
       isLoading: true,
       isLoadingMore: false,
       user: null
@@ -49,20 +53,27 @@ class ProfileContainer extends Component {
       });
   }
 
+  changeNavigationTab(tab) {
+    this.setState({ selectedTab: tab });
+  }
+
   renderProfileList() {
     switch (this.state.selectedTab) {
-      case 'topic':
+      case 0:
         return <ProfileTopicList />;
         break;
-      case 'reply':
+      case 1:
         return <ProfileReplyList />;
         break;
-      case 'following':
+      case 2:
         return <ProfileUserList />;
         break;
-      case 'followers':
+      case 3:
         return <ProfileUserList />;
         break;
+      default:
+        return <ProfileTopicList />;
+
     }
   }
 
@@ -75,8 +86,8 @@ class ProfileContainer extends Component {
     return (
       <div>
         <ProfileUserDetails user={this.state.user} />
-        <ProfileNavigation />
-        { this.renderProfileList.bind(this)() }
+        <ProfileNavigation changeTab={this.changeNavigationTab} selectedTab={this.state.selectedTab} />
+        { this.renderProfileList() }
       </div>
     );
   }

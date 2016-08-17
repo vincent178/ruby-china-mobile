@@ -1,0 +1,30 @@
+
+.profileNavigationContainer {
+
+    border-top: 1px solid #eee;
+    height: 64px;
+
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+
+.profileItem {
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.profileText {
+    font-size: 0.8rem;
+}
+
+.profileNumber {
+    color: #0084B4;
+    font-size: 1.2rem;
+    margin-top: 4px;
+    margin-bottom: 8px;
+}
