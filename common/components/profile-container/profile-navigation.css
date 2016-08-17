@@ -1,8 +1,11 @@
 
 .profileNavigationContainer {
 
-    border-top: 1px solid #eee;
-    height: 64px;
+    border: 1px solid #0091c5;
+    border-radius: 4px;
+    height: 32px;
+    margin: 0 8px;
+
 
     display: flex;
     justify-content: space-around;
@@ -11,11 +14,17 @@
 }
 
 .profileItem {
-    width: 60px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex: 1;
+    height: 100%;
+}
+
+.selected {
+    background: #0091c5;
+    color: white;
 }
 
 .profileText {
