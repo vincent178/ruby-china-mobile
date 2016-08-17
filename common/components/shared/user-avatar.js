@@ -14,7 +14,7 @@ export default class UserAvatar extends Component {
     };
 
     return (
-      <Link to={`/users/${this.props.userId}`}>
+      <Link to={`/users/${this.props.username}`}>
         <img style={style} src={this.props.src} />
       </Link>);
   }
@@ -24,5 +24,5 @@ UserAvatar.propTypes = {
   size: PropTypes.number.isRequired,
   src: PropTypes.string.isRequired,
   radius: PropTypes.number,
-  userId: PropTypes.number.isRequired
+  username: PropTypes.string.isRequired
 };

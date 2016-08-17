@@ -18,7 +18,7 @@ export default class NotificationTopicReplyItem extends Component {
           size={32}
           radius={4}
           src={actor.avatar_url}
-          userId={actor.id} />
+          username={actor.login} />
         <div className={styles.topicReplyItemDetails}>
           <div className={styles.topicReplyItemInfo}>
             在帖子 <Link to={`/topics/${topic.id}`}>{topic.title}</Link> 回复了

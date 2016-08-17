@@ -16,7 +16,7 @@ export default class TopicDetailHeader extends Component {
 
         <UserAvatar size={48} radius={5}
                     src={user.avatar_url}
-                    userId={user.id} />
+                    username={user.login} />
 
         <div className={styles.topicMain}>
           <div className={styles.topicInfo}>

@@ -11,7 +11,7 @@ export default class ReplyListItem extends Component {
       <div className={styles.replyListItemContainer}>
         <UserAvatar size={48} radius={5}
                     src={this.props.user.avatar_url}
-                    userId={this.props.user.id} />
+                    username={this.props.user.login} />
         <div className={styles.replyMain}>
           <div className={styles.topicInfo}>
             <span className={styles.topicLogin}>{`@${this.props.user.login}`}</span>

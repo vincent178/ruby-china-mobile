@@ -44,28 +44,24 @@ const address = {
     return addressFactory('notifications.json', {offset: offset, limit: limit});
   },
 
-  me: () => {
-    return addressFactory('users/me.json');
+  user: (username) => {
+    return addressFactory(`users/${username}.json`);
   },
 
-  user: (userId) => {
-    return addressFactory(`users/${userId}.json`);
+  userTopics: (username) => {
+    return addressFactory(`users/${username}/topics.json`);
   },
 
-  userTopics: (userId) => {
-    return addressFactory(`users/${userId}/topics.json`);
+  userReplies: (username) => {
+    return addressFactory(`users/${username}/replies.json`);
   },
 
-  userReplies: (userId) => {
-    return addressFactory(`users/${userId}/replies.json`);
+  userFollowers: (username) => {
+    return addressFactory(`users/${username}/followers.json`);
   },
 
-  userFollowers: (userId) => {
-    return addressFactory(`users/${userId}/followers.json`);
-  },
-
-  userFollowing: (userId) => {
-    return addressFactory(`users/${userId}/follow.json`);
+  userFollowing: (username) => {
+    return addressFactory(`users/${username}/follow.json`);
   }
 };
 
