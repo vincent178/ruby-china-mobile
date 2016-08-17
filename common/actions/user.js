@@ -4,7 +4,7 @@ import address from '../lib/address';
 import { userSchema, topicSchema, replySchema } from '../constants/schema';
 import { normalize, arrayOf } from 'normalizr';
 
-export function receiveUsers(entities, users) {
+function receiveUsers(entities, users) {
   return {
     type: types.RECEIVE_USERS,
     entities,
@@ -13,16 +13,17 @@ export function receiveUsers(entities, users) {
 }
 
 
-export function fetchUserProfile(userId) {
+export function fetchUserProfile(username) {
 
   return (dispatch) => {
-    return fetch(address.user(userId))
+    return fetch(address.user(username))
       .then(res => res.json())
       .then(data => {
         if (data) {
+
           if (data.error) {
 
-            return { error: data["error_description"]}
+            return { error: data["error"]}
 
           } else if (data.user) {
 
@@ -38,22 +39,21 @@ export function fetchUserProfile(userId) {
   }
 }
 
-export function fetchUserTopics(userId) {
+export function fetchUserTopics(username) {
 
   return (dispatch) => {
-    return fetch(address.userTopics(userId))
+    return fetch(address.userTopics(username))
       .then(res => res.json())
       .then(data => {
 
         if (data) {
+
           if (data.error) {
 
-            return { error: data["error_description"] }
+            return { error: data["error"] }
 
           } else if (data.topics && Array.isArray(data.topics) && data.topics.length > 0) {
-
-            const normalized = normalize([data.topics], arrayOf(userSchema));
-            dispatch(receiveUsers(normalized.entities, normalized.result));
+            return {};
           }
 
           return { error: "fetch user topics error" };
@@ -147,5 +147,17 @@ export function fetchUserFollow(userId) {
       })
       .catch( e => { return { error: e.message }});
   }
+}
+
+export function getUserProfileAndTopics(username) {
+
+  return dispatch => {
+    return Promise.all([
+      dispatch(fetchUserProfile(username)),
+      dispatch(fetchUserTopics(username))
+    ])
+      .catch( e => { return { error: e.message } });
+  };
+
 }
 

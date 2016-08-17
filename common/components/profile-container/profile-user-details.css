@@ -1,0 +1,27 @@
+
+.profileUserDetailsContainer {
+
+    margin: 9px 12px;
+
+    display: flex;
+}
+
+.profileInfo {
+    margin-left: 12px;
+    font-size: 0.8rem;
+}
+
+.profileInfo div {
+    margin-top: 3px;
+}
+
+.profileFullname {
+
+    font-size: 1.6rem;
+    font-weight: bold;
+    color: black;
+}
+
+.profileUsername {
+    font-size: 1rem;
+}

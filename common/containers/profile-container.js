@@ -7,9 +7,10 @@ import ProfileNavigation from '../components/profile-container/profile-navigatio
 import ProfileTopicList from '../components/profile-container/profile-topic-list';
 import ProfileReplyList from '../components/profile-container/profile-reply-list';
 import ProfileUserList from '../components/profile-container/profile-user-list';
-import { getToken, isValidLoginOrRedirect } from '../lib/util';
+import Spinner from '../components/shared/spinner';
+import { getToken } from '../lib/util';
 import { refreshAccessToken } from '../actions/application';
-import { fetchUserProfile } from '../actions/user';
+import { getUserProfileAndTopics } from '../actions/user';
 
 class ProfileContainer extends Component {
 
@@ -17,7 +18,7 @@ class ProfileContainer extends Component {
     super(props);
     this.state = {
       selectedTab: 'topic',
-      isLoading: false,
+      isLoading: true,
       isLoadingMore: false,
       user: null
     }
@@ -25,34 +26,27 @@ class ProfileContainer extends Component {
 
   componentDidMount() {
 
-    const { dispatch, entities, routes } = this.props;
-    const { username } = getToken();
+    const { dispatch, entities, location, params } = this.props;
+    let username;
 
-    debugger;
+    if ( location.pathname === '/me' ) {
+      username = getToken().username;
+    } else {
+      username = params.username;
+    }
 
     window.scrollTo(0, 0);
     this.setState({ isLoading: true });
-    if (!isValidLoginOrRedirect()) {
-      dispatch(refreshAccessToken())
-        .then( result => {
-          if (result.error) {
-            browserHistory.push('/login');
-          }
-          dispatch(fetchUserProfile(username)).then(() => {
-            this.setState({
-              isLoading: false,
-              user: entities.users[username]
-            });
-          });
-        });
-    } else {
-      dispatch(fetchUserProfile(username)).then(() => {
+    dispatch(getUserProfileAndTopics(username))
+      .then( () => {
         this.setState({
           isLoading: false,
-          user: entities.users[username]
+          user: this.props.entities.users[username]
         });
+      })
+      .catch( e => {
+        this.setState({ isLoading: false });
       });
-    }
   }
 
   renderProfileList() {
@@ -74,17 +68,17 @@ class ProfileContainer extends Component {
 
   render() {
 
-    if (this.state.user) {
-      return (
-        <div>
-          <ProfileUserDetails user={this.state.user} />
-          <ProfileNavigation />
-          { this.renderProfileList.bind(this)() }
-        </div>
-      );
-    } else {
-      return (<div>wait</div>);
+    if (this.state.isLoading) {
+      return <Spinner />
     }
+
+    return (
+      <div>
+        <ProfileUserDetails user={this.state.user} />
+        <ProfileNavigation />
+        { this.renderProfileList.bind(this)() }
+      </div>
+    );
   }
 }
 

@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 
 import UserAvatar from '../shared/user-avatar';
+import styles from './profile-user-details.css';
 
 
 export default class ProfileUserDetails extends Component {
@@ -14,9 +15,9 @@ export default class ProfileUserDetails extends Component {
 
     let userCompanyLocation = "";
 
-    if (user.company.length === 0) {
+    if (user.company && user.company.length === 0) {
       userCompanyLocation = user.location;
-    } else if (user.location.length === 0) {
+    } else if (user.location && user.location.length === 0) {
       userCompanyLocation = user.company;
     } else {
       userCompanyLocation = `${user.company}@${user.location}`;
@@ -25,17 +26,18 @@ export default class ProfileUserDetails extends Component {
     console.log(user);
 
     return (
-      <div>
+      <div className={styles.profileUserDetailsContainer}>
         <UserAvatar
           size={56}
           radius={6}
           src={user.avatar_url}
-          userId={user.id}
+          username={user.login}
         />
-        <div>
-          <div>{`${user.login}(${user.name})`}</div>
+        <div className={styles.profileInfo}>
+          <div className={styles.profileFullname}>{`${user.name}`}</div>
+          <div className={styles.profileUsername}>{`${user.login}`}</div>
           <div>{userCompanyLocation}</div>
-          <div>{user.created_at.slice(0, 10)}</div>
+          <div>{user.created_at.slice(0, 10)}加入</div>
           <div>twitter/website/github/email</div>
         </div>
       </div>

@@ -10,6 +10,12 @@ import styles from './topic-list-item.css';
 
 export default class TopicListItem extends Component {
 
+  constructor(props) {
+
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
   handleClick() {
     const { dispatch } = this.props;
     dispatch(trackScrollPosition(window.scrollY));
@@ -17,22 +23,24 @@ export default class TopicListItem extends Component {
   }
 
   render() {
+    const { user, topic } = this.props;
+
     return (
       <div className={styles.topicListItemContainer}>
         <div className={styles.topicContent}>
 
           <UserAvatar size={48} radius={5}
-                      src={this.props.user.avatar_url}
-                      userId={this.props.user.id} />
+                      src={user.avatar_url}
+                      username={user.login} />
 
-          <div className={styles.topicMain} onClick={this.handleClick.bind(this)}>
+          <div className={styles.topicMain} onClick={this.handleClick}>
             <div className={styles.topicInfo}>
-              <span className={styles.topicNode}>{this.props.topic.node_name}</span>
-              <span className={styles.topicLogin}>{`@${this.props.user.login}`}</span>
+              <span className={styles.topicNode}>{topic.node_name}</span>
+              <span className={styles.topicLogin}>{`@${user.login}`}</span>
             </div>
-            <p>{this.props.topic.title}</p>
+            <p>{topic.title}</p>
             <div className={styles.topicAction}>
-              <TopicActionBar replyCount={this.props.topic.replies_count} likeCount={this.props.topic.likes_count} />
+              <TopicActionBar replyCount={topic.replies_count} likeCount={topic.likes_count} />
             </div>
           </div>
         </div>
