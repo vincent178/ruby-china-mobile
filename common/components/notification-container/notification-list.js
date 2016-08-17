@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 
-import { isValidLoginOrRedirect } from '../../lib/util';
-import { refreshAccessToken } from '../../actions/application';
-import items from '../../constants/items';
 import NotificationMentionItem from './notification-mention-item';
 import NotificationTopicReplyItem from './notification-topic-reply-item';
 import NotificationNodeChangeItem from './notification-node-change-item';
+import { isValidLoginOrRedirect } from '../../lib/util';
+import { refreshAccessToken } from '../../actions/application';
+import items from '../../constants/items';
 
 // notification type: Mention, TopicReply, NodeChanged
 export default class NotificationList extends Component {
@@ -13,7 +13,13 @@ export default class NotificationList extends Component {
   renderNotificationItem() {
     const { notification, entities } = this.props;
 
-    return notification.items.map((notificationId, i) => {
+    if ( notification.items.length === 0 ) {
+      return (
+        <div className="center-container">没有最新通知</div>
+      );
+    }
+
+    return notification.items.map((notificationId) => {
       let topic, reply;
       const notification = entities.notifications[notificationId];
       const notificationType = notification.type;

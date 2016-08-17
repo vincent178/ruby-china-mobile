@@ -61,4 +61,12 @@ img {
     color: rgb(102, 117, 127);
 }
 
+:global(.center-container) {
+    margin-top: 36px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 

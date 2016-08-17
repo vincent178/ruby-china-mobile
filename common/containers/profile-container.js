@@ -18,6 +18,7 @@ class ProfileContainer extends Component {
     this.state = {
       selectedTab: 'topic',
       isLoading: false,
+      isLoadingMore: false,
       user: null
     }
   }

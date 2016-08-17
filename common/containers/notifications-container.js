@@ -13,7 +13,8 @@ class NotificationsContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoading: false
+      isLoading: false,
+      isLoadingMore: false
     };
   }
 
@@ -45,13 +46,6 @@ class NotificationsContainer extends Component {
       return <Spinner />;
     }
 
-    if (this.props.notification.length === 0) {
-      return (
-        <div>
-          没有未读的通知
-        </div>
-      )
-    }
     return <NotificationList {...this.props} />;
   }
 }
