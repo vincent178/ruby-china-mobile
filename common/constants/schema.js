@@ -37,7 +37,8 @@ notification.define({
 user.define({
   topics: arrayOf(topic),
   replies: arrayOf(reply),
-  followers: arrayOf(user)
+  followers: arrayOf(user),
+  follow: arrayOf(user)
 });
 
 export const topicSchema = topic;

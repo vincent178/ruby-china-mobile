@@ -10,7 +10,13 @@ import ProfileUserList from '../components/profile-container/profile-user-list';
 import Spinner from '../components/shared/spinner';
 import { getToken } from '../lib/util';
 import { refreshAccessToken } from '../actions/application';
-import { getUserProfileAndTopics } from '../actions/user';
+import {
+  getUserProfileAndTopics,
+  getUserTopics,
+  getUserReplies,
+  getUserFollowers,
+  getUserFollow
+} from '../actions/user';
 
 class ProfileContainer extends Component {
 
@@ -24,6 +30,7 @@ class ProfileContainer extends Component {
       selectedTab: 0,
       isLoading: true,
       isLoadingMore: false,
+      isLoadingTab: false,
       user: null
     }
   }
@@ -54,10 +61,54 @@ class ProfileContainer extends Component {
   }
 
   changeNavigationTab(tab) {
+
+    const { user } = this.state;
+    const { dispatch, params } = this.props;
+
+    switch (tab) {
+      case 0:
+        if (user['topics_count'] > 0 && (typeof user.topics === 'undefined' ||  user.topics.length === 0)) {
+          this.setState({ isLoadingTab: true });
+          dispatch(getUserTopics(params.username))
+            .then( () => this.setState({ isLoadingTab: false }))
+            .catch( e => this.setState({ isLoadingTab: false }));
+        }
+        break;
+      case 1:
+        if (user['replies_count'] > 0 && (typeof user.replies === 'undefined' || user.replies.length === 0)) {
+          this.setState({ isLoadingTab: true });
+          dispatch(getUserReplies(params.username))
+            .then( () => this.setState({ isLoadingTab: false }))
+            .catch( e => this.setState({ isLoadingTab: false }));
+        }
+        break;
+      case 2:
+        if (user['follow_count'] > 0 && (typeof user.follow === 'undefined' || user.follow.length === 0)) {
+          this.setState({ isLoadingTab: true });
+          dispatch(getUserFollow(params.username))
+            .then( () => this.setState({ isLoadingTab: false }))
+            .catch( e => this.setState({ isLoadingTab: false }));
+        }
+        break;
+      case 3:
+        if (user['followers_count'] > 0 && (typeof user.followers === 'undefined' || user.followers.length === 0)) {
+          this.setState({ isLoadingTab: true });
+          dispatch(getUserFollowers(params.username))
+            .then( () => this.setState({ isLoadingTab: false }))
+            .catch( e => this.setState({ isLoadingTab: false }));
+        }
+        break;
+    }
+
     this.setState({ selectedTab: tab });
   }
 
   renderProfileList() {
+
+    if (this.state.isLoadingTab) {
+      return <Spinner />;
+    }
+
     switch (this.state.selectedTab) {
       case 0:
         return <ProfileTopicList />;
@@ -73,7 +124,6 @@ class ProfileContainer extends Component {
         break;
       default:
         return <ProfileTopicList />;
-
     }
   }
 
@@ -82,6 +132,8 @@ class ProfileContainer extends Component {
     if (this.state.isLoading) {
       return <Spinner />
     }
+
+    console.log(this.state.user);
 
     return (
       <div>
