@@ -25,6 +25,7 @@ export function getUserProfile(username) {
         }
 
         if (data.user) {
+
           const normalized = normalize([data.user], arrayOf(userSchema));
           dispatch(receiveUsers(normalized.entities, normalized.result));
         }
@@ -72,8 +73,9 @@ export function getUserReplies(username) {
         }
 
         if (data && data.replies) {
+
           data.login = username;
-          const normalized = normalize([data.replies], arrayOf(userSchema));
+          const normalized = normalize([data], arrayOf(userSchema));
           return dispatch(receiveUsers(normalized.entities, normalized.result));
         }
 
@@ -96,8 +98,9 @@ export function getUserFollowers(username) {
         }
 
         if (data && data.followers) {
+
           data.login = username;
-          const normalized = normalize([data.followers], arrayOf(userSchema));
+          const normalized = normalize([data], arrayOf(userSchema));
           return dispatch(receiveUsers(normalized.entities, normalized.result));
         }
 
@@ -120,8 +123,9 @@ export function getUserFollow(username) {
         }
 
         if (data && data.follow) {
+
           data.login = username;
-          const normalized = normalize([data.follow], arrayOf(userSchema));
+          const normalized = normalize([data], arrayOf(userSchema));
           return dispatch(receiveUsers(normalized.entities, normalized.result));
         }
 

@@ -50,10 +50,7 @@ class ProfileContainer extends Component {
     this.setState({ isLoading: true });
     dispatch(getUserProfileAndTopics(username))
       .then( () => {
-        this.setState({
-          isLoading: false,
-          user: this.props.entities.users[username]
-        });
+        this.setState({ isLoading: false });
       })
       .catch( e => {
         this.setState({ isLoading: false });
@@ -62,8 +59,9 @@ class ProfileContainer extends Component {
 
   changeNavigationTab(tab) {
 
-    const { user } = this.state;
-    const { dispatch, params } = this.props;
+    const { dispatch, params, entities } = this.props;
+    const { username } = params;
+    const user = entities.users[username];
 
     switch (tab) {
       case 0:
@@ -133,11 +131,12 @@ class ProfileContainer extends Component {
       return <Spinner />
     }
 
-    console.log(this.state.user);
+    const { entities, params } = this.props;
+    const { username } = params;
 
     return (
       <div>
-        <ProfileUserDetails user={this.state.user} />
+        <ProfileUserDetails user={entities.users[username]} />
         <ProfileNavigation changeTab={this.changeNavigationTab} selectedTab={this.state.selectedTab} />
         { this.renderProfileList() }
       </div>
