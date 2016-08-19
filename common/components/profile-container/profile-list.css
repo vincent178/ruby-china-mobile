@@ -1,6 +1,33 @@
 
 .profileListContainer {
-    margin-top: 8px;
+    margin-top: 12px;
+    padding: 0 8px;
     border-top: 1px solid #eee;
-    padding-top: 6px;
+}
+
+.profileListItemContainer {
+    padding: 12px 0;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #eee;
+}
+
+.profileListItemTitle {
+    font-size: 1.0rem;
+    color: #303030;
+}
+
+.profileListItemInfo {
+    margin-top: 6px;
+    font-size: 0.8rem;
+}
+
+.profileListItemNode {
+    background: #ecebeb;
+    color: #444;
+    margin-right: 8px;
+}
+
+
+.profileListItemAggregation {
 }

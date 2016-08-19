@@ -1,4 +1,7 @@
-import React, { Component } from 'react';
+import React, {
+  Component,
+  PropTypes
+} from 'react';
 
 import TopicListItem from './topic-list-item';
 import SpinnerCircle from '../shared/spinner-circle';
@@ -37,6 +40,12 @@ export default class TopicList extends Component {
       </div>
     );
   }
+}
+
+
+TopicList.propTypes = {
+  entities: PropTypes.object.isRequired,
+  topic: PropTypes.object.isRequired
 }
 
 

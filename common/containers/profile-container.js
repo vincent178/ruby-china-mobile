@@ -101,7 +101,7 @@ class ProfileContainer extends Component {
     this.setState({ selectedTab: tab });
   }
 
-  renderProfileList() {
+  renderProfileList(user) {
 
     if (this.state.isLoadingTab) {
       return <Spinner />;
@@ -109,16 +109,16 @@ class ProfileContainer extends Component {
 
     switch (this.state.selectedTab) {
       case 0:
-        return <ProfileTopicList />;
+        return <ProfileTopicList {...this.props} user={user} />;
         break;
       case 1:
-        return <ProfileReplyList />;
+        return <ProfileReplyList {...this.props} />;
         break;
       case 2:
-        return <ProfileUserList />;
+        return <ProfileUserList {...this.props} />;
         break;
       case 3:
-        return <ProfileUserList />;
+        return <ProfileUserList {...this.props} />;
         break;
       default:
         return <ProfileTopicList />;
@@ -133,12 +133,13 @@ class ProfileContainer extends Component {
 
     const { entities, params } = this.props;
     const { username } = params;
+    const user = entities.users[username];
 
     return (
       <div>
-        <ProfileUserDetails user={entities.users[username]} />
+        <ProfileUserDetails user={user} />
         <ProfileNavigation changeTab={this.changeNavigationTab} selectedTab={this.state.selectedTab} />
-        { this.renderProfileList() }
+        { this.renderProfileList(user) }
       </div>
     );
   }
