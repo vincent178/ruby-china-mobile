@@ -39,18 +39,23 @@ export default class ProfileUserDetails extends Component {
 
     return (
       <div className={styles.profileUserDetailsContainer}>
-        <UserAvatar
-          size={56}
-          radius={6}
-          src={user.avatar_url}
-          username={user.login}
-        />
-        <div className={styles.profileInfo}>
-          <div className={styles.profileFullname}>{`${user.name}`}</div>
-          <div className={styles.profileUsername}>{`${user.login}`}</div>
-          <div>{userCompanyLocation}</div>
-          <div>{joinTime}</div>
+        <div className={styles.profileUserDetailsItem}>
+          <UserAvatar
+            size={56}
+            radius={6}
+            src={user.avatar_url}
+            username={user.login}
+          />
+          <div className={styles.profileInfo}>
+            <div className={styles.profileFullname}>{`${user.name}`}</div>
+            <div className={styles.profileUsername}>{`${user.login}`}</div>
+            <div>{userCompanyLocation}</div>
+            <div>{joinTime}</div>
+          </div>
+
         </div>
+
+        <button className={styles.profileFollowButton}>关注</button>
       </div>
     );
   }
