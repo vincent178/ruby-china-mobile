@@ -15,6 +15,7 @@ export default class ProfileUserDetails extends Component {
 
     let userInfoArray = [];
     let userCompanyLocation = "";
+    let joinTime = ""
 
     if (user.company && user.company.length > 0) {
       userInfoArray.push(user.company);
@@ -32,6 +33,10 @@ export default class ProfileUserDetails extends Component {
       userCompanyLocation = userInfoArray[0];
     }
 
+    if (user.created_at && user.created_at.length > 0) {
+      joinTime = `${user.created_at.slice(0, 10)} 加入`;
+    }
+
     return (
       <div className={styles.profileUserDetailsContainer}>
         <UserAvatar
@@ -44,7 +49,7 @@ export default class ProfileUserDetails extends Component {
           <div className={styles.profileFullname}>{`${user.name}`}</div>
           <div className={styles.profileUsername}>{`${user.login}`}</div>
           <div>{userCompanyLocation}</div>
-          <div>{user.created_at.slice(0, 10)} 加入</div>
+          <div>{joinTime}</div>
         </div>
       </div>
     );

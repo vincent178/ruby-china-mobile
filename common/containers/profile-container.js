@@ -57,6 +57,31 @@ class ProfileContainer extends Component {
       });
   }
 
+  componentDidUpdate(prevProps) {
+    let oldUsername = prevProps.params.username;
+    let { dispatch, entities: { users }, params: { username } } = this.props;
+
+    window.scrollTo(0, 0);
+
+    if (oldUsername !== username) {
+      this.changeNavigationTab(0);
+    }
+
+    if (oldUsername !== username &&
+       ( typeof users[username] === 'undefined' ||
+       typeof users[username].topics === 'undefined' )) {
+
+      this.setState({ isLoading: true });
+      dispatch(getUserProfileAndTopics(username))
+        .then( () => {
+          this.setState({ isLoading: false });
+        })
+        .catch( e => {
+          this.setState({ isLoading: false });
+        });
+    }
+  }
+
   changeNavigationTab(tab) {
 
     const { dispatch, params, entities } = this.props;
