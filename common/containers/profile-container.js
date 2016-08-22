@@ -15,7 +15,7 @@ import {
   getUserTopics,
   getUserReplies,
   getUserFollowers,
-  getUserFollow
+  getUserFollowing
 } from '../actions/user';
 
 class ProfileContainer extends Component {
@@ -106,9 +106,9 @@ class ProfileContainer extends Component {
         }
         break;
       case 2:
-        if (user['follow_count'] > 0 && (typeof user.follow === 'undefined' || user.follow.length === 0)) {
+        if (user['following_count'] > 0 && (typeof user.following === 'undefined' || user.following.length === 0)) {
           this.setState({ isLoadingTab: true });
-          dispatch(getUserFollow(params.username))
+          dispatch(getUserFollowing(params.username))
             .then( () => this.setState({ isLoadingTab: false }))
             .catch( e => this.setState({ isLoadingTab: false }));
         }
@@ -140,7 +140,7 @@ class ProfileContainer extends Component {
         return <ProfileReplyList {...this.props} user={user} />;
         break;
       case 2:
-        return <ProfileUserList {...this.props} user={user} type={"follow"} />;
+        return <ProfileUserList {...this.props} user={user} type={"following"} />;
         break;
       case 3:
         return <ProfileUserList {...this.props} user={user} type={"followers"} />;

@@ -110,11 +110,11 @@ export function getUserFollowers(username) {
   }
 }
 
-export function getUserFollow(username) {
+export function getUserFollowing(username) {
 
   return (dispatch) => {
 
-    return fetch(address.userFollowers(username))
+    return fetch(address.userFollowing(username))
       .then(res => res.json())
       .then(data => {
 
@@ -122,8 +122,7 @@ export function getUserFollow(username) {
           return { error: data.error };
         }
 
-        if (data && data.follow) {
-
+        if (data && data.following) {
           data.login = username;
           const normalized = normalize([data], arrayOf(userSchema));
           return dispatch(receiveUsers(normalized.entities, normalized.result));
