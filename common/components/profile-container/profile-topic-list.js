@@ -17,6 +17,10 @@ export default class ProfileTopicList extends Component {
 
     const { user : { topics }, entities } = this.props;
 
+    if (typeof topics === 'undefined' || topics.length === 0) {
+      return <div>没有话题</div>;
+    }
+
     return topics.map( topicId => {
       const topic = entities.topics[topicId];
 

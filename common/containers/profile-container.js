@@ -112,13 +112,13 @@ class ProfileContainer extends Component {
         return <ProfileTopicList {...this.props} user={user} />;
         break;
       case 1:
-        return <ProfileReplyList {...this.props} />;
+        return <ProfileReplyList {...this.props} user={user} />;
         break;
       case 2:
-        return <ProfileUserList {...this.props} />;
+        return <ProfileUserList {...this.props} user={user} type={"follow"} />;
         break;
       case 3:
-        return <ProfileUserList {...this.props} />;
+        return <ProfileUserList {...this.props} user={user} type={"followers"} />;
         break;
       default:
         return <ProfileTopicList />;
