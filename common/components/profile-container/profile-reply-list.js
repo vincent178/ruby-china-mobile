@@ -24,8 +24,6 @@ export default class ProfileReplyList extends Component {
     return replies.map( replyId => {
       const reply = entities.replies[replyId];
 
-      console.log(reply);
-
       return (
         <div key={`ProfileReplyList-${replyId}`} className={styles.profileListItemContainer}>
           <div className={styles.profileListItemTitle}>{reply.topic_title}</div>

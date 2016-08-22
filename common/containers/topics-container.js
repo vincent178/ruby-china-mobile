@@ -33,7 +33,6 @@ class TopicsContainer extends Component {
       TopicsContainer.fetchData(dispatch)
         .then((res) => {
           if (res && res.error) {
-            console.log(`[TopicsContainer] error: ${res.error}`);
             this.setState({ error: res.error });
           }
         });

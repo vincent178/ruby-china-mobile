@@ -18,8 +18,6 @@ export default class ProfileUserList extends Component {
 
   renderUserList() {
 
-    console.log(this.props.user);
-
     const { user, type, entities } = this.props;
 
     if (typeof user === 'undefined' || typeof user[type] === 'undefined') {
