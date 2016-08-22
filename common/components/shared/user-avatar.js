@@ -14,7 +14,7 @@ export default class UserAvatar extends Component {
     };
 
     return (
-      <Link to={`/users/${this.props.username}`}>
+      <Link to={`/${this.props.username}`}>
         <img style={style} src={this.props.src} />
       </Link>);
   }

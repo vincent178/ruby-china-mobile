@@ -46,7 +46,7 @@ export default class ProfileUserList extends Component {
 
           <UserAvatar size={30} src={userItem.avatar_url} radius={5} username={userItem.login} />
 
-          <Link to={`/users/${userItem.login}`}>
+          <Link to={`/${userItem.login}`}>
             <div className={styles.profileUserInfo}>
               <div className={styles.profileFullname}>{ userItem.name }</div>
               <div className={styles.profileUsername}>{ userItem.login }</div>

@@ -63,3 +63,11 @@
     width: 20px !important;
     vertical-align: top;
 }
+
+:global .at_user {
+    color: #0069D6;
+}
+
+:global .at_floor {
+    color: #60B566;
+}

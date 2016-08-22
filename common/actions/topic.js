@@ -49,7 +49,6 @@ export function getTopicDetail(id) {
       .then( topicPayload => {
         if (topicPayload && topicPayload.topic) {
           const normalized = normalize([topicPayload.topic], arrayOf(topicSchema));
-          console.log(normalized.entities);
           dispatch(receiveTopics(normalized.entities, normalized.result));
         }
       });

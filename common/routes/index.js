@@ -16,7 +16,7 @@ export default history => (
       <Route path="notifications" component={NotificationsContainer} />
       <Route path="login" component={LoginContainer} />
       <Route path="topics/:topicId" component={TopicContainer} />
-      <Route path="users/:username" component={ProfileContainer} />
+      <Route path=":username" component={ProfileContainer} />
     </Route>
   </Router>
 );
