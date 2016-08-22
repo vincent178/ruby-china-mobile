@@ -26,6 +26,7 @@ export function getUserProfile(username) {
 
         if (data.user) {
 
+          data.user.meta = data.meta;
           const normalized = normalize([data.user], arrayOf(userSchema));
           dispatch(receiveUsers(normalized.entities, normalized.result));
         }
@@ -112,7 +113,7 @@ export function getUserFollowers(username) {
 
 export function getUserFollowing(username) {
 
-  return (dispatch) => {
+  return dispatch => {
 
     return fetch(address.userFollowing(username))
       .then(res => res.json())
@@ -146,3 +147,64 @@ export function getUserProfileAndTopics(username) {
 
 }
 
+export function followUser(user) {
+
+  return dispatch => {
+    return fetch(address.userFollow(user.login), {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+
+        if (data && data.error) {
+          return { error: data.error };
+        }
+
+        if (data && data.ok && data.ok === 1) {
+          user.meta.followed = true;
+          const normalized = normalize([user], arrayOf(userSchema));
+          return dispatch(receiveUsers(normalized.entities, normalized.result));
+        }
+
+
+        return { error: "follow user error" };
+      })
+      .catch( e => { return { error: e.message }});
+  }
+
+}
+
+export function unfollowUser(user) {
+
+  return dispatch => {
+    return fetch(address.userUnfollow(user.login), {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+
+        if (data && data.error) {
+          return { error: data.error };
+        }
+
+        if (data && data.ok && data.ok === 1) {
+          user.meta.followed = false;
+          const normalized = normalize([user], arrayOf(userSchema));
+          return dispatch(receiveUsers(normalized.entities, normalized.result));
+        }
+
+
+        return { error: "follow user error" };
+      })
+      .catch( e => { return { error: e.message }});
+  }
+
+}

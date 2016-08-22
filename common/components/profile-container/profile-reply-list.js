@@ -3,6 +3,7 @@ import React, {
   PropTypes
 } from 'react';
 
+import { Link } from 'react-router';
 import styles from './profile-list.css';
 
 export default class ProfileReplyList extends Component {
@@ -26,7 +27,13 @@ export default class ProfileReplyList extends Component {
 
       return (
         <div key={`ProfileReplyList-${replyId}`} className={styles.profileListItemContainer}>
-          <div className={styles.profileListItemTitle}>{reply.topic_title}</div>
+
+          <Link to={`/topics/${reply.topic_id}`}>
+            <div className={styles.profileListItemTitle}>
+              {reply.topic_title}
+              </div>
+          </Link>
+
           <div dangerouslySetInnerHTML={{__html: reply.body_html}}></div>
         </div>
       )

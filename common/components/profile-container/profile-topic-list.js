@@ -3,6 +3,7 @@ import React, {
   PropTypes
 } from 'react';
 
+import { Link } from 'react-router';
 import styles from './profile-list.css';
 
 export default class ProfileTopicList extends Component {
@@ -26,9 +27,13 @@ export default class ProfileTopicList extends Component {
 
       return (
         <div className={styles.profileListItemContainer} key={`ProfileTopicList-${topicId}`}>
-          <div className={styles.profileListItemTitle}>
-            { topic.title }
-          </div>
+
+          <Link to={`/topics/${topic.id}`}>
+            <div className={styles.profileListItemTitle}>
+              { topic.title }
+            </div>
+          </Link>
+
           <div className={styles.profileListItemInfo}>
             <span className={styles.profileListItemNode}>{topic.node_name}</span>
             <span className={styles.profileListItemAggregation}>{`${topic.likes_count}个赞•${topic.replies_count}条回复`}</span>

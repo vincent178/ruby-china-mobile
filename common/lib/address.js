@@ -62,6 +62,14 @@ const address = {
 
   userFollowing: (username) => {
     return addressFactory(`users/${username}/following.json`);
+  },
+
+  userFollow: (username) => {
+    return addressFactory(`users/${username}/follow.json`);
+  },
+
+  userUnfollow: (username) => {
+    return addressFactory(`users/${username}/unfollow.json`);
   }
 };
 

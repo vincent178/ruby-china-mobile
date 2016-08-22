@@ -2,16 +2,19 @@
 .profileUserDetailsContainer {
     margin: 9px 12px;
     display: flex;
-    justify-content: space-between;
 }
 
-.profileUserDetailsItem {
-    display: flex;
-}
+
 
 .profileInfo {
     margin-left: 12px;
     font-size: 0.8rem;
+    flex: 1;
+}
+
+.profileUserDetailsItem {
+    display: flex;
+    justify-content: space-between;
 }
 
 .profileInfo div {

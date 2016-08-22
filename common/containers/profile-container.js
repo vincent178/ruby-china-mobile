@@ -162,7 +162,7 @@ class ProfileContainer extends Component {
 
     return (
       <div>
-        <ProfileUserDetails user={user} />
+        <ProfileUserDetails {...this.props} user={user} />
         <ProfileNavigation changeTab={this.changeNavigationTab} selectedTab={this.state.selectedTab} />
         { this.renderProfileList(user) }
       </div>

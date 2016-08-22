@@ -4,10 +4,22 @@ import React, {
 } from 'react';
 
 import UserAvatar from '../shared/user-avatar';
+import { followUser, unfollowUser } from '../../actions/user';
 import styles from './profile-user-details.css';
 
-
 export default class ProfileUserDetails extends Component {
+
+  handleClick(user) {
+
+    const { dispatch } = this.props;
+
+    if (user.meta.followed) {
+      dispatch(unfollowUser(user));
+    } else {
+      dispatch(followUser(user));
+    }
+  }
+
 
   render() {
 
@@ -16,6 +28,7 @@ export default class ProfileUserDetails extends Component {
     let userInfoArray = [];
     let userCompanyLocation = "";
     let joinTime = "";
+    let followingText = "关注";
 
     if (user.company && user.company.length > 0) {
       userInfoArray.push(user.company);
@@ -37,9 +50,12 @@ export default class ProfileUserDetails extends Component {
       joinTime = `${user.created_at.slice(0, 10)} 加入`;
     }
 
+    if (user.meta && user.meta.followed) {
+      followingText = "取消关注";
+    }
+
     return (
       <div className={styles.profileUserDetailsContainer}>
-        <div className={styles.profileUserDetailsItem}>
           <UserAvatar
             size={56}
             radius={6}
@@ -47,15 +63,19 @@ export default class ProfileUserDetails extends Component {
             username={user.login}
           />
           <div className={styles.profileInfo}>
-            <div className={styles.profileFullname}>{`${user.name}`}</div>
+
+            <div className={styles.profileUserDetailsItem}>
+              <div className={styles.profileFullname}>{`${user.name || user.login}`}</div>
+              <button className={styles.profileFollowButton}
+                      onClick={this.handleClick.bind(this, user)}>
+                {followingText}
+              </button>
+            </div>
+
             <div className={styles.profileUsername}>{`${user.login}`}</div>
             <div>{userCompanyLocation}</div>
             <div>{joinTime}</div>
           </div>
-
-        </div>
-
-        <button className={styles.profileFollowButton}>关注</button>
       </div>
     );
   }
