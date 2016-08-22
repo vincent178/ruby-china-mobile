@@ -15,7 +15,7 @@ export default class ProfileUserDetails extends Component {
 
     let userInfoArray = [];
     let userCompanyLocation = "";
-    let joinTime = ""
+    let joinTime = "";
 
     if (user.company && user.company.length > 0) {
       userInfoArray.push(user.company);

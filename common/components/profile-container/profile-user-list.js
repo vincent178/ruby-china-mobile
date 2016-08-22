@@ -3,8 +3,8 @@ import React, {
   PropTypes
 } from 'react';
 
+import { Link } from 'react-router';
 import UserAvatar from '../shared/user-avatar';
-
 import styles from './profile-list.css';
 
 
@@ -48,11 +48,12 @@ export default class ProfileUserList extends Component {
 
           <UserAvatar size={30} src={userItem.avatar_url} radius={5} username={userItem.login} />
 
-          <div className={styles.profileUserInfo}>
-            <div className={styles.profileFullname}>{ userItem.name }</div>
-            <div className={styles.profileUsername}>{ userItem.login }</div>
-          </div>
-
+          <Link to={`/users/${userItem.login}`}>
+            <div className={styles.profileUserInfo}>
+              <div className={styles.profileFullname}>{ userItem.name }</div>
+              <div className={styles.profileUsername}>{ userItem.login }</div>
+            </div>
+          </Link>
         </div>
       );
 
