@@ -23,7 +23,7 @@ export default class TopicListItem extends Component {
   }
 
   render() {
-    const { user, topic } = this.props;
+    const { user, topic, dispatch } = this.props;
 
     return (
       <div className={styles.topicListItemContainer}>
@@ -40,7 +40,12 @@ export default class TopicListItem extends Component {
             </div>
             <p>{topic.title}</p>
             <div className={styles.topicAction}>
-              <TopicActionBar replyCount={topic.replies_count} likeCount={topic.likes_count} />
+              <TopicActionBar
+                dispatch={dispatch}
+                topic={topic}
+                topicId={topic.id}
+                replyCount={topic.replies_count}
+                likeCount={topic.likes_count} />
             </div>
           </div>
         </div>

@@ -70,7 +70,23 @@ const address = {
 
   userUnfollow: (username) => {
     return addressFactory(`users/${username}/unfollow.json`);
-  }
+  },
+
+  likes: () => {
+    return addressFactory('likes');
+  },
+
+  topicFollow: (id) => {
+    return addressFactory(`topics/${id}/follow`);
+  },
+
+  topicUnfollow: (id) => {
+    return addressFactory(`topics/${id}/unfollow`)
+  },
+
+
+
+
 };
 
 export default address;

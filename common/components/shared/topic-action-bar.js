@@ -2,67 +2,72 @@ import React, {
   Component,
   PropTypes
 } from 'react';
-import Items from '../../constants/items';
+
+import {
+  likeTopic,
+  unlikeTopic,
+  followTopic,
+  unfollowTopic
+} from '../../actions/topic';
+
+import { authenticatedAction } from '../../lib/util';
 import styles from "./topic-action-bar.css";
 
 export default class TopicActionBar extends Component {
 
   constructor(props) {
+
     super(props);
-
-    this.state = {
-      isPressed: false
-    };
-  }
-
-  handleReplyStart(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    this.setState({isPressed: true});
-  }
-
-  handleReplyEnd(e) {
-    e.stopPropagation();
-    e.preventDefault();
-    this.setState({isPressed: false});
-  }
-
-  clickReply(e) {
-    e.preventDefault();
-    this.setState({isPressed: true});
-    setTimeout(() => {
-      this.setState({isPressed: false});
-    }, 300);
+    this.clickLike = this.clickLike.bind(this);
+    this.clickFollow = this.clickFollow.bind(this);
   }
 
   clickLike(e) {
-    console.debug("[TopicActionBar] clickLike");
+
     e.preventDefault();
+    e.stopPropagation();
+
+    const { topicId, dispatch } = this.props;
+
+    authenticatedAction(dispatch, () => {
+      dispatch(likeTopic(topicId));
+    });
+
   }
 
   clickFollow(e) {
-    console.debug("[TopicActionBar] clickFollow");
+
     e.preventDefault();
+    e.stopPropagation();
+
+    const { topicId, dispatch } = this.props;
+
+    authenticatedAction(dispatch, () => {
+      dispatch(followTopic(topicId));
+    });
+
   }
 
   render() {
+
+    const { replyCount, likeCount, viewCount } = this.props;
 
     return (
       <div className={styles.topicActionContainer}>
 
         <div>
           <i className="fa fa-reply" />
-          <span>{this.props.replyCount}</span>
+          <span>{replyCount}</span>
         </div>
 
-        <div>
+        <div onClick={this.clickLike}>
           <i className="fa fa-thumbs-up" />
-          <span>{this.props.likeCount}</span>
+          <span>{likeCount}</span>
         </div>
 
-        <div>
+        <div onClick={this.clickFollow}>
           <i className="fa fa-eye" />
-          <span>{this.props.viewCount}</span>
+          <span>{viewCount}</span>
         </div>
       </div>
     );
@@ -70,6 +75,7 @@ export default class TopicActionBar extends Component {
 }
 
 TopicActionBar.propTypes = {
+  topicId: PropTypes.number.isRequired,
   replyCount: PropTypes.number.isRequired,
   likeCount: PropTypes.number.isRequired,
   viewCount: PropTypes.number

@@ -91,6 +91,81 @@ export function getMoreTopicReplies(id, offset, limit) {
   };
 }
 
+export function likeTopic(id) {
+  return dispatch => {
+    return fetch(address.likes(), {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        obj_type: 'topic',
+        obj_id: id
+      })
+    })
+      .then( res => res.json() )
+      .then( data => {
+        debugger;
+      })
+      .catch( e => { return { error: e.message }});
+  }
+}
+
+export function unlikeTopic(id) {
+  return dispatch => {
+    return fetch(address.likes(), {
+      method: 'DELETE',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        obj_type: 'topic',
+        obj_id: id
+      })
+    })
+      .then( res => res.json() )
+      .then( data => {
+        debugger;
+      })
+      .catch( e => { return { error: e.message }});
+  }
+}
+
+export function followTopic(id) {
+  return dispatch => {
+    return fetch(address.topicFollow(id), {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then( res => res.json() )
+      .then( data => {
+        debugger;
+      })
+      .catch( e => { return { error: e.messsage }});
+  }
+}
+
+export function unfollowTopic(id) {
+  return dispatch => {
+    return fetch(address.topicUnfollow(id), {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      }
+    })
+      .then( res => res.json() )
+      .then( data => {
+        debugger;
+      })
+      .catch( e => { return { error: e.messsage }});
+  }
+}
 export function postTopicReply(id, body) {
   return dispatch => {
     dispatch(createTopicReply());

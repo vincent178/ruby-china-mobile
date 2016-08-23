@@ -46,6 +46,6 @@ export default class TopicList extends Component {
 TopicList.propTypes = {
   entities: PropTypes.object.isRequired,
   topic: PropTypes.object.isRequired
-}
+};
 
 
