@@ -48,20 +48,20 @@ const address = {
     return addressFactory(`users/${username}.json`);
   },
 
-  userTopics: (username) => {
-    return addressFactory(`users/${username}/topics.json`);
+  userTopics: (username, offset = 0, limit = 20) => {
+    return addressFactory(`users/${username}/topics.json`, {offset: offset, limit: limit});
   },
 
-  userReplies: (username) => {
-    return addressFactory(`users/${username}/replies.json`);
+  userReplies: (username, offset = 0, limit = 20) => {
+    return addressFactory(`users/${username}/replies.json`, {offset: offset, limit: limit});
   },
 
-  userFollowers: (username) => {
-    return addressFactory(`users/${username}/followers.json`);
+  userFollowers: (username, offset = 0, limit = 20) => {
+    return addressFactory(`users/${username}/followers.json`, {offset: offset, limit: limit});
   },
 
-  userFollowing: (username) => {
-    return addressFactory(`users/${username}/following.json`);
+  userFollowing: (username, offset = 0, limit = 20) => {
+    return addressFactory(`users/${username}/following.json`, {offset: offset, limit: limit});
   },
 
   userFollow: (username) => {

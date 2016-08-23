@@ -9,6 +9,7 @@ import ProfileReplyList from '../components/profile-container/profile-reply-list
 import ProfileUserList from '../components/profile-container/profile-user-list';
 import Spinner from '../components/shared/spinner';
 import { getToken } from '../lib/util';
+import { detectScrollEnd } from '../lib/scroll';
 import { refreshAccessToken } from '../actions/application';
 import {
   getUserProfileAndTopics,
@@ -25,6 +26,7 @@ class ProfileContainer extends Component {
     super(props);
     this.renderProfileList = this.renderProfileList.bind(this);
     this.changeNavigationTab = this.changeNavigationTab.bind(this);
+    this.loadMoreContent = this.loadMoreContent.bind(this);
 
     this.state = {
       selectedTab: 0,
@@ -37,7 +39,7 @@ class ProfileContainer extends Component {
 
   componentDidMount() {
 
-    const { dispatch, entities, location, params } = this.props;
+    const { dispatch, location, params } = this.props;
     let username;
 
     if ( location.pathname === '/me' ) {
@@ -45,6 +47,9 @@ class ProfileContainer extends Component {
     } else {
       username = params.username;
     }
+
+    document.addEventListener('scroll', this.loadMoreContent, false);
+    document.addEventListener('touchMove', this.loadMoreContent, false);
 
     window.scrollTo(0, 0);
     this.setState({ isLoading: true });
@@ -61,9 +66,8 @@ class ProfileContainer extends Component {
     let oldUsername = prevProps.params.username;
     let { dispatch, entities: { users }, params: { username } } = this.props;
 
-    window.scrollTo(0, 0);
-
     if (oldUsername !== username) {
+      window.scrollTo(0, 0);
       this.changeNavigationTab(0);
     }
 
@@ -81,6 +85,12 @@ class ProfileContainer extends Component {
         });
     }
   }
+
+  componentWillUnmount() {
+    document.removeEventListener('scroll', this.loadMoreContent);
+    document.removeEventListener('touchMove', this.loadMoreContent);
+  }
+
 
   changeNavigationTab(tab) {
 
@@ -124,6 +134,23 @@ class ProfileContainer extends Component {
     }
 
     this.setState({ selectedTab: tab });
+  }
+
+  loadMoreContent() {
+    if (detectScrollEnd() && this.state.isLoadingMore === false) {
+      let { dispatch, params: { username }, entities: { users } } = this.props;
+      let user = users[username];
+      switch (this.state.selectedTab) {
+        case 0:
+          if (user['topics_count'] > user.topics.length) {
+            this.setState({ isLoadingMore: true });
+            dispatch(getUserTopics(user, user.topics.length))
+              .then( () => this.setState({ isLoadingMore: false }))
+              .catch( e => this.setState({ isLoadingMore: false }));
+          }
+
+      }
+    }
   }
 
   renderProfileList(user) {

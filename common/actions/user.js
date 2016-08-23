@@ -37,10 +37,14 @@ export function getUserProfile(username) {
   }
 }
 
-export function getUserTopics(username) {
+export function getUserTopics(user_or_username, offset, limit) {
 
   return dispatch => {
-    return fetch(address.userTopics(username))
+    let username = user_or_username;
+    if (typeof  user_or_username === 'object') {
+      username = user_or_username.login;
+    }
+    return fetch(address.userTopics(username, offset, limit))
       .then(res => res.json())
       .then(data => {
 
@@ -49,8 +53,21 @@ export function getUserTopics(username) {
         }
 
         if (data && data.topics && Array.isArray(data.topics)) {
-          data.login = username;
-          const normalized = normalize([data], arrayOf(userSchema));
+
+          let normalized;
+
+          if (typeof user_or_username === 'object') {
+
+            user_or_username.topics = Array.from(new Set([...user_or_username.topics, data.topics]));
+            normalized = normalize([user_or_username], arrayOf(userSchema));
+
+          } else {
+
+            data.login = username;
+            normalized = normalize([data], arrayOf(userSchema));
+
+          }
+
           return dispatch(receiveUsers(normalized.entities, normalized.result));
         }
 
