@@ -1,6 +1,7 @@
 'use strict';
 
 import { browserHistory } from 'react-router';
+import { refreshAccessToken } from '../actions/application';
 
 export function timeSince(date) {
   const seconds = Math.floor((new Date()) - date) / 1000;
@@ -87,6 +88,22 @@ export function isValidLoginOrRedirect() {
   } else {
     browserHistory.push(`/login?next=${window.location.pathname}`);
     return false;
+  }
+}
+
+export function authenticatedAction(dispatch, action) {
+  if (!isValidLoginOrRedirect()) {
+    dispatch(refreshAccessToken())
+      .then( result => {
+        if (result.error) {
+          browserHistory.push(`/login?next=${window.location.pathname}`)
+        } else {
+          action();
+        }
+      })
+      .catch( e => browserHistory.push(`/login?next=${window.location.pathname}`));
+  } else {
+    action();
   }
 }
 

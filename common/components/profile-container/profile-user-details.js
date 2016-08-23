@@ -5,6 +5,7 @@ import React, {
 
 import UserAvatar from '../shared/user-avatar';
 import { followUser, unfollowUser } from '../../actions/user';
+import { authenticatedAction } from '../../lib/util';
 import styles from './profile-user-details.css';
 
 export default class ProfileUserDetails extends Component {
@@ -14,9 +15,16 @@ export default class ProfileUserDetails extends Component {
     const { dispatch } = this.props;
 
     if (user.meta.followed) {
-      dispatch(unfollowUser(user));
+
+      authenticatedAction(dispatch, () => {
+        dispatch(unfollowUser(user));
+      });
+
     } else {
-      dispatch(followUser(user));
+
+      authenticatedAction(dispatch, () => {
+        dispatch(followUser(user));
+      });
     }
   }
 
