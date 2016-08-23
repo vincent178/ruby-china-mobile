@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 
 import { Link } from 'react-router';
+import SpinnerCircle from '../shared/spinner-circle';
 import styles from './profile-list.css';
 
 export default class ProfileReplyList extends Component {
@@ -12,13 +13,14 @@ export default class ProfileReplyList extends Component {
 
     super(props);
     this.renderReplyList = this.renderReplyList.bind(this);
+    this.renderSpinner = this.renderSpinner.bind(this);
   }
 
   renderReplyList() {
 
     const { user: { replies }, entities } = this.props;
 
-    if (replies.length === 0) {
+    if (typeof replies === 'undefined' || replies.length === 0) {
       return <div>没有回复</div>;
     }
 
@@ -40,10 +42,19 @@ export default class ProfileReplyList extends Component {
     })
   }
 
+  renderSpinner() {
+
+    if (this.props.isLoadingMore) {
+      return <SpinnerCircle width={30} color={"rgb(102, 117, 127)"} />
+    }
+
+  }
+
   render() {
     return (
       <div className={styles.profileListContainer}>
         { this.renderReplyList() }
+        { this.renderSpinner() }
       </div>
     );
   }

@@ -5,6 +5,7 @@ import React, {
 
 import { Link } from 'react-router';
 import UserAvatar from '../shared/user-avatar';
+import SpinnerCircle from '../shared/spinner-circle';
 import styles from './profile-list.css';
 
 
@@ -14,6 +15,7 @@ export default class ProfileUserList extends Component {
 
     super(props);
     this.renderUserList = this.renderUserList.bind(this);
+    this.renderSpinner = this.renderSpinner.bind(this);
   }
 
   renderUserList() {
@@ -58,10 +60,20 @@ export default class ProfileUserList extends Component {
     });
   }
 
+  renderSpinner() {
+
+    if (this.props.isLoadingMore) {
+      return <SpinnerCircle width={30} color={"rgb(102, 117, 127)"} />
+    }
+
+  }
+
+
   render() {
     return (
       <div className={styles.profileListContainer}>
         { this.renderUserList() }
+        { this.renderSpinner() }
       </div>
     )
   }

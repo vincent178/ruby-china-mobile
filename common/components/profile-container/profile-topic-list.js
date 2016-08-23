@@ -4,6 +4,7 @@ import React, {
 } from 'react';
 
 import { Link } from 'react-router';
+import SpinnerCircle from '../shared/spinner-circle';
 import styles from './profile-list.css';
 
 export default class ProfileTopicList extends Component {
@@ -12,6 +13,7 @@ export default class ProfileTopicList extends Component {
 
     super(props);
     this.renderTopicList = this.renderTopicList.bind(this);
+    this.renderSpinner = this.renderSpinner.bind(this);
   }
 
   renderTopicList() {
@@ -43,11 +45,20 @@ export default class ProfileTopicList extends Component {
     })
   }
 
+  renderSpinner() {
+
+    if (this.props.isLoadingMore) {
+      return <SpinnerCircle width={30} color={"rgb(102, 117, 127)"} />
+    }
+
+  }
+
   render() {
 
     return (
       <div className={styles.profileListContainer}>
         { this.renderTopicList() }
+        { this.renderSpinner() }
       </div>
     )
   }

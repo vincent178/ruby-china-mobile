@@ -37,14 +37,11 @@ export function getUserProfile(username) {
   }
 }
 
-export function getUserTopics(user_or_username, offset, limit) {
+export function getUserTopics(username, offset, limit) {
 
   return dispatch => {
-    let username = user_or_username;
-    if (typeof  user_or_username === 'object') {
-      username = user_or_username.login;
-    }
-    return fetch(address.userTopics(username, offset, limit))
+
+   return fetch(address.userTopics(username, offset, limit))
       .then(res => res.json())
       .then(data => {
 
@@ -53,21 +50,8 @@ export function getUserTopics(user_or_username, offset, limit) {
         }
 
         if (data && data.topics && Array.isArray(data.topics)) {
-
-          let normalized;
-
-          if (typeof user_or_username === 'object') {
-
-            user_or_username.topics = Array.from(new Set([...user_or_username.topics, data.topics]));
-            normalized = normalize([user_or_username], arrayOf(userSchema));
-
-          } else {
-
-            data.login = username;
-            normalized = normalize([data], arrayOf(userSchema));
-
-          }
-
+          data.login = username;
+          let normalized = normalize([data], arrayOf(userSchema));
           return dispatch(receiveUsers(normalized.entities, normalized.result));
         }
 
@@ -78,11 +62,11 @@ export function getUserTopics(user_or_username, offset, limit) {
 }
 
 
-export function getUserReplies(username) {
+export function getUserReplies(username, offset, limit) {
 
   return (dispatch) => {
 
-    return fetch(address.userReplies(username))
+    return fetch(address.userReplies(username, offset, limit))
       .then(res => res.json())
       .then(data => {
 
@@ -90,7 +74,7 @@ export function getUserReplies(username) {
           return { error: data.error };
         }
 
-        if (data && data.replies) {
+        if (data && data.replies && Array.isArray(data.replies)) {
 
           data.login = username;
           const normalized = normalize([data], arrayOf(userSchema));
@@ -103,11 +87,11 @@ export function getUserReplies(username) {
   }
 }
 
-export function getUserFollowers(username) {
+export function getUserFollowers(username, offset, limit) {
 
   return (dispatch) => {
 
-    return fetch(address.userFollowers(username))
+    return fetch(address.userFollowers(username, offset, limit))
       .then(res => res.json())
       .then(data => {
 
@@ -128,11 +112,11 @@ export function getUserFollowers(username) {
   }
 }
 
-export function getUserFollowing(username) {
+export function getUserFollowing(username, offset, limit) {
 
   return dispatch => {
 
-    return fetch(address.userFollowing(username))
+    return fetch(address.userFollowing(username, offset, limit))
       .then(res => res.json())
       .then(data => {
 

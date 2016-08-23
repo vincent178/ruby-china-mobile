@@ -142,12 +142,37 @@ class ProfileContainer extends Component {
       let user = users[username];
       switch (this.state.selectedTab) {
         case 0:
-          if (user['topics_count'] > user.topics.length) {
+          if (user.topics && user['topics_count'] > user.topics.length) {
             this.setState({ isLoadingMore: true });
-            dispatch(getUserTopics(user, user.topics.length))
+            dispatch(getUserTopics(username, user.topics.length))
               .then( () => this.setState({ isLoadingMore: false }))
               .catch( e => this.setState({ isLoadingMore: false }));
           }
+          break;
+        case 1:
+          if (user.replies && user['replies_count'] > user.replies.length) {
+            this.setState({ isLoadingMore: true });
+            dispatch(getUserReplies(username, user.replies.length))
+              .then( () => this.setState({ isLoadingMore: false }))
+              .then( e => this.setState({ isLoadingMore: false }));
+          }
+          break;
+        case 2:
+          if (user.following && user['following_count'] > user.following.length) {
+            this.setState({ isLoadingMore: true });
+            dispatch(getUserFollowing(username, user.following.length))
+              .then( () => this.setState({ isLoadingMore: false }))
+              .catch( e => this.setState({ isLoadingMore: false }));
+          }
+          break;
+        case 3:
+          if (user.followers && user['followers_count'] > user.followers.length) {
+            this.setState({ isLoadingMore: true });
+            dispatch(getUserFollowers(username, user.followers.length))
+              .then( () => this.setState({ isLoadingMore: false }))
+              .catch( e => this.setState({ isLoadingMore: false }));
+          }
+          break;
 
       }
     }
@@ -161,16 +186,16 @@ class ProfileContainer extends Component {
 
     switch (this.state.selectedTab) {
       case 0:
-        return <ProfileTopicList {...this.props} user={user} />;
+        return <ProfileTopicList {...this.props} user={user} isLoadingMore={this.state.isLoadingMore} />;
         break;
       case 1:
-        return <ProfileReplyList {...this.props} user={user} />;
+        return <ProfileReplyList {...this.props} user={user} isLoadingMore={this.state.isLoadingMore} />;
         break;
       case 2:
-        return <ProfileUserList {...this.props} user={user} type={"following"} />;
+        return <ProfileUserList {...this.props} user={user} type={"following"} isLoadingMore={this.state.isLoadingMore} />;
         break;
       case 3:
-        return <ProfileUserList {...this.props} user={user} type={"followers"} />;
+        return <ProfileUserList {...this.props} user={user} type={"followers"} isLoadingMore={this.state.isLoadingMore} />;
         break;
       default:
         return <ProfileTopicList />;
