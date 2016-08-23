@@ -10,10 +10,10 @@ Ruby China mobile
 - [x] topic detail page
 - [x] backend server for oauth
 - [ ] running in production
-- [ ] profile/me page
+- [x] profile/me page
 - [x] login page
 - [ ] reply, follow, like... actions
 - [x] notification page
-- [ ] server side rendering
+- [x] server side rendering
 - [ ] animations !important
 
