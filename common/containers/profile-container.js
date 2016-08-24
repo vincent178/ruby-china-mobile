@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 
 import ProfileUserDetails from '../components/profile-container/profile-user-details';
 import ProfileNavigation from '../components/profile-container/profile-navigation';
@@ -10,7 +9,6 @@ import ProfileUserList from '../components/profile-container/profile-user-list';
 import Spinner from '../components/shared/spinner';
 import { getToken } from '../lib/util';
 import { detectScrollEnd } from '../lib/scroll';
-import { refreshAccessToken } from '../actions/application';
 import {
   getUserProfileAndTopics,
   getUserTopics,

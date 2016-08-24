@@ -2,9 +2,6 @@ import React, { Component } from 'react';
 
 import NotificationMentionItem from './notification-mention-item';
 import NotificationTopicReplyItem from './notification-topic-reply-item';
-import NotificationNodeChangeItem from './notification-node-change-item';
-import { isValidLoginOrRedirect } from '../../lib/util';
-import { refreshAccessToken } from '../../actions/application';
 import items from '../../constants/items';
 
 // notification type: Mention, TopicReply, NodeChanged

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { browserHistory } from 'react-router';
 
-import { isValidLoginOrRedirect } from '../lib/util';
-import { refreshAccessToken } from '../actions/application';
+import { authenticatedAction } from '../lib/util';
 import { fetchNotifications } from '../actions/notification';
 import NotificationList from '../components/notification-container/notification-list';
 import Spinner from '../components/shared/spinner';
@@ -23,22 +21,11 @@ class NotificationsContainer extends Component {
 
     window.scrollTo(0, 0);
     this.setState({ isLoading: true });
-    if (!isValidLoginOrRedirect()) {
-      dispatch(refreshAccessToken())
-        .then( result => {
-          if (result.error) {
-            console.log(`[NotificationList] error ${result.error}`);
-            browserHistory.push('/login');
-          }
-          dispatch(fetchNotifications()).then(() => {
-            this.setState({ isLoading: false });
-          });
-        });
-    } else {
+    authenticatedAction(dispatch, () => {
       dispatch(fetchNotifications()).then(() => {
         this.setState({ isLoading: false });
       });
-    }
+    });
   }
 
   render() {

@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 
 import { isLoginOrRedirect } from '../../lib/util';
-import { refreshAccessToken } from '../../actions/application';
 import SpinnerCircle from '../shared/spinner-circle';
 import styles from './reply-action-bar.css';
 
