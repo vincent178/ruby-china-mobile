@@ -41,11 +41,9 @@ export default class TopicListItem extends Component {
             <p>{topic.title}</p>
             <div className={styles.topicAction}>
               <TopicActionBar
+                interactive={false}
                 dispatch={dispatch}
-                topic={topic}
-                topicId={topic.id}
-                replyCount={topic.replies_count}
-                likeCount={topic.likes_count} />
+                topic={topic} />
             </div>
           </div>
         </div>

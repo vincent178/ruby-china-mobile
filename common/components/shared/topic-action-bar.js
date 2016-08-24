@@ -24,50 +24,59 @@ export default class TopicActionBar extends Component {
 
   clickLike(e) {
 
-    e.preventDefault();
-    e.stopPropagation();
+    if (this.props.interactive) {
+      e.preventDefault();
+      e.stopPropagation();
 
-    const { topicId, dispatch } = this.props;
+      const { topic, dispatch } = this.props;
 
-    authenticatedAction(dispatch, () => {
-      dispatch(likeTopic(topicId));
-    });
-
+      authenticatedAction(dispatch, () => {
+        if (topic.meta && topic.meta.liked) {
+          dispatch(unlikeTopic(topic));
+        } else {
+          dispatch(likeTopic(topic));
+        }
+      });
+    }
   }
 
   clickFollow(e) {
 
-    e.preventDefault();
-    e.stopPropagation();
+    if (this.props.interactive) {
+      e.preventDefault();
+      e.stopPropagation();
 
-    const { topicId, dispatch } = this.props;
+      const { topic, dispatch } = this.props;
 
-    authenticatedAction(dispatch, () => {
-      dispatch(followTopic(topicId));
-    });
-
+      authenticatedAction(dispatch, () => {
+        if (topic.meta && topic.meta.followed) {
+          dispatch(unfollowTopic(topic));
+        } else {
+          dispatch(followTopic(topic));
+        }
+      });
+    }
   }
 
   render() {
 
-    const { replyCount, likeCount, viewCount } = this.props;
+    const { topic, interactive } = this.props;
 
     return (
       <div className={styles.topicActionContainer}>
 
         <div>
-          <i className="fa fa-reply" />
-          <span>{replyCount}</span>
+          <i className="fa fa-reply"/>
+          <span>{topic['replies_count']}</span>
         </div>
 
         <div onClick={this.clickLike}>
-          <i className="fa fa-thumbs-up" />
-          <span>{likeCount}</span>
+          <i className="fa fa-thumbs-up" style={{color: interactive && topic.meta && topic.meta.liked ? '#e76f3c' : null }} />
+          <span>{topic['likes_count']}</span>
         </div>
 
         <div onClick={this.clickFollow}>
-          <i className="fa fa-eye" />
-          <span>{viewCount}</span>
+          <i className="fa fa-eye" style={{color: interactive && topic.meta && topic.meta.followed ? '#e76f3c' : null }} />
         </div>
       </div>
     );
@@ -75,8 +84,7 @@ export default class TopicActionBar extends Component {
 }
 
 TopicActionBar.propTypes = {
-  topicId: PropTypes.number.isRequired,
-  replyCount: PropTypes.number.isRequired,
-  likeCount: PropTypes.number.isRequired,
-  viewCount: PropTypes.number
+  topic: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  interactive: PropTypes.bool
 };

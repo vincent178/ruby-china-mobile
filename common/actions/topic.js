@@ -48,6 +48,7 @@ export function getTopicDetail(id) {
       .then(res => res.json())
       .then( topicPayload => {
         if (topicPayload && topicPayload.topic) {
+          topicPayload.topic.meta = topicPayload.meta;
           const normalized = normalize([topicPayload.topic], arrayOf(topicSchema));
           dispatch(receiveTopics(normalized.entities, normalized.result));
         }
@@ -91,7 +92,7 @@ export function getMoreTopicReplies(id, offset, limit) {
   };
 }
 
-export function likeTopic(id) {
+export function likeTopic(topic) {
   return dispatch => {
     return fetch(address.likes(), {
       method: 'POST',
@@ -101,18 +102,27 @@ export function likeTopic(id) {
       },
       body: JSON.stringify({
         obj_type: 'topic',
-        obj_id: id
+        obj_id: topic.id
       })
     })
       .then( res => res.json() )
       .then( data => {
-        debugger;
+
+        if (typeof topic.meta === 'undefined') {
+          topic.meta = {};
+        }
+
+        topic.meta.liked = true;
+        topic['likes_count'] = data.count;
+
+        const normalized = normalize([topic], arrayOf(topicSchema));
+        dispatch(receiveTopics(normalized.entities, normalized.result));
       })
       .catch( e => { return { error: e.message }});
   }
 }
 
-export function unlikeTopic(id) {
+export function unlikeTopic(topic) {
   return dispatch => {
     return fetch(address.likes(), {
       method: 'DELETE',
@@ -122,20 +132,29 @@ export function unlikeTopic(id) {
       },
       body: JSON.stringify({
         obj_type: 'topic',
-        obj_id: id
+        obj_id: topic.id
       })
     })
       .then( res => res.json() )
       .then( data => {
-        debugger;
+
+        if (typeof topic.meta === 'undefined') {
+          topic.meta = {};
+        }
+
+        topic.meta.liked = false;
+        topic['likes_count'] = data.count;
+
+        const normalized = normalize([topic], arrayOf(topicSchema));
+        dispatch(receiveTopics(normalized.entities, normalized.result));
       })
       .catch( e => { return { error: e.message }});
   }
 }
 
-export function followTopic(id) {
+export function followTopic(topic) {
   return dispatch => {
-    return fetch(address.topicFollow(id), {
+    return fetch(address.topicFollow(topic.id), {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -143,16 +162,24 @@ export function followTopic(id) {
       }
     })
       .then( res => res.json() )
-      .then( data => {
-        debugger;
+      .then( () => {
+
+        if (typeof topic.meta === 'undefined') {
+          topic.meta = {};
+        }
+
+        topic.meta.followed = true;
+
+        const normalized = normalize([topic], arrayOf(topicSchema));
+        dispatch(receiveTopics(normalized.entities, normalized.result));
       })
       .catch( e => { return { error: e.messsage }});
   }
 }
 
-export function unfollowTopic(id) {
+export function unfollowTopic(topic) {
   return dispatch => {
-    return fetch(address.topicUnfollow(id), {
+    return fetch(address.topicUnfollow(topic.id), {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
@@ -160,8 +187,16 @@ export function unfollowTopic(id) {
       }
     })
       .then( res => res.json() )
-      .then( data => {
-        debugger;
+      .then( () => {
+
+        if (typeof topic.meta === 'undefined') {
+          topic.meta = {};
+        }
+
+        topic.meta.followed = false;
+
+        const normalized = normalize([topic], arrayOf(topicSchema));
+        dispatch(receiveTopics(normalized.entities, normalized.result));
       })
       .catch( e => { return { error: e.messsage }});
   }

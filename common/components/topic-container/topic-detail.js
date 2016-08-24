@@ -15,7 +15,7 @@ export default class TopicDetail extends Component {
 
   render() {
 
-    const { params, entities } = this.props;
+    const { params, entities, dispatch } = this.props;
 
     const topic = entities.topics[params.topicId];
     if (typeof topic === 'undefined') {
@@ -47,7 +47,7 @@ export default class TopicDetail extends Component {
         </div>
 
         <div className={styles.topicDetailActionBar}>
-          <TopicActionBar replyCount={topic.replies_count} likeCount={topic.likes_count} />
+          <TopicActionBar topic={topic} dispatch={dispatch} interactive={true} />
         </div>
       </div>
     );
