@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import "isomorphic-fetch";
+import HttpsProxyAgent from 'https-proxy-agent';
 
 const router = Router();
 
@@ -29,21 +30,34 @@ router.post('/oauth/access_token', (req, res) => {
       res.status(400).end();
   }
 
-  for (let key in postBody) {
-    console.log(`[OAUTH ROUTER][PARAMS] postBody ${postBody[key]}`);
-  }
+  let agent;
 
-  fetch(API_URL, {
+  let options = {
     method: 'POST',
     headers: {
       'ACCEPT': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(postBody)
-  })
+  };
+
+  if (process.env.PROXY) {
+    const proxy = process.env.PROXY;
+    agent = new HttpsProxyAgent(proxy);
+  }
+
+  options.agent = agent;
+
+  fetch(API_URL, options)
     .then( res1 => res1.json())
-    .then( data => res.json(data))
-    .catch( e => res.status(500).json({ error: e.message }));
+    .then( data => {
+      console.log("success " + data);
+      res.json(data)
+    })
+    .catch( e => {
+      console.log("error " + e.message);
+      res.status(500).json({ error: e.message })
+    });
 });
 
 export default router;
