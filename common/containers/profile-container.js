@@ -140,7 +140,7 @@ class ProfileContainer extends Component {
       let user = users[username];
       switch (this.state.selectedTab) {
         case 0:
-          if (user.topics && user['topics_count'] > user.topics.length) {
+          if (user.topics && Math.ceil(user['topics_count']/20-1)*20 >= user.topics.length) {
             this.setState({ isLoadingMore: true });
             dispatch(getUserTopics(username, user.topics.length))
               .then( () => this.setState({ isLoadingMore: false }))
@@ -148,7 +148,7 @@ class ProfileContainer extends Component {
           }
           break;
         case 1:
-          if (user.replies && user['replies_count'] > user.replies.length) {
+          if (user.replies && Math.ceil(user['replies_count']/20-1)*20 >= user.replies.length) {
             this.setState({ isLoadingMore: true });
             dispatch(getUserReplies(username, user.replies.length))
               .then( () => this.setState({ isLoadingMore: false }))
@@ -156,7 +156,7 @@ class ProfileContainer extends Component {
           }
           break;
         case 2:
-          if (user.following && user['following_count'] > user.following.length) {
+          if (user.following && Math.ceil(user['following_count']/20-1)*20 >= user.following.length) {
             this.setState({ isLoadingMore: true });
             dispatch(getUserFollowing(username, user.following.length))
               .then( () => this.setState({ isLoadingMore: false }))
@@ -164,7 +164,7 @@ class ProfileContainer extends Component {
           }
           break;
         case 3:
-          if (user.followers && user['followers_count'] > user.followers.length) {
+          if (user.followers && Math.ceil(user['followers_count']/20-1)*20 >= user.followers.length) {
             this.setState({ isLoadingMore: true });
             dispatch(getUserFollowers(username, user.followers.length))
               .then( () => this.setState({ isLoadingMore: false }))
