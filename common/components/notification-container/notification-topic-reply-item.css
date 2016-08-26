@@ -6,6 +6,16 @@
     border-bottom: 1px solid #eee;
 }
 
+.topicReplyItemContainer span {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
+.topicReplyItemContainer code {
+    word-break: break-all;
+    white-space: pre-wrap;
+}
+
 .topicReplyItemDetails {
     margin-left: 12px;
 }
