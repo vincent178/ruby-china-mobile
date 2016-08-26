@@ -74,7 +74,8 @@ export default class ProfileUserDetails extends Component {
 
             <div className={styles.profileUserDetailsItem}>
               <div className={styles.profileFullname}>{`${user.name || user.login}`}</div>
-              { location.pathname !== '/me' ?
+              {
+                location.pathname !== '/me' ?
                 (
                   <button className={styles.profileFollowButton}
                           onClick={this.handleClick.bind(this, user)}>
