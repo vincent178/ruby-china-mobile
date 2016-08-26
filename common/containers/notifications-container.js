@@ -24,6 +24,7 @@ class NotificationsContainer extends Component {
     const { dispatch } = this.props;
 
     document.addEventListener('scroll', this.loadMoreNotifications, false);
+    document.addEventListener('touchmove', this.loadMoreNotifications, false);
 
     window.scrollTo(0, 0);
     this.setState({ isLoading: true });
@@ -36,6 +37,7 @@ class NotificationsContainer extends Component {
 
   componentWillUnmount() {
     document.removeEventListener('scroll', this.loadMoreNotifications);
+    document.removeEventListener('touchMove', this.loadMoreNotifications);
   }
 
   loadMoreNotifications() {
