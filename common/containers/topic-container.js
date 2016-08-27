@@ -46,7 +46,7 @@ class TopicContainer extends Component {
     const topicId = params.topicId;
     let topic = entities.topics[topicId];
 
-    if (detectScrollEnd() && topic['replies_count'] > reply.items.length && (this.state.isLoadingMore === false)) {
+    if (detectScrollEnd() && Math.ceil(topic['replies_count']/20-1)*20 > reply.items.length && (this.state.isLoadingMore === false)) {
       this.setState({ isLoadingMore: true });
       return dispatch(getMoreTopicReplies(topicId, reply.items.length))
         .then(() => this.setState({ isLoadingMore: false }))

@@ -25,6 +25,7 @@ class ProfileContainer extends Component {
     this.renderProfileList = this.renderProfileList.bind(this);
     this.changeNavigationTab = this.changeNavigationTab.bind(this);
     this.loadMoreContent = this.loadMoreContent.bind(this);
+    this.getUsername = this.getUsername.bind(this);
 
     this.state = {
       selectedTab: 0,
@@ -37,14 +38,8 @@ class ProfileContainer extends Component {
 
   componentDidMount() {
 
-    const { dispatch, location, params } = this.props;
-    let username;
-
-    if ( location.pathname === '/me' ) {
-      username = getToken().username;
-    } else {
-      username = params.username;
-    }
+    const { dispatch } = this.props;
+    const username = this.getUsername();
 
     document.addEventListener('scroll', this.loadMoreContent, false);
     document.addEventListener('touchMove', this.loadMoreContent, false);
@@ -61,8 +56,10 @@ class ProfileContainer extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    let oldUsername = prevProps.params.username;
-    let { dispatch, entities: { users }, params: { username } } = this.props;
+    const oldUsername = this.getUsername(prevProps);
+    const username = this.getUsername();
+
+    let { dispatch, entities: { users } } = this.props;
 
     if (oldUsername !== username) {
       window.scrollTo(0, 0);
@@ -78,7 +75,7 @@ class ProfileContainer extends Component {
         .then( () => {
           this.setState({ isLoading: false });
         })
-        .catch( e => {
+        .catch( () => {
           this.setState({ isLoading: false });
         });
     }
@@ -89,11 +86,25 @@ class ProfileContainer extends Component {
     document.removeEventListener('touchMove', this.loadMoreContent);
   }
 
+  getUsername(prevProps) {
+
+    const props = prevProps ? prevProps : this.props;
+
+    const { params, location } = props;
+
+    if (location && location.pathname === '/me' && getToken().username.length > 0) {
+      return getToken().username;
+    } else if (params) {
+      return params.username;
+    } else {
+      return;
+    }
+  }
 
   changeNavigationTab(tab) {
 
     const { dispatch, params, entities } = this.props;
-    const { username } = params;
+    const username = this.getUsername();
     const user = entities.users[username];
 
     switch (tab) {
@@ -140,7 +151,7 @@ class ProfileContainer extends Component {
       let user = users[username];
       switch (this.state.selectedTab) {
         case 0:
-          if (user.topics && user['topics_count'] > user.topics.length) {
+          if (user.topics && Math.ceil(user['topics_count']/20-1)*20 >= user.topics.length) {
             this.setState({ isLoadingMore: true });
             dispatch(getUserTopics(username, user.topics.length))
               .then( () => this.setState({ isLoadingMore: false }))
@@ -148,7 +159,7 @@ class ProfileContainer extends Component {
           }
           break;
         case 1:
-          if (user.replies && user['replies_count'] > user.replies.length) {
+          if (user.replies && Math.ceil(user['replies_count']/20-1)*20 >= user.replies.length) {
             this.setState({ isLoadingMore: true });
             dispatch(getUserReplies(username, user.replies.length))
               .then( () => this.setState({ isLoadingMore: false }))
@@ -156,7 +167,7 @@ class ProfileContainer extends Component {
           }
           break;
         case 2:
-          if (user.following && user['following_count'] > user.following.length) {
+          if (user.following && Math.ceil(user['following_count']/20-1)*20 >= user.following.length) {
             this.setState({ isLoadingMore: true });
             dispatch(getUserFollowing(username, user.following.length))
               .then( () => this.setState({ isLoadingMore: false }))
@@ -164,7 +175,7 @@ class ProfileContainer extends Component {
           }
           break;
         case 3:
-          if (user.followers && user['followers_count'] > user.followers.length) {
+          if (user.followers && Math.ceil(user['followers_count']/20-1)*20 >= user.followers.length) {
             this.setState({ isLoadingMore: true });
             dispatch(getUserFollowers(username, user.followers.length))
               .then( () => this.setState({ isLoadingMore: false }))
@@ -206,9 +217,18 @@ class ProfileContainer extends Component {
       return <Spinner />
     }
 
-    const { entities, params } = this.props;
-    const { username } = params;
+    const username = this.getUsername();
+
+    if (typeof  username === 'undefined') {
+      return null;
+    }
+
+    const { entities } = this.props;
     const user = entities.users[username];
+
+    if (typeof user === 'undefined') {
+      return null;
+    }
 
     return (
       <div>

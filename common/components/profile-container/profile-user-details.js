@@ -31,7 +31,7 @@ export default class ProfileUserDetails extends Component {
 
   render() {
 
-    const { user } = this.props;
+    const { user, location } = this.props;
 
     let userInfoArray = [];
     let userCompanyLocation = "";
@@ -74,10 +74,16 @@ export default class ProfileUserDetails extends Component {
 
             <div className={styles.profileUserDetailsItem}>
               <div className={styles.profileFullname}>{`${user.name || user.login}`}</div>
-              <button className={styles.profileFollowButton}
-                      onClick={this.handleClick.bind(this, user)}>
-                {followingText}
-              </button>
+              {
+                location.pathname !== '/me' ?
+                (
+                  <button className={styles.profileFollowButton}
+                          onClick={this.handleClick.bind(this, user)}>
+                    {followingText}
+                  </button>
+                )
+                : null
+              }
             </div>
 
             <div className={styles.profileUsername}>{`${user.login}`}</div>
