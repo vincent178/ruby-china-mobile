@@ -4,7 +4,21 @@ import { RouterContext } from 'react-router';
 import { renderToString } from 'react-dom/server';
 import { resolve } from 'path';
 
-const assets = require(resolve('public/manifest.json'));
+let assets;
+
+try {
+  assets = require(resolve('public/manifest.json'));
+} catch (e) {
+  assets = {
+    "vendor": {
+      "js": "vendor.js"
+    },
+    "client": {
+      "js": "app.js",
+      "css": "app.css"
+    }
+  }
+}
 
 const createPage = (content = '', state = {}) => {
   return `

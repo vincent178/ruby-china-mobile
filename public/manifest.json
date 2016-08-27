@@ -1,1 +1,9 @@
-{"vendor":{"js":"vendor.js?20430e666932075e9cfc"},"client":{"js":"app.js?20430e666932075e9cfc","css":"app.css?20430e666932075e9cfc"}}
+{
+  "vendor": {
+    "js": "vendor.js?278eb7c304b2fbc16fc6"
+  },
+  "client": {
+    "js": "app.js?278eb7c304b2fbc16fc6",
+    "css": "app.css?278eb7c304b2fbc16fc6"
+  }
+}
