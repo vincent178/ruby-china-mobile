@@ -21,6 +21,10 @@
     white-space: pre-wrap;
 }
 
+.replyListItemContainer a {
+    text-decoration: underline;
+    color: #0069D6;
+}
 
 .replyMain {
     margin-left: 12px;

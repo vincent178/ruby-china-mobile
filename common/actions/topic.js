@@ -203,24 +203,22 @@ export function unfollowTopic(topic) {
 }
 export function postTopicReply(id, body) {
   return dispatch => {
-    dispatch(createTopicReply());
-    return fetch(address.replyTopic(id), {
+    return fetch(address.topicReplies(id), {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        body: body
+        body: `${body}<br>发送自[ruby-china-mobile](https://github.com/vincent178/ruby-china-mobile)`
       })
     })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data);
-        dispatch(createTopicReplyDone());
+      .then( res => res.json() )
+      .then( replyPayload => {
+        const normalized = normalize([replyPayload.reply], arrayOf(replySchema));
+        dispatch(receiveMoreReplies(normalized.entities, normalized.result));
       })
       .catch(e => console.log(e));
-
   }
 }
 
