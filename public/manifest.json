@@ -1,9 +1,0 @@
-{
-  "vendor": {
-    "js": "vendor.js?c86505a3c65332247258"
-  },
-  "client": {
-    "js": "app.js?c86505a3c65332247258",
-    "css": "app.css?c86505a3c65332247258"
-  }
-}

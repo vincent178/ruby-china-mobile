@@ -41,9 +41,13 @@ reply[body]:不好意思 在测试 @beyondouyuan #a :lollipop:
 
 server加载内容, 到了用户浏览器使用 access_token 加载一次信息, 服务器回复所有 meta data
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
+
 
 TODO
 真正的 hot reload
 错误处理
-run in production
+浏览器兼容性问题
+
+
 
